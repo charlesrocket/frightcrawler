@@ -9,12 +9,12 @@ import csv
 from dictor import dictor
 
 intro = '''
-░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
-░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
-░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
-░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
-░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
-░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀
+  ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
+  ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
+  ▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
+  ▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
+  ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
+  ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀
 '''
 print(intro)
 
@@ -148,9 +148,9 @@ with args.file as helvaultdb:
         if args.standard:
             cardStatus = dictor(scryJSON, 'legalities', search='standard')
             if cardStatus == ['legal']:
-                print('  ---    Legal    ', cardName)
+                print('  ▓▒░░░    Legal    ', cardName)
             else:
-                print('  ---  Not legal  ', cardName)
+                print('  ▓▒░░░  Not legal  ', cardName)
 
         if args.vintage:
             cardStatus = dictor(scryJSON, 'legalities', search='vintage')
