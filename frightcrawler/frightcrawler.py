@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
-import argparse
-import os
 import time
+import argparse
 import requests
 import json
 import csv
