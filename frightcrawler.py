@@ -8,6 +8,16 @@ import json
 import csv
 from dictor import dictor
 
+intro = '''
+░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
+░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
+░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
+░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
+░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
+░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀
+'''
+print(intro)
+
 parser = argparse.ArgumentParser()
 parser.add_argument(dest='format',
                     choices=['brawl','commander', 'duel', 'future', 'gladiator',
