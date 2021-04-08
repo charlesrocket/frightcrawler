@@ -1,3 +1,4 @@
+import frightcrawler
 from setuptools import setup, find_packages
 
 with open('README.md', 'r') as readmefile:
@@ -18,4 +19,7 @@ setup(
     ],
     python_requires='>=3.6',
     packages=find_packages(),
+    entry_points={
+        'console_scripts':['frightcrawler=frightcrawler.frightcrawler:main'],
+    },
 )
