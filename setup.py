@@ -6,7 +6,7 @@ with open('README.md', 'r') as readmefile:
 
 setup(
     name='frightcrawler',
-    version='0.0.1',
+    version=frightcrawler.__version__,
     author='charlesrocket',
     license='MIT',
     description='MtG deck legality checker',
@@ -19,6 +19,7 @@ setup(
     ],
     python_requires='>=3.6',
     packages=find_packages(),
+    include_package_data=True,
     entry_points={
         'console_scripts':['frightcrawler=frightcrawler.frightcrawler:main'],
     },
