@@ -37,37 +37,110 @@ with open('helvault.csv') as helvaultdb:
         scryAPI = requests.get(scryId)
         scryJSON = scryAPI.json()
         cardName = row[3]
-        ###
+
         if args.brawl:
             cardStatus = dictor(scryJSON, 'legalities', search='brawl')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.commander:
             cardStatus = dictor(scryJSON, 'legalities', search='commander')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.duel:
             cardStatus = dictor(scryJSON, 'legalities', search='duel')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.future:
             cardStatus = dictor(scryJSON, 'legalities', search='future')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.gladiator:
             cardStatus = dictor(scryJSON, 'legalities', search='gladiator')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.historic:
             cardStatus = dictor(scryJSON, 'legalities', search='historic')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.legacy:
             cardStatus = dictor(scryJSON, 'legalities', search='legacy')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.modern:
             cardStatus = dictor(scryJSON, 'legalities', search='modern')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.oldschool:
             cardStatus = dictor(scryJSON, 'legalities', search='oldschool')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.pauper:
             cardStatus = dictor(scryJSON, 'legalities', search='pauper')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.penny:
             cardStatus = dictor(scryJSON, 'legalities', search='penny')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.pioneer:
             cardStatus = dictor(scryJSON, 'legalities', search='pioneer')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.premodern:
             cardStatus = dictor(scryJSON, 'legalities', search='premodern')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.standard:
             cardStatus = dictor(scryJSON, 'legalities', search='standard')
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         if args.vintage:
             cardStatus = dictor(scryJSON, 'legalities', search='vintage')
-        ###
-        print(cardStatus, cardName)
+            if cardStatus == ['legal']:
+                print('  ---    Legal    ', cardName)
+            else:
+                print('  ---  Not legal  ', cardName)
+
         time.sleep(.1) #respect API rate limits
