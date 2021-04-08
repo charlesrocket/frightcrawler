@@ -1,7 +1,5 @@
 # frightcrawler
 
-![axerunner_scrnsht](https://raw.githubusercontent.com/charlesrocket/frightcrawler/master/screenshot.jpg)
-
 Deck legality checker
 
 ```bash
