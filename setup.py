@@ -8,7 +8,7 @@ setup(
     version='0.0.1',
     author='charlesrocket',
     license='MIT',
-    description='',
+    description='MtG deck legality checker',
     long_description=readme,
     long_description_content_type='text/markdown',
     url='https://github.com/charlesrocket/frightcrawler',
