@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 import time
 import requests
 import json
@@ -30,7 +31,8 @@ args.premodern = (args.format == 'premodern')
 args.standard = (args.format == 'standard')
 args.vintage = (args.format == 'vintage')
 
-with open('helvault.csv') as helvaultdb:
+while os.path.isfile('helvault.csv'):
+    helvaultdb = open('helvault.csv')
     readHVDB = csv.reader(helvaultdb, delimiter=',')
     for row in readHVDB:
         scryId = 'https://api.scryfall.com/cards/' + row[6]
