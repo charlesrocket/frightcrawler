@@ -20,7 +20,7 @@ print(intro)
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('file', type=argparse.FileType('r'), help='Path to helvault csv file')
+    parser.add_argument('file', type=argparse.FileType('r'), help='Path to helvault.csv file')
     parser.add_argument(dest='format',
                         default='standard',
                         help='Choose the format',
@@ -47,7 +47,6 @@ def main():
     args.vintage = (args.format == 'vintage')
 
     with args.file as helvaultdb:
-        helvaultdb = open('helvault.csv')
         readHVDB = csv.reader(helvaultdb, delimiter=',')
         for row in readHVDB:
             scryID = 'https://api.scryfall.com/cards/' + row[6]
