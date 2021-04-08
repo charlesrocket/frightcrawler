@@ -19,7 +19,11 @@ intro = '''
 print(intro)
 
 parser = argparse.ArgumentParser()
+parser.add_argument('file', type=argparse.FileType('r'), help='Path to helvault csv file')
 parser.add_argument(dest='format',
+                    default='standard',
+                    help='Choose the format',
+                    nargs='?',
                     choices=['brawl','commander', 'duel', 'future', 'gladiator',
                     'historic', 'legacy', 'modern', 'oldschool', 'pauper', 'penny',
                     'pioneer', 'premodern', 'standard', 'vintage'])
@@ -41,7 +45,7 @@ args.premodern = (args.format == 'premodern')
 args.standard = (args.format == 'standard')
 args.vintage = (args.format == 'vintage')
 
-while os.path.isfile('helvault.csv'):
+with args.file as helvaultdb:
     helvaultdb = open('helvault.csv')
     readHVDB = csv.reader(helvaultdb, delimiter=',')
     for row in readHVDB:
