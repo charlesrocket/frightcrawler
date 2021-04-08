@@ -1,8 +1,14 @@
 # frightcrawler
 
-Deck legality checker
+### Deck legality checker
 
-```bash
-git clone https://github.com/charlesrocket/frightcrawler
-pip3 install .
-frightcrawler.py -h
+```
+pip install frightcrawler
+frightcrawler -h
+```
+
+To check agains `modern` format:
+
+```
+frightcrawler path/to/csv modern
+```
