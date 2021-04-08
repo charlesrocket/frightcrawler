@@ -49,8 +49,8 @@ with args.file as helvaultdb:
     helvaultdb = open('helvault.csv')
     readHVDB = csv.reader(helvaultdb, delimiter=',')
     for row in readHVDB:
-        scryId = 'https://api.scryfall.com/cards/' + row[6]
-        scryAPI = requests.get(scryId)
+        scryID = 'https://api.scryfall.com/cards/' + row[6]
+        scryAPI = requests.get(scryID)
         scryJSON = scryAPI.json()
         cardName = row[3]
 
