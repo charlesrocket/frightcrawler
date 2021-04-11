@@ -59,6 +59,7 @@ def main():
 
     with args.file as helvaultdb:
         readHVDB = csv.reader(helvaultdb, delimiter=',')
+        next(readHVDB)
         print('  Processing with ' + args.format + ' format...\n')
         for row in readHVDB:
             scryID = 'https://api.scryfall.com/cards/' + row[6]
