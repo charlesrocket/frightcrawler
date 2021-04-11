@@ -19,6 +19,9 @@ intro = '''
 print(intro)
 
 class Logger(object):
+    def flush(self):
+        pass
+
     def __init__(self):
         self.terminal = sys.stdout
         self.log = open("log.txt", "a")
