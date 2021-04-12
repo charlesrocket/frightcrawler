@@ -60,11 +60,11 @@ def main():
     args.standard = (args.format == 'standard')
     args.vintage = (args.format == 'vintage')
 
-    with args.file as helvaultdb:
-        readHVDB = csv.reader(helvaultdb, delimiter=',')
-        next(readHVDB)
+    with args.file as cardlistCSV:
+        cardlist = csv.reader(cardlistCSV, delimiter=',')
+        next(cardlist)
         print('  Processing with ' + args.format + ' format...\n')
-        for row in readHVDB:
+        for row in cardlist:
             scryID = 'https://api.scryfall.com/cards/' + row[6]
             scryAPI = requests.get(scryID)
             scryJSON = scryAPI.json()
