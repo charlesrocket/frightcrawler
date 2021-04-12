@@ -34,11 +34,10 @@ sys.stdout = Logger()
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('file', type=argparse.FileType('r'), help='Path to helvault.csv file')
+    parser.add_argument('file', type=argparse.FileType('r'), help='Path to CSV file')
     parser.add_argument(dest='csv_file',
                         default='helvault',
                         help='Set CSV file layout',
-                        nargs='?',
                         choices=['helvault', 'aetherhub'])
     parser.add_argument(dest='format',
                         default='standard',
