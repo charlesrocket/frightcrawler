@@ -36,7 +36,6 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('file', type=argparse.FileType('r'), help='path to csv file')
     parser.add_argument(dest='csv_file',
-                        default='helvault',
                         help='set csv file layout',
                         choices=['helvault', 'aetherhub'])
     parser.add_argument(dest='format',
