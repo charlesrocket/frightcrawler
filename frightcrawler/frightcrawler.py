@@ -83,7 +83,7 @@ def main():
                 foil_status = row[7]
 
             if foil_status == '1' or foil_status == 'foil':
-                foil = "◍ "
+                foil = "◆ "
             else:
                 foil = '● '
 
