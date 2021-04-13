@@ -21,7 +21,7 @@ setup(
     ],
     install_requires=[
         'dictor>=0.1.6',
-        'requests>=2.25.0',
+        'requests-cache>=0.6.0',
     ],
     python_requires='>=3.6',
     packages=find_packages(),
