@@ -1,4 +1,5 @@
 frightcrawler-output.log
+scryfall-cache.sqlite
 
 .DS_Store
 build/
