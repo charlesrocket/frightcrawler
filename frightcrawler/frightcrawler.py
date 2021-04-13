@@ -82,106 +82,106 @@ def main():
             scry_json = scry_api.json()
 
             if args.brawl:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.commander:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.duel:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.future:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.gladiator:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.historic:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.legacy:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.modern:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.oldschool:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.pauper:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.penny:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.pioneer:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.premodern:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.standard:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
 
             if args.vintage:
-                cardStatus = dictor(scry_json, 'legalities', search=args.format, checknone=True)
-                if cardStatus == ['legal']:
+                card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
+                if card_status == ['legal']:
                     print('  ▓▒░░░    Legal    ', card_name)
                 else:
                     print('  ▓▒░░░  Not legal  ', card_name)
