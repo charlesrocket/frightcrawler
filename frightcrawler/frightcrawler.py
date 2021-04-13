@@ -83,9 +83,9 @@ def main():
                 foil_status = row[7]
 
             if foil_status == '1' or foil_status == 'foil':
-                foil = "◍"
+                foil = "◍ "
             else:
-                foil = '◌'
+                foil = '● '
 
             scry_api = scry_cache.request('GET', scry_id)
             scry_json = scry_api.json()
