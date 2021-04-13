@@ -87,7 +87,6 @@ def main():
                 foil = '◌'
 
             scry_cache = CachedSession(backend='sqlite', cache_name='scryfall-cache', expire_after=timedelta(days=3))
-            scry_cache.get(scry_id)
             scry_api = scry_cache.request('GET', scry_id)
             scry_json = scry_api.json()
 
