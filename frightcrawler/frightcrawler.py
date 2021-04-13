@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import time
 import argparse
 import json
 import csv
 import sys
+from time import sleep
 from datetime import timedelta
 from dictor import dictor
 from requests_cache import CachedSession
@@ -210,7 +210,7 @@ def main():
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
 
-            time.sleep(.1) #respect API rate limits
+            sleep(.1) #respect API rate limits
 
 if __name__ == '__main__':
     main()
