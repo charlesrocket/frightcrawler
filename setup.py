@@ -1,4 +1,4 @@
-import frightcrawler
+from frightcrawler import __version__
 from setuptools import setup, find_packages
 
 with open('README.md', 'r') as readmefile:
@@ -6,7 +6,7 @@ with open('README.md', 'r') as readmefile:
 
 setup(
     name='frightcrawler',
-    version=frightcrawler.__version__,
+    version=__version__,
     author='charlesrocket',
     license='MIT',
     description='MtG deck legality checker',
