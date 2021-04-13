@@ -98,8 +98,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.commander:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -108,8 +106,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.duel:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -118,8 +114,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.future:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -128,8 +122,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.gladiator:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -138,8 +130,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.historic:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -148,8 +138,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.legacy:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -158,8 +146,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.modern:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -168,8 +154,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.oldschool:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -178,8 +162,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.pauper:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -188,8 +170,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.penny:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -198,8 +178,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.pioneer:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -208,8 +186,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.premodern:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -218,8 +194,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.standard:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -228,8 +202,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             if args.vintage:
                 card_status = dictor(scry_json, 'legalities', search=args.format, checknone=True)
@@ -238,8 +210,6 @@ def main():
                     print('  ▓▒░░░    Legal    ', foil, card_name, ' ◄', set_name, '►')
                 elif card_status == ['not_legal']:
                     print('  ▓▒░░░  Not legal  ', foil, card_name, ' ◄', set_name, '►')
-                else:
-                    print('  ▓▒░░░  ERROR')
 
             time.sleep(.1) #respect API rate limits
 
