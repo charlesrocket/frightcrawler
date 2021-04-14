@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import json
 import csv
 import sys
 from time import sleep
@@ -9,7 +8,7 @@ from datetime import timedelta
 from dictor import dictor
 from requests_cache import CachedSession
 
-intro = '''
+INTRO = '''
   ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
   ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
   ▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
@@ -17,9 +16,9 @@ intro = '''
   ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
   ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀
 '''
-print(intro)
+print(INTRO)
 
-class Logger():
+class Logger:
     def __init__(self):
         self.terminal = sys.stdout
         self.log = open("frightcrawler-output.log", "a")
@@ -70,7 +69,9 @@ def main():
         cardlist = csv.reader(cardlist_csv, delimiter=',')
         next(cardlist)
         print('  Processing ' + args.csv_file +' CSV file for ' + args.format + ' format...\n')
-        scry_cache = CachedSession(backend='sqlite', cache_name='scryfall-cache', expire_after=timedelta(days=3))
+        scry_cache = CachedSession(backend='sqlite',
+                                   cache_name='scryfall-cache',
+                                   expire_after=timedelta(days=3))
         for row in cardlist:
             if args.helvault:
                 scry_id = 'https://api.scryfall.com/cards/' + row[6]
