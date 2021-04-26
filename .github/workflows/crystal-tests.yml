@@ -1,0 +1,27 @@
+name: Run Crystal tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        crystal: [latest, nightly]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Download source
+        uses: actions/checkout@v2
+      - name: Install Crystal
+        uses: oprypin/install-crystal@f0b2ce0d9d45075b6da31d7130c26cfb51744ead
+        with:
+          crystal: ${{ matrix.crystal }}
+      - name: Install shards
+        run: shards install --ignore-crystal-version
+      - name: Build
+        run: shards build
+      - name: Check formatting
+        run: crystal tool format --check
+#     - name: Run tests
+#       run: crystal spec --order=random --error-on-warnings
