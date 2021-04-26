@@ -1,0 +1,10 @@
+name: frightcrawler
+version: 0.0.9
+license: MIT
+crystal: 1.0.0
+authors:
+  - -k
+
+targets:
+  frightcrawler:
+    main: src/frightcrawler.cr
