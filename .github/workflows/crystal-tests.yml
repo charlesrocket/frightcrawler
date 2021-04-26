@@ -14,7 +14,7 @@ jobs:
       - name: Download source
         uses: actions/checkout@v2
       - name: Install Crystal
-        uses: oprypin/install-crystal@f0b2ce0d9d45075b6da31d7130c26cfb51744ead
+        uses: oprypin/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal }}
       - name: Install shards
