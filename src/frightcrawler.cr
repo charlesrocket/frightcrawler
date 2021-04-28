@@ -21,6 +21,7 @@ module Frightcrawler
     parser.banner = intro
     parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
     parser.on("-h", "--help", "Print this text") do
+      parser.banner = "Usage: frightcrawler -g standard"
       puts parser
       exit
     end
@@ -32,7 +33,7 @@ module Frightcrawler
   parser.parse
   File.open("helvault.csv") do |infile|
     cardlist = CSV.new(infile, header = true)
-    STDERR.puts "  Processing CSV file for #{game_format} format"
+    puts "  Processing CSV file for #{game_format} format"
     cardlist.each do |entry|
       row = entry.row.to_a
       scry_id = "https://api.scryfall.com/cards/" + row[6]
