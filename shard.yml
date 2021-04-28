@@ -8,7 +8,3 @@ authors:
 targets:
   frightcrawler:
     main: src/frightcrawler.cr
-
-dependencies:
-  halite:
-    github: icyleaf/halite
