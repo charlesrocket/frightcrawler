@@ -4,7 +4,6 @@ require "http"
 require "json"
 require "csv"
 
-# TODO: Write documentation for `Frightcrawler`
 module Frightcrawler
   VERSION = "0.1.0"
 
@@ -20,8 +19,10 @@ module Frightcrawler
   game_format = ""
   parser = OptionParser.new do |parser|
     parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
-    parser.on("-h", "--help", "Print this text") do
+    parser.on("-h", "--help", "Print documentation") do
       parser.banner = "Usage: frightcrawler -g standard"
+      parser.separator(message = "Supported formats:")
+      parser.separator(message = "brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
       puts parser
       exit
     end
