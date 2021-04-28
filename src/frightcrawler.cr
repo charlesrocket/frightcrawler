@@ -31,8 +31,8 @@ module Frightcrawler
     end
   end
   parser.parse
-  File.open("helvault.csv") do |infile|
-    cardlist = CSV.new(infile, header = true)
+  File.open("helvault.csv") do |file|
+    cardlist = CSV.new(file, header = true)
     puts
     puts "  Processing CSV file for #{game_format} format"
     puts
