@@ -1,4 +1,4 @@
-require "halite"
+require "http"
 require "json"
 require "csv"
 
@@ -25,8 +25,9 @@ module Frightcrawler
       scry_id = "https://api.scryfall.com/cards/" + row[6]
       card_name = row[3]
       foil_status = row[1]
-      scry_api = Halite.get("#{scry_id}")
-      puts scry_api
+      scry_api = HTTP::Client.get("#{scry_id}")
+      api_response = scry_api.body
+      puts api_response.includes? %("standard":"not_legal")
       sleep 0.1
     end
   end
