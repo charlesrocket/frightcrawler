@@ -59,7 +59,7 @@ module Frightcrawler
       exit
     else
       puts "ERROR"
-      exit
+      exit(1)
     end
   end
   loop_count = 1
@@ -88,7 +88,7 @@ module Frightcrawler
         puts "  ▓▒░░░    Legal    #{foil} #{card_name} ◄ #{set_name} ►"
       else
         puts "ERROR"
-        exit
+        exit(1)
       end
       sleep 0.1 # API rate limit
     end
