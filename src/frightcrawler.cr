@@ -43,11 +43,11 @@ module Frightcrawler
       foil_status = row[1]
       set_name = row[8].colorize.mode(:underline)
       if foil_status == '1'
-        foil = "◆"
+        foil = "◆".colorize(:light_gray)
       elsif foil_status == "foil"
-        foil = "◆"
+        foil = "◆".colorize(:light_gray)
       else
-        foil = "●"
+        foil = "●".colorize(:dark_gray)
       end
       scry_api = HTTP::Client.get("#{scry_id}")
       api_response = scry_api.body
