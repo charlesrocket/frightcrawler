@@ -1,8 +1,7 @@
-frightcrawler-output.log
-scryfall-cache.sqlite
-
 .DS_Store
-build/
-dist/
-*.egg
-*.egg-info/
+
+/docs/
+/lib/
+/bin/
+/.shards/
+*.dwarf
