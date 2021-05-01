@@ -5,7 +5,7 @@ require "json"
 require "csv"
 
 module Frightcrawler
-  VERSION = "0.1.0"
+  VERSION = "0.1.1"
   intro = "
   ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
   ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
