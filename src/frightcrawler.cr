@@ -1,6 +1,6 @@
 require "option_parser"
+require "http/client"
 require "colorize"
-require "http"
 require "json"
 require "csv"
 
