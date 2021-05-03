@@ -51,9 +51,7 @@ module Frightcrawler
         foil_status = row[1]
         set_name = row[7].upcase.colorize.mode(:underline)
       end
-      if foil_status == "1"
-        foil = "▲".colorize(:light_gray)
-      elsif foil_status == "foil"
+      if foil_status == "1" || foil_status == "foil"
         foil = "▲".colorize(:light_gray)
       elsif foil_status == "etchedFoil"
         foil = "◭".colorize(:light_gray)
