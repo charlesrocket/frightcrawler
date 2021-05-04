@@ -60,14 +60,15 @@ module Frightcrawler
       end
       scry_api = HTTP::Client.get("#{scry_id}")
       scry_json = JSON.parse("#{scry_api.body}")
-      if scry_json["legalities"]["#{game_format}"] == "not_legal"
-        puts "  ▓▒░░░  Not legal  #{foil}  #{card_name}  ◄ #{set_name} ►"
-      elsif scry_json["legalities"]["#{game_format}"] == "legal"
-        puts "  ▓▒░░░    Legal    #{foil}  #{card_name}  ◄ #{set_name} ►"
+      if scry_json["legalities"]["#{game_format}"] == "legal"
+        legalities = "  Legal   "
+      elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
+        legalities = "Not legal "
       else
         puts parser
         exit(1)
       end
+      puts "  ▓▒░░░  #{legalities} #{foil}  #{card_name}  ◄ #{set_name} ►"
       sleep 0.1 # API rate limit
     end
   end
