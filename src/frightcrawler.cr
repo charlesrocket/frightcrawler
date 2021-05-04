@@ -51,12 +51,13 @@ module Frightcrawler
         foil_status = row[1]
         set_name = row[7].upcase.colorize.mode(:underline)
       end
-      if foil_status == "1" || foil_status == "foil"
-        foil = "▲".colorize(:light_gray)
-      elsif foil_status == "etchedFoil"
-        foil = "◭".colorize(:light_gray)
+      case
+      when foil_status == "1", foil_status == "foil"
+        foil_layout = "▲".colorize(:light_gray)
+      when foil_status == "etchedFoil"
+        foil_layout = "◭".colorize(:light_gray)
       else
-        foil = "△".colorize(:dark_gray)
+        foil_layout = "△".colorize(:dark_gray)
       end
       scry_api = HTTP::Client.get("#{scry_id}")
       scry_json = JSON.parse("#{scry_api.body}")
@@ -68,7 +69,21 @@ module Frightcrawler
         puts parser
         exit(1)
       end
-      puts "  ▓▒░░░  #{legalities} #{foil}  #{card_name}  ◄ #{set_name} ►"
+      if scry_json["rarity"] == "common"
+        rarity_symbol = "C"
+      elsif scry_json["rarity"] == "uncommon"
+        rarity_symbol = "U"
+      elsif scry_json["rarity"] == "rare"
+        rarity_symbol = "R"
+      elsif scry_json["rarity"] == "mythic"
+        rarity_symbol = "M"
+      elsif scry_json["rarity"] == "land"
+        rarity_symbol = "L"
+      else
+        puts parser
+        exit(1)
+      end
+      puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name}  ◄ #{set_name} ►"
       sleep 0.1 # API rate limit
     end
   end
