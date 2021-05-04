@@ -20,8 +20,8 @@ module Frightcrawler
     parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
     parser.on("-h", "--help", "Print documentation") do
       parser.banner = "Usage: frightcrawler -g standard"
-      parser.separator(message = "Supported formats:")
-      parser.separator(message = "brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
+      parser.separator(message = "Supported CSV layouts: AetherHub, Helvault")
+      parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
       puts parser
       exit
     end
