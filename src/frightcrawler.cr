@@ -70,15 +70,15 @@ module Frightcrawler
         exit(1)
       end
       if scry_json["rarity"] == "common"
-        rarity_symbol = "C"
+        rarity_symbol = "C".colorize(:white)
       elsif scry_json["rarity"] == "uncommon"
-        rarity_symbol = "U"
+        rarity_symbol = "U".colorize(:cyan)
       elsif scry_json["rarity"] == "rare"
-        rarity_symbol = "R"
+        rarity_symbol = "R".colorize(:light_yellow)
       elsif scry_json["rarity"] == "mythic"
-        rarity_symbol = "M"
+        rarity_symbol = "M".colorize(:magenta)
       elsif scry_json["rarity"] == "land"
-        rarity_symbol = "L"
+        rarity_symbol = "L".colorize(:light_gray)
       else
         puts parser
         exit(1)
