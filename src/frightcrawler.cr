@@ -1,6 +1,7 @@
 require "option_parser"
 require "http/client"
 require "colorize"
+require "json"
 require "csv"
 
 module Frightcrawler
@@ -58,10 +59,10 @@ module Frightcrawler
         foil = "△".colorize(:dark_gray)
       end
       scry_api = HTTP::Client.get("#{scry_id}")
-      api_response = scry_api.body
-      if api_response.includes? %("#{game_format}":"not_legal")
+      scry_json = JSON.parse("#{scry_api.body}")
+      if scry_json["legalities"]["#{game_format}"] == "not_legal"
         puts "  ▓▒░░░  Not legal  #{foil}  #{card_name}  ◄ #{set_name} ►"
-      elsif api_response.includes? %("#{game_format}":"legal")
+      elsif scry_json["legalities"]["#{game_format}"] == "legal"
         puts "  ▓▒░░░    Legal    #{foil}  #{card_name}  ◄ #{set_name} ►"
       else
         puts parser
