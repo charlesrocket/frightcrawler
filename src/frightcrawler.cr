@@ -1,7 +1,6 @@
 require "option_parser"
 require "http/client"
 require "colorize"
-require "json"
 require "csv"
 
 module Frightcrawler
