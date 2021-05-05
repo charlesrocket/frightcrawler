@@ -92,7 +92,6 @@ module Frightcrawler
         exit(1)
       end
       puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name}  ◄ #{set_name} ►"
-      sleep 0.1 # API rate limit
     end
   end
   puts "\n  DONE\n"
