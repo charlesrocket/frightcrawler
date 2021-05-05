@@ -72,7 +72,6 @@ module Frightcrawler
       elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
         legalities = "Not legal "
       else
-        puts parser
         exit(1)
       end
       if scry_json["rarity"] == "common"
@@ -86,9 +85,8 @@ module Frightcrawler
       elsif scry_json["rarity"] == "mythic"
         rarity_symbol = "M".colorize(:magenta)
       elsif scry_json["rarity"] == "bonus"
-        rarity_symbol = "B".colorize(:light_red)
+        rarity_symbol = "B".colorize(:yellow)
       else
-        puts parser
         exit(1)
       end
       puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name}  ◄ #{set_name} ►"
