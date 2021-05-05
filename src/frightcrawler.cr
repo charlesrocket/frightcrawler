@@ -88,7 +88,7 @@ module Frightcrawler
       elsif scry_json["rarity"] == "mythic"
         rarity_symbol = "M".colorize(:magenta)
       elsif scry_json["rarity"] == "bonus"
-        rarity_symbol = "B".colorize(:blue)
+        rarity_symbol = "B".colorize(:light_red)
       else
         puts parser
         exit(1)
