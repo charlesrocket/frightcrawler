@@ -38,9 +38,7 @@ module Frightcrawler
   File.open("#{csv_file}") do |file|
     cardlist = CSV.new(file, header = true)
     csv_header = cardlist.headers
-    puts
-    puts "  Processing CSV file for #{game_format} format..."
-    puts
+    puts "\n  Processing CSV file for #{game_format} format..."
     bulk_file = File.read("bulk-data.json")
     bulk_json = JSON.parse("#{bulk_file}")
     cardlist.each do |entry|
@@ -97,4 +95,5 @@ module Frightcrawler
       sleep 0.1 # API rate limit
     end
   end
+  puts "\n  DONE\n"
 end
