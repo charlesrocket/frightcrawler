@@ -21,7 +21,7 @@ parser = OptionParser.new do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
   parser.on("-h", "--help", "Print documentation") do
-    parser.banner = "Usage: frightcrawler -g standard"
+    parser.banner = "Usage: frightcrawler -g standard -f PATH/TO/FILE"
     parser.separator(message = "Supported CSV layouts: AetherHub, Helvault")
     parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
     puts parser
@@ -82,12 +82,12 @@ File.open("#{csv_file}") do |file|
       rarity_symbol = "U".colorize(:cyan)
     elsif scry_json["rarity"] == "rare"
       rarity_symbol = "R".colorize(:light_yellow)
-    elsif scry_json["rarity"] == "mythic"
-      rarity_symbol = "M".colorize(:magenta)
     elsif scry_json["rarity"] == "special"
       rarity_symbol = "S".colorize(:light_blue)
-    elsif scry_json["rarity"] == "land"
-      rarity_symbol = "L".colorize(:light_gray)
+    elsif scry_json["rarity"] == "mythic"
+      rarity_symbol = "M".colorize(:magenta)
+    elsif scry_json["rarity"] == "bonus"
+      rarity_symbol = "B".colorize(:blue)
     else
       puts parser
       exit(1)
