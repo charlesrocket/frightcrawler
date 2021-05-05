@@ -20,7 +20,6 @@ csv_file = ""
 parser = OptionParser.new do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
-  parser.on("bulk", "Scryfall Bulk Data") { bulk = true }
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g standard"
     parser.separator(message = "Supported CSV layouts: AetherHub, Helvault")
@@ -34,13 +33,15 @@ parser = OptionParser.new do |parser|
   end
 end
 parser.parse
-# pull_bulk if bulk
+pull_bulk
 File.open("#{csv_file}") do |file|
   cardlist = CSV.new(file, header = true)
   csv_header = cardlist.headers
   puts
   puts "  Processing CSV file for #{game_format} format"
   puts
+  bulk_file = File.read("bulk-data.json")
+  bulk_json = JSON.parse("#{bulk_file}")
   cardlist.each do |entry|
     row = entry.row.to_a
     if csv_header.includes? %(AetherHub Card Id)
@@ -54,6 +55,10 @@ File.open("#{csv_file}") do |file|
       foil_status = row[1]
       set_name = row[7].upcase.colorize.mode(:underline)
     end
+    i = 0
+    until bulk_json[i]["id"] == "#{scry_id}"
+      i += 1
+    end
     case
     when foil_status == "1", foil_status == "foil"
       foil_layout = "▲".colorize(:light_gray)
@@ -62,8 +67,7 @@ File.open("#{csv_file}") do |file|
     else
       foil_layout = "△".colorize(:dark_gray)
     end
-    scry_api = HTTP::Client.get("https://api.scryfall.com/cards/#{scry_id}")
-    scry_json = JSON.parse("#{scry_api.body}")
+    scry_json = bulk_json[i]
     if scry_json["legalities"]["#{game_format}"] == "legal"
       legalities = "  Legal   "
     elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
