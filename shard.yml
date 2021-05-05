@@ -8,3 +8,7 @@ authors:
 targets:
   frightcrawler:
     main: src/frightcrawler.cr
+
+tags:
+  - mtg
+  - scryfall-api
