@@ -84,6 +84,8 @@ File.open("#{csv_file}") do |file|
       rarity_symbol = "R".colorize(:light_yellow)
     elsif scry_json["rarity"] == "mythic"
       rarity_symbol = "M".colorize(:magenta)
+    elsif scry_json["rarity"] == "special"
+      rarity_symbol = "S".colorize(:light_blue)
     elsif scry_json["rarity"] == "land"
       rarity_symbol = "L".colorize(:light_gray)
     else
