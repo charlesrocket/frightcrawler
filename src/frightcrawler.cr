@@ -1,4 +1,5 @@
 require "./bulk"
+require "log"
 require "option_parser"
 require "http/client"
 require "colorize"
@@ -6,6 +7,8 @@ require "json"
 require "csv"
 
 module Frightcrawler
+  backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
+  Log.setup(:info, backend)
   VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
   intro = "
   ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
@@ -47,12 +50,12 @@ module Frightcrawler
         scry_id = row[13]
         card_name = row[12]
         foil_status = row[7]
-        set_name = row[14].upcase.colorize.mode(:underline)
+        set_code = row[14].upcase.colorize.mode(:underline)
       else
         scry_id = row[6]
         card_name = row[3]
         foil_status = row[1]
-        set_name = row[7].upcase.colorize.mode(:underline)
+        set_code = row[7].upcase.colorize.mode(:underline)
       end
       i = 0
       until bulk_json[i]["id"] == "#{scry_id}"
@@ -81,15 +84,17 @@ module Frightcrawler
       elsif scry_json["rarity"] == "rare"
         rarity_symbol = "R".colorize(:light_yellow)
       elsif scry_json["rarity"] == "special"
-        rarity_symbol = "S".colorize(:light_blue)
+        rarity_symbol = "S".colorize(:yellow)
       elsif scry_json["rarity"] == "mythic"
         rarity_symbol = "M".colorize(:magenta)
       elsif scry_json["rarity"] == "bonus"
-        rarity_symbol = "B".colorize(:yellow)
+        rarity_symbol = "B".colorize(:light_blue)
       else
         exit(1)
       end
-      puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name}  ◄ #{set_name} ►"
+      set_name = scry_json["set_name"]
+      puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} - #{set_name} ◄ #{set_code} ►"
+      Log.info { "#{game_format}: #{legalities} - #{card_name} ◄ #{set_name} ►" }
     end
   end
   puts "\n  DONE"
