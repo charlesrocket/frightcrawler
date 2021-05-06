@@ -93,8 +93,8 @@ module Frightcrawler
         exit(1)
       end
       set_name = scry_json["set_name"]
-      puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} - #{set_name} ◄ #{set_code} ►"
-      Log.info { "#{game_format}: #{legalities} - #{card_name} ◄ #{set_name} ►" }
+      puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ►" }
     end
   end
   puts "\n  DONE"
