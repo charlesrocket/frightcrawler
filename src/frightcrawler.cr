@@ -7,9 +7,9 @@ require "json"
 require "csv"
 
 module Frightcrawler
+  VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
   backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
   Log.setup(:info, backend)
-  VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
   intro = "
   ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
   ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
@@ -57,10 +57,6 @@ module Frightcrawler
         foil_status = row[1]
         set_code = row[7].upcase.colorize.mode(:underline)
       end
-      i = 0
-      until bulk_json[i]["id"] == "#{scry_id}"
-        i += 1
-      end
       case
       when foil_status == "1", foil_status == "foil"
         foil_layout = "▲".colorize(:light_gray)
@@ -69,7 +65,12 @@ module Frightcrawler
       else
         foil_layout = "△".colorize(:dark_gray)
       end
+      i = 0
+      until bulk_json[i]["id"] == "#{scry_id}"
+        i += 1
+      end
       scry_json = bulk_json[i]
+      set_name = scry_json["set_name"]
       if scry_json["legalities"]["#{game_format}"] == "legal"
         legalities = "  Legal   "
       elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
@@ -92,7 +93,6 @@ module Frightcrawler
       else
         exit(1)
       end
-      set_name = scry_json["set_name"]
       puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ►" }
     end
