@@ -25,8 +25,8 @@ module Frightcrawler
     parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
     parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
     parser.on("-h", "--help", "Print documentation") do
-      parser.banner = "Usage: frightcrawler -g standard -f PATH/TO/FILE"
-      parser.separator(message = "Supported CSV layouts: AetherHub, Helvault")
+      parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
+      parser.separator(message = "Supported CSV layouts: Helvault, AetherHub")
       parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
       puts parser
       exit
@@ -59,11 +59,11 @@ module Frightcrawler
       end
       case
       when foil_status == "1", foil_status == "foil"
-        foil_layout = "▲".colorize(:light_gray)
+        foil_layout = :▲.colorize(:light_gray)
       when foil_status == "etchedFoil"
-        foil_layout = "◭".colorize(:light_gray)
+        foil_layout = :◭.colorize(:light_gray)
       else
-        foil_layout = "△".colorize(:dark_gray)
+        foil_layout = :△.colorize(:dark_gray)
       end
       i = 0
       until bulk_json[i]["id"] == "#{scry_id}"
@@ -79,17 +79,17 @@ module Frightcrawler
         exit(1)
       end
       if scry_json["rarity"] == "common"
-        rarity_symbol = "C".colorize(:white)
+        rarity_symbol = :C.colorize(:white)
       elsif scry_json["rarity"] == "uncommon"
-        rarity_symbol = "U".colorize(:cyan)
+        rarity_symbol = :U.colorize(:cyan)
       elsif scry_json["rarity"] == "rare"
-        rarity_symbol = "R".colorize(:light_yellow)
+        rarity_symbol = :R.colorize(:light_yellow)
       elsif scry_json["rarity"] == "special"
-        rarity_symbol = "S".colorize(:yellow)
+        rarity_symbol = :S.colorize(:yellow)
       elsif scry_json["rarity"] == "mythic"
-        rarity_symbol = "M".colorize(:magenta)
+        rarity_symbol = :M.colorize(:magenta)
       elsif scry_json["rarity"] == "bonus"
-        rarity_symbol = "B".colorize(:light_blue)
+        rarity_symbol = :B.colorize(:light_blue)
       else
         exit(1)
       end
