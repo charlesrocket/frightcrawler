@@ -46,6 +46,7 @@ module Frightcrawler
     bulk_json = JSON.parse("#{bulk_file}")
     cardlist.each do |entry|
       row = entry.row.to_a
+      x = 0
       if csv_header.includes? %(AetherHub Card Id)
         scry_id = row[13]
         card_name = row[12]
@@ -57,6 +58,9 @@ module Frightcrawler
         foil_status = row[1]
         set_code = row[7].upcase.colorize.mode(:underline)
       end
+      until bulk_json[x]["id"] == "#{scry_id}"
+        x += 1
+      end
       case
       when foil_status == "1", foil_status == "foil"
         foil_layout = :▲.colorize(:light_gray)
@@ -65,11 +69,7 @@ module Frightcrawler
       else
         foil_layout = :△.colorize(:dark_gray)
       end
-      i = 0
-      until bulk_json[i]["id"] == "#{scry_id}"
-        i += 1
-      end
-      scry_json = bulk_json[i]
+      scry_json = bulk_json[x]
       set_name = scry_json["set_name"]
       if scry_json["legalities"]["#{game_format}"] == "legal"
         legalities = "  Legal   "
@@ -93,7 +93,7 @@ module Frightcrawler
       else
         exit(1)
       end
-      puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      STDOUT.puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ►" }
     end
   end
