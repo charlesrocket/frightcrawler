@@ -75,6 +75,8 @@ module Frightcrawler
         legalities = "  Legal   "
       elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
         legalities = "Not legal "
+      elsif scry_json["legalities"]["#{game_format}"] == "banned"
+        legalities = "   BAN    "
       else
         exit(1)
       end
