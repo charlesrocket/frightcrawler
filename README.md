@@ -10,3 +10,10 @@
 ```
 
 ### Deck legality checker
+
+#### Usage
+
+```
+frightcrawler -h
+frightcrawler -g modern -f PATH/TO/FILE
+```
