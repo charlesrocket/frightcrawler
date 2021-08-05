@@ -21,6 +21,7 @@ module Frightcrawler
   bulk = false
   game_format = ""
   csv_file = ""
+  total_count = 0
   parser = OptionParser.new do |parser|
     parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
     parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
@@ -95,9 +96,11 @@ module Frightcrawler
       else
         exit(1)
       end
+      total_count += 1
       STDOUT.puts "  ▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ►" }
     end
   end
   puts "\n  DONE"
+  puts "  Total processed: #{total_count}"
 end
