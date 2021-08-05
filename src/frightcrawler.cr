@@ -1,7 +1,6 @@
 require "./bulk"
 require "log"
 require "option_parser"
-require "http/client"
 require "colorize"
 require "json"
 require "csv"
@@ -18,7 +17,6 @@ module Frightcrawler
   ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
   ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
   puts intro
-  bulk = false
   game_format = ""
   csv_file = ""
   total_count = 0

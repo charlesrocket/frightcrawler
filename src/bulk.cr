@@ -1,5 +1,4 @@
 require "http/client"
-require "json"
 
 def pull_bulk
   bulk_api = HTTP::Client.get("https://api.scryfall.com/bulk-data")
