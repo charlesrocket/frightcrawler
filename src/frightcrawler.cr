@@ -36,6 +36,7 @@ module Frightcrawler
     end
   end
   parser.parse
+  puts "\n  Using #{game_format} format list"
   pull_bulk
   File.open("#{csv_file}") do |file|
     cardlist = CSV.new(file, header = true)
@@ -49,9 +50,10 @@ module Frightcrawler
     else
       raise "Unsupported CSV layout"
     end
-    puts "\n  Processing CSV file for #{game_format} format ...", "\n"
+    puts "\n  Loading bulk data ..."
     bulk_file = File.read("bulk-data.json")
     bulk_json = JSON.parse("#{bulk_file}")
+    puts "\n  Reading CSV file ..."  , "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
       x = 0
