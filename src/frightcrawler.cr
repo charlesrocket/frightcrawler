@@ -53,6 +53,7 @@ module Frightcrawler
     puts "\n  Loading bulk data ..."
     bulk_file = File.read("bulk-data.json")
     bulk_json = JSON.parse("#{bulk_file}")
+    puts "\n  Bulk data loaded"
     puts "\n  Reading CSV file ..."  , "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
