@@ -25,7 +25,7 @@ module Frightcrawler
     parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
     parser.on("-h", "--help", "Print documentation") do
       parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
-      parser.separator(message = "Supported CSV layouts: Helvault, AetherHub")
+      parser.separator(message = "Supported CSV layouts: Helvault Pro, AetherHub")
       parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
       puts parser
       exit
@@ -46,16 +46,18 @@ module Frightcrawler
     cardlist.each do |entry|
       row = entry.row.to_a
       x = 0
-      if csv_header.includes? %(AetherHub Card Id)
+      if csv_header.includes? %(collector_number)
+        scry_id = row[7]
+        card_name = row[4]
+        foil_status = row[2]
+        set_code = row[8].upcase.colorize.mode(:underline)
+      elsif csv_header.includes? %(AetherHub Card Id)
         scry_id = row[13]
         card_name = row[12]
         foil_status = row[7]
         set_code = row[14].upcase.colorize.mode(:underline)
       else
-        scry_id = row[6]
-        card_name = row[3]
-        foil_status = row[1]
-        set_code = row[7].upcase.colorize.mode(:underline)
+        raise "Unsupported CSV layout"
       end
       until bulk_json[x]["id"] == "#{scry_id}"
         x += 1
