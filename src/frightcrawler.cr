@@ -42,10 +42,10 @@ module Frightcrawler
     csv_header = cardlist.headers
     if csv_header.includes? %(collector_number)
       csvHelvaultPro = true
-      puts "\n  Helvault Pro file loaded"
+      puts "\n  Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
       csvAetherHub = true
-      puts "\n  AetherHub file loaded"
+      puts "\n  AetherHub CSV file loaded"
     else
       raise "Unsupported CSV layout"
     end
