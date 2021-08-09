@@ -40,24 +40,29 @@ module Frightcrawler
   File.open("#{csv_file}") do |file|
     cardlist = CSV.new(file, header = true)
     csv_header = cardlist.headers
+    if csv_header.includes? %(collector_number)
+      csvHelvaultPro = true
+    elsif csv_header.includes? %(AetherHub Card Id)
+      csvAetherHub = true
+    else
+      raise "Unsupported CSV layout"
+    end
     puts "\n  Processing CSV file for #{game_format} format ...", "\n"
     bulk_file = File.read("bulk-data.json")
     bulk_json = JSON.parse("#{bulk_file}")
     cardlist.each do |entry|
       row = entry.row.to_a
       x = 0
-      if csv_header.includes? %(collector_number)
+      if csvHelvaultPro == true
         scry_id = row[7]
         card_name = row[4]
         foil_status = row[2]
         set_code = row[8].upcase.colorize.mode(:underline)
-      elsif csv_header.includes? %(AetherHub Card Id)
+      elsif csvAetherHub == true
         scry_id = row[13]
         card_name = row[12]
         foil_status = row[7]
         set_code = row[14].upcase.colorize.mode(:underline)
-      else
-        raise "Unsupported CSV layout"
       end
       until bulk_json[x]["id"] == "#{scry_id}"
         x += 1
