@@ -82,11 +82,11 @@ File.open("#{csv_file}") do |file|
     scry_json = bulk_json[x]
     set_name = scry_json["set_name"]
     if scry_json["legalities"]["#{game_format}"] == "legal"
-      legalities = "  Legal   "
+      legalities = "  Legal   ".colorize(:green)
     elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
-      legalities = "Not legal "
+      legalities = "Not legal ".colorize(:red)
     elsif scry_json["legalities"]["#{game_format}"] == "banned"
-      legalities = "   BAN    "
+      legalities = "   BAN    ".colorize(:red)
     else
       exit(1)
     end
