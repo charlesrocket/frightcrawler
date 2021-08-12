@@ -86,7 +86,7 @@ struct Crawler
         card_name = row[12]
         foil_status = row[7]
         set_code = row[14].upcase.colorize.mode(:underline)
-        quantity = row[5]
+        quantity = row[6]
       end
       until bulk_json[x]["id"] == "#{scry_id}"
         x += 1
