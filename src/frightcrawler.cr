@@ -5,6 +5,19 @@ require "colorize"
 require "json"
 require "csv"
 
+VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
+backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
+Log.setup(:info, backend)
+
+intro = "
+▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
+▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
+▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
+▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
+▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
+▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
+puts intro
+
 def pull_bulk
   bulk_api = HTTP::Client.get("https://api.scryfall.com/bulk-data")
   bulk_json = JSON.parse("#{bulk_api.body}")
@@ -25,19 +38,6 @@ def pull_bulk
     end
   end
 end
-
-VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
-backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
-Log.setup(:info, backend)
-
-intro = "
-▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
-▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
-▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
-▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
-▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
-▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
-puts intro
 
 game_format = ""
 csv_file = ""
