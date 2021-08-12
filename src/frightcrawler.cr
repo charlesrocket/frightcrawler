@@ -94,8 +94,10 @@ struct Crawler
         foil_layout = :▲.colorize(:light_gray)
       when foil_status == "etchedFoil"
         foil_layout = :◭.colorize(:light_gray)
-      else
+      when foil_status == ""
         foil_layout = :△.colorize(:dark_gray)
+      else
+        raise "ERROR: foil_status"
       end
       scry_json = bulk_json[x]
       set_name = scry_json["set_name"]
