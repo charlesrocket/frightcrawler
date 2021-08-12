@@ -96,7 +96,7 @@ struct Crawler
         foil_layout = :▲.colorize(:light_gray)
       when foil_status == "etchedFoil"
         foil_layout = :◭.colorize(:light_gray)
-      when foil_status == ""
+      when foil_status == "0", foil_status == ""
         foil_layout = :△.colorize(:dark_gray)
       else
         raise "ERROR: foil_status"
