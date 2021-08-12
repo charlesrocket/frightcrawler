@@ -80,11 +80,13 @@ struct Crawler
         card_name = row[4]
         foil_status = row[2]
         set_code = row[8].upcase.colorize.mode(:underline)
+        quantity = row[6]
       elsif csvAetherHub == true
         scry_id = row[13]
         card_name = row[12]
         foil_status = row[7]
         set_code = row[14].upcase.colorize.mode(:underline)
+        quantity = row[5]
       end
       until bulk_json[x]["id"] == "#{scry_id}"
         x += 1
@@ -126,8 +128,8 @@ struct Crawler
         raise "ERROR: rarity"
       end
       total_count += 1
-      STDOUT.puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
-      Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ►" }
+      STDOUT.puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ► ⑇ #{quantity}"
+      Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
   end
 end
