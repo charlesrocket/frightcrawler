@@ -1,13 +1,26 @@
-require "./bulk"
 require "log"
+require "http/client"
 require "option_parser"
 require "colorize"
 require "json"
 require "csv"
 
+def pull_bulk
+  bulk_api = HTTP::Client.get("https://api.scryfall.com/bulk-data")
+  bulk_json = JSON.parse("#{bulk_api.body}")
+  download_link = bulk_json["data"][3]["download_uri"]
+  if !File.exists?("bulk-data.json")
+    puts "\n  Downloading bulk data from Scryfall ..."
+    HTTP::Client.get("#{download_link}") do |response|
+      File.write("bulk-data.json", response.body_io)
+    end
+  end
+end
+
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
+
 intro = "
 ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
 ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
@@ -16,9 +29,11 @@ intro = "
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
 puts intro
+
 game_format = ""
 csv_file = ""
 total_count = 0
+
 parser = OptionParser.new do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
@@ -35,8 +50,10 @@ parser = OptionParser.new do |parser|
   end
 end
 parser.parse
+
 puts "\n  Using #{game_format} format list"
 pull_bulk
+
 File.open("#{csv_file}") do |file|
   cardlist = CSV.new(file, header = true)
   csv_header = cardlist.headers
@@ -110,5 +127,6 @@ File.open("#{csv_file}") do |file|
     Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ►" }
   end
 end
+
 puts "\n  DONE"
 puts "  Total processed: #{total_count}"
