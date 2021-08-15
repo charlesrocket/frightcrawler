@@ -16,7 +16,7 @@ intro = "
 ▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
-STDOUT.puts intro
+puts intro
 
 def pull_bulk
   bulk_api = HTTP::Client.get("https://api.scryfall.com/bulk-data")
@@ -27,12 +27,12 @@ def pull_bulk
     modification_time = File.info("bulk-data.json").modification_time.to_unix
     bulk_time = 86000
     if (local_time - modification_time) >= bulk_time
-      STDOUT.puts "\n  Deleting old bulk data"
+      puts "\n  Deleting old bulk data"
       File.delete("bulk-data.json")
     end
   end
   if !File.exists?("bulk-data.json")
-    STDOUT.puts "\n  Downloading bulk data from Scryfall ..."
+    puts "\n  Downloading bulk data from Scryfall ..."
     HTTP::Client.get("#{download_link}") do |response|
       File.write("bulk-data.json", response.body_io)
     end
@@ -50,17 +50,17 @@ parser = OptionParser.new do |parser|
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
     parser.separator(message = "Supported CSV layouts: Helvault Pro, AetherHub")
     parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
-    STDOUT.puts parser
+    puts parser
     exit
   end
   parser.on("-v", "--version", "Version") do
-    STDOUT.puts VERSION
+    puts VERSION
     exit
   end
 end
 parser.parse
 
-STDOUT.puts "\n  Using #{game_format} format list"
+puts "\n  Using #{game_format} format list"
 pull_bulk
 
 struct Crawler
@@ -69,18 +69,18 @@ struct Crawler
     csv_header = cardlist.headers
     if csv_header.includes? %(collector_number)
       csvHelvaultPro = true
-      STDOUT.puts "\n  Helvault Pro CSV file loaded"
+      puts "\n  Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
       csvAetherHub = true
-      STDOUT.puts "\n  AetherHub CSV file loaded"
+      puts "\n  AetherHub CSV file loaded"
     else
       raise "Unsupported CSV layout"
     end
-    STDOUT.puts "\n  Loading bulk data ..."
+    puts "\n  Loading bulk data ..."
     bulk_file = File.read("bulk-data.json")
     bulk_json = JSON.parse("#{bulk_file}")
-    STDOUT.puts "\n  Bulk data loaded"
-    STDOUT.puts "\n  Reading CSV file ...", "\n"
+    puts "\n  Bulk data loaded"
+    puts "\n  Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
       x = 0
@@ -137,11 +137,11 @@ struct Crawler
         raise "ERROR: rarity"
       end
       total_count += 1
-      STDOUT.puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ► ⑇ #{quantity}"
+      puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ► ⑇ #{quantity}"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
   end
 end
 
-STDOUT.puts "\n  DONE"
-STDOUT.puts "  Total processed: #{total_count}"
+puts "\n  DONE"
+puts "  Total processed: #{total_count}"
