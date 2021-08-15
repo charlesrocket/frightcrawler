@@ -23,6 +23,7 @@ def pull_bulk
   bulk_json = JSON.parse("#{bulk_api.body}")
   download_link = bulk_json["data"][3]["download_uri"]
   if File.exists?("bulk-data.json")
+    # daily bulk data pulls
     local_time = Time.utc.to_unix
     modification_time = File.info("bulk-data.json").modification_time.to_unix
     bulk_time = 86000
