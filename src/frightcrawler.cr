@@ -61,6 +61,7 @@ parser = OptionParser.new do |parser|
 end
 parser.parse
 
+t1 = Time.monotonic
 puts "\n  Using #{game_format} format list"
 pull_bulk
 
@@ -144,5 +145,9 @@ struct Crawler
   end
 end
 
+t2 = Time.monotonic
+elapsed_time = t2 - t1
+
 puts "\n  DONE"
 puts "  Total processed: #{total_count}"
+puts "  Time: #{elapsed_time}"
