@@ -16,7 +16,7 @@ intro = "
 ▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
-puts intro
+puts intro, VERSION
 
 def pull_bulk
   bulk_api = HTTP::Client.get("https://api.scryfall.com/bulk-data")
