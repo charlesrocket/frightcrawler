@@ -28,12 +28,12 @@ def pull_bulk
     modification_time = File.info("bulk-data.json").modification_time.to_unix
     bulk_time = 86000
     if (local_time - modification_time) >= bulk_time
-      puts "\n  Deleting old bulk data"
+      puts "\n  * Deleting old bulk data"
       File.delete("bulk-data.json")
     end
   end
   if !File.exists?("bulk-data.json")
-    puts "\n  Downloading bulk data from Scryfall ..."
+    puts "\n  * Downloading bulk data from Scryfall ..."
     HTTP::Client.get("#{download_link}") do |response|
       File.write("bulk-data.json", response.body_io)
     end
@@ -62,7 +62,7 @@ end
 parser.parse
 
 t1 = Time.monotonic
-puts "\n  Using #{game_format} format list"
+puts "\n  * Using #{game_format} format list"
 pull_bulk
 
 struct Crawler
@@ -71,18 +71,18 @@ struct Crawler
     csv_header = cardlist.headers
     if csv_header.includes? %(collector_number)
       csvHelvaultPro = true
-      puts "\n  Helvault Pro CSV file loaded"
+      puts "\n  * Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
       csvAetherHub = true
-      puts "\n  AetherHub CSV file loaded"
+      puts "\n  * AetherHub CSV file loaded"
     else
       raise "Unsupported CSV layout"
     end
-    puts "\n  Loading bulk data ..."
+    puts "\n  * Loading bulk data ..."
     bulk_file = File.read("bulk-data.json")
     bulk_json = JSON.parse("#{bulk_file}")
-    puts "\n  Bulk data loaded"
-    puts "\n  Reading CSV file ...", "\n"
+    puts "\n  * Bulk data loaded"
+    puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
       x = 0
@@ -154,5 +154,5 @@ t2 = Time.monotonic
 elapsed_time = t2 - t1
 
 puts "\n  DONE"
-puts "  Total processed: #{total_count}"
+puts "\n  Total processed: #{total_count}"
 puts "  Time: #{elapsed_time}"
