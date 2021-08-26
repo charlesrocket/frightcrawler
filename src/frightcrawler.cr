@@ -98,9 +98,12 @@ struct Crawler
         foil_status = row[7]
         set_code = row[14].upcase.colorize.mode(:underline)
         quantity = row[6]
+      else
+        raise "ERROR: csv"
       end
       until bulk_json[x]["id"] == "#{scry_id}"
         x += 1
+        # not good enough!
       end
       case
       when foil_status == "1", foil_status == "foil"
