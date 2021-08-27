@@ -122,7 +122,7 @@ struct Crawler
       elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
         legalities = "Not legal ".colorize(:red)
       elsif scry_json["legalities"]["#{game_format}"] == "restricted"
-        legalities = "Restricted".colorize(:yellow)
+        legalities = "  Restr   ".colorize(:yellow)
       elsif scry_json["legalities"]["#{game_format}"] == "banned"
         legalities = "   BAN    ".colorize(:red)
       else
