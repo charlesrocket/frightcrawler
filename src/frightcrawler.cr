@@ -87,10 +87,10 @@ struct Crawler
       row = entry.row.to_a
       x = 0
       if csvHelvaultPro == true
-        scry_id = row[7]
+        scry_id = row[8]
         card_name = row[4]
         foil_status = row[2]
-        set_code = row[8].upcase.colorize.mode(:underline)
+        set_code = row[9].upcase.colorize.mode(:underline)
         quantity = row[6]
       elsif csvAetherHub == true
         scry_id = row[13]
