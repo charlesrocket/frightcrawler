@@ -87,13 +87,14 @@ struct Crawler
     cardlist.each do |entry|
       row = entry.row.to_a
       x = 0
-      if csvHelvaultPro == true
+      case
+      when csvHelvaultPro
         scry_id = row[8]
         card_name = row[4]
         foil_status = row[2]
         set_code = row[9].upcase.colorize.mode(:underline)
         quantity = row[6]
-      elsif csvAetherHub == true
+      when csvAetherHub
         scry_id = row[13]
         card_name = row[12]
         foil_status = row[7]
