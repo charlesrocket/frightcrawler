@@ -43,6 +43,7 @@ end
 game_format = ""
 csv_file = ""
 total_count = 0
+unique_count = 0
 
 parser = OptionParser.new do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
@@ -143,7 +144,8 @@ struct Crawler
       else
         raise "ERROR: rarity"
       end
-      total_count += 1
+      total_count += quantity.to_i
+      unique_count += 1
       puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ► ⑇ #{quantity}"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
@@ -153,6 +155,7 @@ end
 t2 = Time.monotonic
 elapsed_time = t2 - t1
 
+Log.info { "Processed: #{unique_count}/#{total_count}" }
 puts "\n  DONE"
-puts "\n  Total processed: #{total_count}"
+puts "\n  Unique/total processed: #{unique_count}/#{total_count}"
 puts "  Time: #{elapsed_time}"
