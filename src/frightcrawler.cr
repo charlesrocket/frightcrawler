@@ -159,4 +159,4 @@ elapsed_time = t2 - t1
 Log.info { "Processed: #{unique_count}/#{total_count}" }
 puts "\n  DONE"
 puts "\n  Unique/total processed: #{unique_count}/#{total_count}"
-puts "  Time: #{elapsed_time}"
+puts "  Elapsed time: #{elapsed_time}"
