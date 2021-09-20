@@ -107,6 +107,8 @@ struct Crawler
         x += 1
         # not good enough!
       end
+      scry_json = bulk_json[x]
+      set_name = scry_json["set_name"]
       case
       when foil_status == "1", foil_status == "foil"
         foil_layout = :▲.colorize(:light_gray)
@@ -117,8 +119,6 @@ struct Crawler
       else
         raise "ERROR: foil_status"
       end
-      scry_json = bulk_json[x]
-      set_name = scry_json["set_name"]
       if scry_json["legalities"]["#{game_format}"] == "legal"
         legalities = "  Legal   ".colorize(:green)
       elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
