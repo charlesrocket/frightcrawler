@@ -119,28 +119,30 @@ struct Crawler
       else
         raise "ERROR: foil_status"
       end
-      if scry_json["legalities"]["#{game_format}"] == "legal"
+      case
+      when scry_json["legalities"]["#{game_format}"] == "legal"
         legalities = "  Legal   ".colorize(:green)
-      elsif scry_json["legalities"]["#{game_format}"] == "not_legal"
+      when scry_json["legalities"]["#{game_format}"] == "not_legal"
         legalities = "Not legal ".colorize(:red)
-      elsif scry_json["legalities"]["#{game_format}"] == "restricted"
+      when scry_json["legalities"]["#{game_format}"] == "restricted"
         legalities = "  Restr   ".colorize(:blue)
-      elsif scry_json["legalities"]["#{game_format}"] == "banned"
+      when scry_json["legalities"]["#{game_format}"] == "banned"
         legalities = "   BAN    ".colorize(:red)
       else
         raise "ERROR: legalities"
       end
-      if scry_json["rarity"] == "common"
+      case
+      when scry_json["rarity"] == "common"
         rarity_symbol = :C.colorize(:white)
-      elsif scry_json["rarity"] == "uncommon"
+      when scry_json["rarity"] == "uncommon"
         rarity_symbol = :U.colorize(:cyan)
-      elsif scry_json["rarity"] == "rare"
+      when scry_json["rarity"] == "rare"
         rarity_symbol = :R.colorize(:light_yellow)
-      elsif scry_json["rarity"] == "special"
+      when scry_json["rarity"] == "special"
         rarity_symbol = :S.colorize(:yellow)
-      elsif scry_json["rarity"] == "mythic"
+      when scry_json["rarity"] == "mythic"
         rarity_symbol = :M.colorize(:magenta)
-      elsif scry_json["rarity"] == "bonus"
+      when scry_json["rarity"] == "bonus"
         rarity_symbol = :B.colorize(:light_blue)
       else
         raise "ERROR: rarity"
