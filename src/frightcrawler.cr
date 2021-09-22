@@ -1,9 +1,9 @@
-require "log"
 require "http/client"
 require "option_parser"
 require "colorize"
 require "json"
 require "csv"
+require "log"
 
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
