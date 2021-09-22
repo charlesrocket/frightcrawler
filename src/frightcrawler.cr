@@ -19,9 +19,8 @@ intro = "
 puts intro, VERSION
 
 def pull_bulk
-  bulk_api = HTTP::Client.get("https://api.scryfall.com/bulk-data")
-  bulk_json = JSON.parse("#{bulk_api.body}")
-  download_link = bulk_json["data"][3]["download_uri"]
+  bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
+  download_link = bulk_data["data"][3]["download_uri"]
   if File.exists?("bulk-data.json")
     # daily bulk data pulls
     local_time = Time.utc.to_unix
@@ -80,8 +79,7 @@ struct Crawler
       raise "Unsupported CSV layout"
     end
     puts "\n  * Loading bulk data ..."
-    bulk_file = File.read("bulk-data.json")
-    bulk_json = JSON.parse("#{bulk_file}")
+    bulk_json = JSON.parse(File.read("bulk-data.json"))
     puts "\n  * Bulk data loaded"
     puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
