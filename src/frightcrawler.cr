@@ -18,6 +18,28 @@ intro = "
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
 puts intro, VERSION
 
+class Counter
+  @@total_count = 0
+  @@unique_count = 0
+  @@legal_t = 0
+  @@not_legal_t = 0
+  @@restricted_t = 0
+  @@banned_t = 0
+
+  def self.add_total(x); @@total_count += x end
+  def self.add_unique; @@unique_count += 1 end
+  def self.legal(x); @@legal_t += x end
+  def self.not_legal(x); @@not_legal_t += x end
+  def self.restricted(x); @@restricted_t += x end
+  def self.banned(x); @@banned_t += x end
+  def self.get_total; return @@total_count end
+  def self.get_unique; return @@unique_count end
+  def self.get_legal; return @@legal_t end
+  def self.get_not_legal; return @@not_legal_t end
+  def self.get_restricted; return @@restricted_t end
+  def self.get_banned; return @@banned_t end
+end
+
 def pull_bulk
   bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
   download_link = bulk_data["data"][3]["download_uri"]
@@ -41,8 +63,6 @@ end
 
 game_format = ""
 csv_file = ""
-total_count = 0
-unique_count = 0
 
 parser = OptionParser.new do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
@@ -120,12 +140,16 @@ struct Crawler
       case
       when scry_json["legalities"]["#{game_format}"] == "legal"
         legalities = "  Legal   ".colorize(:green)
+        Counter.legal("#{quantity}".to_i)
       when scry_json["legalities"]["#{game_format}"] == "not_legal"
         legalities = "Not legal ".colorize(:red)
+        Counter.not_legal("#{quantity}".to_i)
       when scry_json["legalities"]["#{game_format}"] == "restricted"
         legalities = "  Restr   ".colorize(:blue)
+        Counter.restricted("#{quantity}".to_i)
       when scry_json["legalities"]["#{game_format}"] == "banned"
         legalities = "   BAN    ".colorize(:red)
+        Counter.banned("#{quantity}".to_i)
       else
         raise "ERROR: legalities"
       end
@@ -145,8 +169,8 @@ struct Crawler
       else
         raise "ERROR: rarity"
       end
-      total_count += quantity.to_i
-      unique_count += 1
+      Counter.add_total("#{quantity}".to_i)
+      Counter.add_unique
       puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
@@ -156,7 +180,11 @@ end
 t2 = Time.monotonic
 elapsed_time = t2 - t1
 
-Log.info { "Processed: #{unique_count}/#{total_count}" }
-puts "\n  DONE"
-puts "\n  Unique/total processed: #{unique_count}/#{total_count}"
+Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
+puts "\n  Legal: #{Counter.get_legal}"
+puts "  Not legal: #{Counter.get_not_legal}"
+puts "  Banned: #{Counter.get_banned}"
+puts "  Restricted: #{Counter.get_restricted}"
+puts "\n  Unique/total processed: #{Counter.get_unique}/#{Counter.get_total}"
 puts "  Elapsed time: #{elapsed_time}"
+puts "\n  DONE"
