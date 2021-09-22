@@ -1,4 +1,4 @@
-name: Run Crystal tests
+name: Tests
 
 on: [push, pull_request]
 
