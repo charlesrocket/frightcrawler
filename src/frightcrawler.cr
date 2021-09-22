@@ -162,8 +162,8 @@ elapsed_time = t2 - t1
 Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
 puts "\n  Legal: #{Counter.get_legal}"
 puts "  Not legal: #{Counter.get_not_legal}"
-puts "  Banned: #{Counter.get_banned}"
 puts "  Restricted: #{Counter.get_restricted}"
+puts "  Banned: #{Counter.get_banned}"
 puts "\n  Unique/total processed: #{Counter.get_unique}/#{Counter.get_total}"
 puts "  Elapsed time: #{elapsed_time}"
 puts "\n  DONE"
