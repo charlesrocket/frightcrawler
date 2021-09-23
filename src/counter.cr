@@ -1,10 +1,10 @@
 class Counter
   @@total_count = 0
   @@unique_count = 0
-  @@legal_t = 0
-  @@not_legal_t = 0
-  @@restricted_t = 0
-  @@banned_t = 0
+  @@legal = 0
+  @@not_legal = 0
+  @@restricted = 0
+  @@banned = 0
 
   def self.total(x)
     @@total_count += x
@@ -15,19 +15,19 @@ class Counter
   end
 
   def self.legal(x)
-    @@legal_t += x
+    @@legal += x
   end
 
   def self.not_legal(x)
-    @@not_legal_t += x
+    @@not_legal += x
   end
 
   def self.restricted(x)
-    @@restricted_t += x
+    @@restricted += x
   end
 
   def self.banned(x)
-    @@banned_t += x
+    @@banned += x
   end
 
   def self.get_total
@@ -39,18 +39,18 @@ class Counter
   end
 
   def self.get_legal
-    return @@legal_t
+    return @@legal
   end
 
   def self.get_not_legal
-    return @@not_legal_t
+    return @@not_legal
   end
 
   def self.get_restricted
-    return @@restricted_t
+    return @@restricted
   end
 
   def self.get_banned
-    return @@banned_t
+    return @@banned
   end
 end
