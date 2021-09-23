@@ -128,8 +128,8 @@ struct Crawler
       else
         raise "ERROR: rarity"
       end
-      Counter.add_total("#{quantity}".to_i)
-      Counter.add_unique
+      Counter.total("#{quantity}".to_i)
+      Counter.unique
       puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end

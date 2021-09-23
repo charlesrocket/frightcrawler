@@ -6,11 +6,11 @@ class Counter
   @@restricted_t = 0
   @@banned_t = 0
 
-  def self.add_total(x)
+  def self.total(x)
     @@total_count += x
   end
 
-  def self.add_unique
+  def self.unique
     @@unique_count += 1
   end
 
