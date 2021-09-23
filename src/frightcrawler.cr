@@ -115,16 +115,22 @@ struct Crawler
       case
       when scry_json["rarity"] == "common"
         rarity_symbol = :C.colorize(:white)
+        Counter.common("#{quantity}".to_i)
       when scry_json["rarity"] == "uncommon"
         rarity_symbol = :U.colorize(:cyan)
+        Counter.uncommon("#{quantity}".to_i)
       when scry_json["rarity"] == "rare"
         rarity_symbol = :R.colorize(:light_yellow)
+        Counter.rare("#{quantity}".to_i)
       when scry_json["rarity"] == "special"
         rarity_symbol = :S.colorize(:yellow)
+        Counter.special("#{quantity}".to_i)
       when scry_json["rarity"] == "mythic"
         rarity_symbol = :M.colorize(:magenta)
+        Counter.mythic("#{quantity}".to_i)
       when scry_json["rarity"] == "bonus"
         rarity_symbol = :B.colorize(:light_blue)
+        Counter.bonus("#{quantity}".to_i)
       else
         raise "ERROR: rarity"
       end
@@ -144,6 +150,12 @@ puts "\n  Legal: #{Counter.get_legal.colorize(:green)}"
 puts "  Not legal: #{Counter.get_not_legal.colorize(:red)}"
 puts "  Restricted: #{Counter.get_restricted.colorize(:blue)}"
 puts "  Banned: #{Counter.get_banned.colorize(:red)}"
+puts "\n  | C #{Counter.get_common.colorize(:white)}"
+puts "  | U #{Counter.get_uncommon.colorize(:cyan)}"
+puts "  | R #{Counter.get_rare.colorize(:light_yellow)}"
+puts "  | S #{Counter.get_special.colorize(:yellow)}"
+puts "  | M #{Counter.get_mythic.colorize(:magenta)}"
+puts "  | B #{Counter.get_bonus.colorize(:light_blue)}"
 puts "\n  Unique/total processed: #{Counter.get_unique}/#{Counter.get_total}"
 puts "  Elapsed time: #{elapsed_time}"
 puts "\n  DONE"
