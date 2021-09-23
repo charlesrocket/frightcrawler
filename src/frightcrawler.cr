@@ -140,10 +140,10 @@ t2 = Time.monotonic
 elapsed_time = t2 - t1
 
 Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
-puts "\n  Legal: #{Counter.get_legal}"
-puts "  Not legal: #{Counter.get_not_legal}"
-puts "  Restricted: #{Counter.get_restricted}"
-puts "  Banned: #{Counter.get_banned}"
+puts "\n  Legal: #{Counter.get_legal.colorize(:green)}"
+puts "  Not legal: #{Counter.get_not_legal.colorize(:red)}"
+puts "  Restricted: #{Counter.get_restricted.colorize(:blue)}"
+puts "  Banned: #{Counter.get_banned.colorize(:red)}"
 puts "\n  Unique/total processed: #{Counter.get_unique}/#{Counter.get_total}"
 puts "  Elapsed time: #{elapsed_time}"
 puts "\n  DONE"
