@@ -14,6 +14,9 @@ class Counter
   @@mythic = 0
   @@bonus = 0
 
+  @@foil = 0
+  @@efoil = 0
+
   def self.total(x)
     @@total_count += x
   end
@@ -62,6 +65,14 @@ class Counter
     @@bonus += x
   end
 
+  def self.foil(x)
+    @@foil += x
+  end
+
+  def self.efoil(x)
+    @@efoil += x
+  end
+
   def self.get_total
     return @@total_count
   end
@@ -108,5 +119,13 @@ class Counter
 
   def self.get_bonus
     return @@bonus
+  end
+
+  def self.get_foil
+    return @@foil
+  end
+
+  def self.get_efoil
+    return @@efoil
   end
 end
