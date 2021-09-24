@@ -89,8 +89,10 @@ struct Crawler
       case
       when foil_status == "1", foil_status == "foil"
         foil_layout = :▲.colorize(:light_gray)
+        Counter.foil("#{quantity}".to_i)
       when foil_status == "etchedFoil"
         foil_layout = :◭.colorize(:light_gray)
+        Counter.efoil("#{quantity}".to_i)
       when foil_status == "0", foil_status == ""
         foil_layout = :△.colorize(:dark_gray)
       else
@@ -156,6 +158,8 @@ puts "  | R #{Counter.get_rare.colorize(:light_yellow)}"
 puts "  | S #{Counter.get_special.colorize(:yellow)}"
 puts "  | M #{Counter.get_mythic.colorize(:magenta)}"
 puts "  | B #{Counter.get_bonus.colorize(:light_blue)}"
+puts "\n  | ▲ #{Counter.get_foil}"
+puts "  | ◭ #{Counter.get_efoil}"
 puts "\n  Unique/total processed: #{Counter.get_unique}/#{Counter.get_total}"
 puts "  Elapsed time: #{elapsed_time}"
 puts "\n  DONE"
