@@ -51,7 +51,7 @@ struct Crawler
     if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
       csvHelvault = true
       puts "\n  * Helvault CSV file loaded"
-    elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language", "name", "oracle_id", "quantity", "rarity", "scryfall_id", "set_code", "set_name")
+    elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language")
       csvHelvaultPro = true
       puts "\n  * Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
