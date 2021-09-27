@@ -47,8 +47,11 @@ Bulk.pull
 struct Crawler
   File.open("#{csv_file}") do |file|
     cardlist = CSV.new(file, header = true)
-    csv_header = cardlist.headers
-    if csv_header.includes? %(collector_number)
+    csv_header = cardlist.headers.to_s
+    if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
+      csvHelvault = true
+      puts "\n  * Helvault CSV file loaded"
+    elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language", "name", "oracle_id", "quantity", "rarity", "scryfall_id", "set_code", "set_name")
       csvHelvaultPro = true
       puts "\n  * Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
@@ -65,6 +68,10 @@ struct Crawler
       row = entry.row.to_a
       x = 0
       case
+      when csvHelvault
+        scry_id = row[4]
+        foil_status = row[0]
+        quantity = row[3]
       when csvHelvaultPro
         scry_id = row[8]
         foil_status = row[2]
