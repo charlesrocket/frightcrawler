@@ -28,7 +28,7 @@ parser = OptionParser.new do |parser|
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
-    parser.separator(message = "Supported CSV layouts: Helvault Pro, AetherHub")
+    parser.separator(message = "Supported CSV layouts: Helvault, Helvault Pro, AetherHub")
     parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
     puts parser
     exit
