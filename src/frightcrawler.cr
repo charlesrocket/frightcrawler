@@ -67,15 +67,11 @@ struct Crawler
       case
       when csvHelvaultPro
         scry_id = row[8]
-        card_name = row[4]
         foil_status = row[2]
-        set_code = row[9].upcase.colorize.mode(:underline)
         quantity = row[6]
       when csvAetherHub
         scry_id = row[13]
-        card_name = row[12]
         foil_status = row[7]
-        set_code = row[14].upcase.colorize.mode(:underline)
         quantity = row[6]
       else
         raise "ERROR: csv"
@@ -85,7 +81,9 @@ struct Crawler
         # not good enough!
       end
       scry_json = bulk_json[x]
+      card_name = scry_json["name"]
       set_name = scry_json["set_name"]
+      set_code = scry_json["set"].to_s.upcase.colorize.mode(:underline)
       case
       when foil_status == "1", foil_status == "foil"
         foil_layout = :▲.colorize(:light_gray)
