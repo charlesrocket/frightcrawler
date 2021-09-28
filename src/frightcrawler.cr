@@ -24,14 +24,14 @@ game_format = ""
 csv_file = ""
 sf_id = ""
 
-parser = OptionParser.new do |parser|
+OptionParser.parse do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
   parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
-    parser.separator(message = "Supported CSV layouts: Helvault, Helvault Pro, AetherHub")
-    parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
+    parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub")
+    parser.separator("Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
     puts parser
     exit
   end
@@ -40,7 +40,6 @@ parser = OptionParser.new do |parser|
     exit
   end
 end
-parser.parse
 
 unless sf_id.empty?
   puts JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{sf_id}").body).to_pretty_json
