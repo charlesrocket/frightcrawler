@@ -55,13 +55,13 @@ struct Crawler
     cardlist = CSV.new(file, header = true)
     csv_header = cardlist.headers.to_s
     if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
-      csvHelvault = true
+      csv_helvault = true
       puts "\n  * Helvault CSV file loaded"
     elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language")
-      csvHelvaultPro = true
+      csv_helvault_pro = true
       puts "\n  * Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
-      csvAetherHub = true
+      csv_aetherhub = true
       puts "\n  * AetherHub CSV file loaded"
     else
       raise "Unsupported CSV layout"
@@ -74,15 +74,15 @@ struct Crawler
       row = entry.row.to_a
       x = 0
       case
-      when csvHelvault
+      when csv_helvault
         scry_id = row[4]
         foil_status = row[0]
         quantity = row[3]
-      when csvHelvaultPro
+      when csv_helvault_pro
         scry_id = row[8]
         foil_status = row[2]
         quantity = row[6]
-      when csvAetherHub
+      when csv_aetherhub
         scry_id = row[13]
         foil_status = row[7]
         quantity = row[6]
