@@ -58,7 +58,7 @@ struct Crawler
       csv_helvault = true
       puts "\n  * Helvault CSV file loaded"
     elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language")
-      csv_helvault_pro = true
+      csv_helvaultpro = true
       puts "\n  * Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
       csv_aetherhub = true
@@ -78,7 +78,7 @@ struct Crawler
         scry_id = row[4]
         foil_status = row[0]
         quantity = row[3]
-      when csv_helvault_pro
+      when csv_helvaultpro
         scry_id = row[8]
         foil_status = row[2]
         quantity = row[6]
