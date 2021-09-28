@@ -23,5 +23,7 @@ jobs:
         run: shards build
       - name: Check formatting
         run: crystal tool format --check
+      - name: Run Ameba
+        run: crystal bin/ameba.cr
 #     - name: Run tests
 #       run: crystal spec --order=random --error-on-warnings
