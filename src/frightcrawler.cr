@@ -52,7 +52,7 @@ Bulk.pull
 
 struct Crawler
   File.open("#{csv_file}") do |file|
-    cardlist = CSV.new(file, header = true)
+    cardlist = CSV.new(file, headers: true)
     csv_header = cardlist.headers.to_s
     if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
       csv_helvault = true
