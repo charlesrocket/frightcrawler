@@ -30,8 +30,8 @@ OptionParser.parse do |parser|
   parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
-    parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub")
-    parser.separator("Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
+    parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub.")
+    parser.separator("Supported formats: brawl, commander, duel, future, gladiator, historic, legacy,\nmodern, oldschool, pauper, penny, pioneer, premodern, standard, vintage.")
     puts parser
     exit
   end
