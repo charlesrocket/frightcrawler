@@ -74,58 +74,58 @@ class Counter
   end
 
   def self.get_total
-    return @@total_count
+    @@total_count
   end
 
   def self.get_unique
-    return @@unique_count
+    @@unique_count
   end
 
   def self.get_legal
-    return @@legal
+    @@legal
   end
 
   def self.get_not_legal
-    return @@not_legal
+    @@not_legal
   end
 
   def self.get_restricted
-    return @@restricted
+    @@restricted
   end
 
   def self.get_banned
-    return @@banned
+    @@banned
   end
 
   def self.get_common
-    return @@common
+    @@common
   end
 
   def self.get_uncommon
-    return @@uncommon
+    @@uncommon
   end
 
   def self.get_rare
-    return @@rare
+    @@rare
   end
 
   def self.get_special
-    return @@special
+    @@special
   end
 
   def self.get_mythic
-    return @@mythic
+    @@mythic
   end
 
   def self.get_bonus
-    return @@bonus
+    @@bonus
   end
 
   def self.get_foil
-    return @@foil
+    @@foil
   end
 
   def self.get_efoil
-    return @@efoil
+    @@efoil
   end
 end

@@ -24,14 +24,14 @@ game_format = ""
 csv_file = ""
 sf_id = ""
 
-parser = OptionParser.new do |parser|
+OptionParser.parse do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
   parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
-    parser.separator(message = "Supported CSV layouts: Helvault, Helvault Pro, AetherHub")
-    parser.separator(message = "Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
+    parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub")
+    parser.separator("Supported formats: brawl, commander, duel, future, gladiator, historic, legacy, modern, oldschool, pauper, penny, pioneer, premodern, standard, vintage")
     puts parser
     exit
   end
@@ -40,7 +40,6 @@ parser = OptionParser.new do |parser|
     exit
   end
 end
-parser.parse
 
 unless sf_id.empty?
   puts JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{sf_id}").body).to_pretty_json
@@ -53,16 +52,16 @@ Bulk.pull
 
 struct Crawler
   File.open("#{csv_file}") do |file|
-    cardlist = CSV.new(file, header = true)
+    cardlist = CSV.new(file, headers: true)
     csv_header = cardlist.headers.to_s
     if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
-      csvHelvault = true
+      csv_helvault = true
       puts "\n  * Helvault CSV file loaded"
     elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language")
-      csvHelvaultPro = true
+      csv_helvaultpro = true
       puts "\n  * Helvault Pro CSV file loaded"
     elsif csv_header.includes? %(AetherHub Card Id)
-      csvAetherHub = true
+      csv_aetherhub = true
       puts "\n  * AetherHub CSV file loaded"
     else
       raise "Unsupported CSV layout"
@@ -75,15 +74,15 @@ struct Crawler
       row = entry.row.to_a
       x = 0
       case
-      when csvHelvault
+      when csv_helvault
         scry_id = row[4]
         foil_status = row[0]
         quantity = row[3]
-      when csvHelvaultPro
+      when csv_helvaultpro
         scry_id = row[8]
         foil_status = row[2]
         quantity = row[6]
-      when csvAetherHub
+      when csv_aetherhub
         scry_id = row[13]
         foil_status = row[7]
         quantity = row[6]
