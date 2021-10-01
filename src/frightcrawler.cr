@@ -90,8 +90,8 @@ struct Crawler
         raise "ERROR: csv"
       end
       until bulk_json[x]["id"] == "#{scry_id}"
+        # OPTIMIZE: Not good enough!
         x += 1
-        # not good enough!
       end
       scry_json = bulk_json[x]
       card_name = scry_json["name"]
@@ -149,6 +149,7 @@ struct Crawler
       end
       Counter.total("#{quantity}".to_i)
       Counter.unique
+      # TODO: Add icons
       puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
@@ -159,6 +160,7 @@ t2 = Time.monotonic
 elapsed_time = t2 - t1
 
 Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
+# FIXME: Too sloppy
 puts "\n  Legal: #{Counter.get_legal.colorize(:green)}"
 puts "  Not legal: #{Counter.get_not_legal.colorize(:red)}"
 puts "  Restricted: #{Counter.get_restricted.colorize(:blue)}"
