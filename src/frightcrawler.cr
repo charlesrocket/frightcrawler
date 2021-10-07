@@ -20,9 +20,9 @@ intro = "
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
 puts intro, VERSION
 
-game_format = ""
-csv_file = ""
-sf_id = ""
+game_format : String = ""
+sf_id : String = ""
+csv_file = Nil
 
 OptionParser.parse do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
