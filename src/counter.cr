@@ -1,21 +1,20 @@
 class Counter
-  @@total_count = 0
-  @@unique_count = 0
+  @@total_count : Int16 = 0
+  @@unique_count : Int16 = 0
 
-  @@legal = 0
-  @@not_legal = 0
-  @@restricted = 0
-  @@banned = 0
+  @@legal : Int16 = 0
+  @@not_legal : Int16 = 0
+  @@restricted : Int16 = 0
+  @@banned : Int16 = 0
 
-  @@common = 0
-  @@uncommon = 0
-  @@rare = 0
-  @@special = 0
-  @@mythic = 0
-  @@bonus = 0
-
-  @@foil = 0
-  @@efoil = 0
+  @@common : Int16 = 0
+  @@uncommon : Int16 = 0
+  @@rare : Int16 = 0
+  @@special : Int16 = 0
+  @@mythic : Int16 = 0
+  @@bonus : Int16 = 0
+  @@foil : Int16 = 0
+  @@efoil : Int16 = 0
 
   def self.total(x)
     @@total_count += x
