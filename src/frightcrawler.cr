@@ -35,10 +35,6 @@ OptionParser.parse do |parser|
     puts parser
     exit
   end
-  parser.on("-v", "--version", "Version") do
-    puts VERSION
-    exit
-  end
 end
 
 unless sf_id.empty?
