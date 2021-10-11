@@ -16,6 +16,22 @@ class Counter
   @@foil : Int16 = 0
   @@efoil : Int16 = 0
 
+  def self.output
+    puts "\n  Legal: #{Counter.get_legal.colorize(:green)}"
+    puts "  Not legal: #{Counter.get_not_legal.colorize(:red)}"
+    puts "  Restricted: #{Counter.get_restricted.colorize(:blue)}"
+    puts "  Banned: #{Counter.get_banned.colorize(:red)}"
+    puts "\n  | ▲ #{Counter.get_foil}"
+    puts "  | ◭ #{Counter.get_efoil}"
+    puts "\n  | C #{Counter.get_common.colorize(:white)}"
+    puts "  | U #{Counter.get_uncommon.colorize(:cyan)}"
+    puts "  | R #{Counter.get_rare.colorize(:light_yellow)}"
+    puts "  | S #{Counter.get_special.colorize(:yellow)}"
+    puts "  | M #{Counter.get_mythic.colorize(:magenta)}"
+    puts "  | B #{Counter.get_bonus.colorize(:light_blue)}"
+    puts "\n  Unique/total processed: #{Counter.get_unique}/#{Counter.get_total}"
+  end
+
   def self.total(x)
     @@total_count += x
   end
