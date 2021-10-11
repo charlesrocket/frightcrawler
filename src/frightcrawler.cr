@@ -147,6 +147,7 @@ struct Crawler
       Counter.unique
       # TODO: Add icons
       puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      # TODO: Improve logging
       Log.info { "#{game_format}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
   end
