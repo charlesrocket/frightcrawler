@@ -31,7 +31,7 @@ OptionParser.parse do |parser|
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
     parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub.")
-    parser.separator("Supported formats: brawl, commander, duel, future, gladiator, historic, legacy,\nmodern, oldschool, pauper, penny, pioneer, premodern, standard, vintage.")
+    parser.separator("Supported formats: standard, future ,historic, gladiator, pioneer, modern, legacy, pauper,\nvintage, penny, commander, brawl, historicbrawl, paupercommander, duel, oldschool, premodern.")
     puts parser
     exit
   end
