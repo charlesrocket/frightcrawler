@@ -19,8 +19,9 @@ jobs:
         run: |
           shards build --production --release --static --no-debug
           strip ./bin/frightcrawler
+          mv ./bin/frightcrawler ./bin/frightcrawler-${{ github.event.release.tag_name }}-linux-x86_64
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./bin/frightcrawler
+          files: ./bin/frightcrawler-${{ github.event.release.tag_name }}-linux-x86_64
           token: ${{ secrets.RLS_TOKEN }}
