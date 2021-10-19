@@ -42,6 +42,15 @@ unless sf_id.empty?
   exit
 end
 
+if csv_file == Nil
+  begin
+    raise "No CSV file provided"
+  rescue no_file
+    puts no_file.message
+    exit
+  end
+end
+
 t1 = Time.monotonic
 puts "\n  * Using #{game_format} format list"
 Bulk.pull
