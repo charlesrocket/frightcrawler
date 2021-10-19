@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe Frightcrawler do
+describe Crawler do
   # TODO: Write tests
 
   it "works" do
