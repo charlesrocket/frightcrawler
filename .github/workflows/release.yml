@@ -6,7 +6,6 @@ on:
       - "*.*.*"
 
 jobs:
-
   dist_linux:
     runs-on: ubuntu-latest
     container:
@@ -18,10 +17,11 @@ jobs:
       - name: Build
         run: |
           shards build --production --release --static --no-debug
+          GET_VERSION=$(git describe --tags --abbrev=0)
           strip ./bin/frightcrawler
-          mv ./bin/frightcrawler ./bin/frightcrawler-${{ github.event.release.tag_name }}-linux-x86_64
+          mv ./bin/frightcrawler ./bin/frightcrawler-$GET_VERSION-linux-x86_64
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ./bin/frightcrawler-${{ github.event.release.tag_name }}-linux-x86_64
+          files: ./bin/frightcrawler-*
           token: ${{ secrets.RLS_TOKEN }}
