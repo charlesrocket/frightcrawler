@@ -45,7 +45,7 @@ unless sf_id.empty?
   exit
 end
 
-if csv_file == Nil
+unless csv_file != Nil
   begin
     raise NoData.new("No CSV file provided")
   rescue no_file : NoData
