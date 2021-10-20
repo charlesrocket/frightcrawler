@@ -7,6 +7,9 @@ require "json"
 require "csv"
 require "log"
 
+class NoData < Exception
+end
+
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
@@ -44,9 +47,9 @@ end
 
 if csv_file == Nil
   begin
-    raise "No CSV file provided"
-  rescue no_file
-    puts no_file.message
+    raise NoData.new("No CSV file provided")
+  rescue no_file : NoData
+    puts "Exiting: #{no_file.message}"
     exit
   end
 end
