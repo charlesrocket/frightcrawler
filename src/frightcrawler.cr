@@ -49,6 +49,7 @@ if csv_file == Nil
   begin
     raise NoData.new("No CSV file provided")
   rescue no_file : NoData
+    Log.error { "No File" }
     puts "Exiting: #{no_file.message}"
     exit
   end
