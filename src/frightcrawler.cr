@@ -41,6 +41,7 @@ OptionParser.parse do |parser|
 end
 
 unless sf_id.empty?
+  Log.info { "Card info requested (#{sf_id})" }
   puts JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{sf_id}").body).to_pretty_json
   exit
 end
