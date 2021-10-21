@@ -105,4 +105,9 @@ struct Crawler
       end
     end
   end
+
+  def self.card_info(z)
+    Log.info { "Card info requested (#{z})" }
+    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{z}").body).to_pretty_json
+  end
 end

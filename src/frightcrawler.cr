@@ -38,18 +38,16 @@ OptionParser.parse do |parser|
   end
 end
 
+if sf_id != ""
+  puts Crawler.card_info("#{sf_id}")
+end
+
 if game_format != ""
   puts "\n  * Using #{game_format} format list"
   Bulk.pull
 end
 
 t1 = Time.monotonic
-
-unless sf_id.empty?
-  Log.info { "Card info requested (#{sf_id})" }
-  puts JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{sf_id}").body).to_pretty_json
-  exit
-end
 
 if csv_file != Nil
   Crawler.print_line("#{game_format}", "#{csv_file}")
@@ -62,6 +60,10 @@ if csv_file != Nil
   Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
   Counter.output
 else
+
+end
+
+if csv_file == Nil && sf_id == "" && game_format == ""
   puts "\n  No data provided"
 end
 
