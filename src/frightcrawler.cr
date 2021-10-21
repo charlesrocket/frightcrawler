@@ -39,6 +39,7 @@ OptionParser.parse do |parser|
 end
 
 if sf_id != ""
+  puts "\n  * Printing card info ..."
   puts Crawler.card_info("#{sf_id}")
 end
 
