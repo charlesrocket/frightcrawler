@@ -59,8 +59,6 @@ elapsed_time = t2 - t1
 if csv_file != Nil
   Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
   Counter.output
-else
-
 end
 
 if csv_file == Nil && sf_id == "" && game_format == ""
