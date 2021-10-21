@@ -38,6 +38,8 @@ OptionParser.parse do |parser|
   end
 end
 
+t1 = Time.monotonic
+
 if sf_id != ""
   puts "\n  * Printing card info ..."
   puts Crawler.card_info("#{sf_id}")
@@ -48,14 +50,11 @@ if game_format != ""
   Bulk.pull
 end
 
-t1 = Time.monotonic
-
 if csv_file != Nil
   Crawler.print_line("#{game_format}", "#{csv_file}")
 end
 
 t2 = Time.monotonic
-elapsed_time = t2 - t1
 
 if csv_file != Nil
   Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
@@ -66,5 +65,6 @@ if csv_file == Nil && sf_id == "" && game_format == ""
   puts "\n  No data provided"
 end
 
+elapsed_time = t2 - t1
 puts "  Elapsed time: #{elapsed_time}"
 puts "\n  DONE"
