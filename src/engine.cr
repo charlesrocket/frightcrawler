@@ -14,7 +14,7 @@ struct Crawler
     elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language")
       @@csv_helvaultpro = true
       puts "\n  * Helvault Pro CSV file loaded"
-      "Helvault pro file"
+      "helvault pro file"
     elsif csv_header.includes? %(AetherHub Card Id)
       @@csv_aetherhub = true
       puts "\n  * AetherHub CSV file loaded"
