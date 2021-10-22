@@ -24,7 +24,7 @@ struct Crawler
     end
   end
 
-  def self.validate_csv(file, fmt)
+  def self.validate_csv(file, game_format)
     content = File.read(file)
     cardlist = CSV.new(content, headers: true)
     puts "\n  * Loading bulk data ..."
@@ -58,62 +58,71 @@ struct Crawler
       card_name = scry_json["name"]
       set_name = scry_json["set_name"]
       set_code = scry_json["set"].to_s.upcase.colorize.mode(:underline)
-      case
-      when foil_status == "1", foil_status == "foil"
-        foil_layout = :▲.colorize(:light_gray)
-        Counter.foil("#{quantity}".to_i)
-      when foil_status == "etchedFoil"
-        foil_layout = :◭.colorize(:light_gray)
-        Counter.efoil("#{quantity}".to_i)
-      when foil_status == "0", foil_status == ""
-        foil_layout = :△.colorize(:dark_gray)
-      else
-        raise "ERROR: foil_status"
-      end
-      case
-      when scry_json["legalities"][fmt] == "legal"
-        legalities = "  Legal   ".colorize(:green)
-        Counter.legal("#{quantity}".to_i)
-      when scry_json["legalities"][fmt] == "not_legal"
-        legalities = "Not legal ".colorize(:red)
-        Counter.not_legal("#{quantity}".to_i)
-      when scry_json["legalities"][fmt] == "restricted"
-        legalities = "  Restr   ".colorize(:blue)
-        Counter.restricted("#{quantity}".to_i)
-      when scry_json["legalities"][fmt] == "banned"
-        legalities = "   BAN    ".colorize(:red)
-        Counter.banned("#{quantity}".to_i)
-      else
-        raise "ERROR: legalities"
-      end
-      case
-      when scry_json["rarity"] == "common"
-        rarity_symbol = :C.colorize(:white)
-        Counter.common("#{quantity}".to_i)
-      when scry_json["rarity"] == "uncommon"
-        rarity_symbol = :U.colorize(:cyan)
-        Counter.uncommon("#{quantity}".to_i)
-      when scry_json["rarity"] == "rare"
-        rarity_symbol = :R.colorize(:light_yellow)
-        Counter.rare("#{quantity}".to_i)
-      when scry_json["rarity"] == "special"
-        rarity_symbol = :S.colorize(:yellow)
-        Counter.special("#{quantity}".to_i)
-      when scry_json["rarity"] == "mythic"
-        rarity_symbol = :M.colorize(:magenta)
-        Counter.mythic("#{quantity}".to_i)
-      when scry_json["rarity"] == "bonus"
-        rarity_symbol = :B.colorize(:light_blue)
-        Counter.bonus("#{quantity}".to_i)
-      else
-        raise "ERROR: rarity"
-      end
       Counter.total("#{quantity}".to_i)
       Counter.unique
       # TODO: Add icons
-      puts "▓▒░░░  #{legalities} #{foil_layout} #{rarity_symbol} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      puts "▓▒░░░  #{legalities(scry_json, game_format, quantity)} #{foils(foil_status, quantity)} #{rarities(scry_json, quantity)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       # TODO: Improve logging
-      Log.info { "#{fmt}: #{legalities} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
+      # Log.info { "#{game_format}: #{legalities(scry_json, game_format, quantity)} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
+    end
+  end
+
+  def self.foils(foil_status, quantity)
+    case
+    when foil_status == "1", foil_status == "foil"
+      Counter.foil("#{quantity}".to_i)
+      :▲.colorize(:light_gray)
+    when foil_status == "etchedFoil"
+      Counter.efoil("#{quantity}".to_i)
+      :◭.colorize(:light_gray)
+    when foil_status == "0", foil_status == ""
+      :△.colorize(:dark_gray)
+    else
+      raise "ERROR: foil_status"
+    end
+  end
+
+  def self.rarities(json, quantity)
+    case
+    when json["rarity"] == "common"
+      Counter.common("#{quantity}".to_i)
+      :C.colorize(:white)
+    when json["rarity"] == "uncommon"
+      Counter.uncommon("#{quantity}".to_i)
+      :U.colorize(:cyan)
+    when json["rarity"] == "rare"
+      Counter.rare("#{quantity}".to_i)
+      :R.colorize(:light_yellow)
+    when json["rarity"] == "special"
+      Counter.special("#{quantity}".to_i)
+      :S.colorize(:yellow)
+    when json["rarity"] == "mythic"
+      Counter.mythic("#{quantity}".to_i)
+      :M.colorize(:magenta)
+    when json["rarity"] == "bonus"
+      Counter.bonus("#{quantity}".to_i)
+      :B.colorize(:light_blue)
+    else
+      raise "ERROR: rarity"
+    end
+  end
+
+  def self.legalities(json, game_format, quantity)
+    case
+    when json["legalities"][game_format] == "legal"
+      Counter.legal("#{quantity}".to_i)
+      "  Legal   ".colorize(:green)
+    when json["legalities"][game_format] == "not_legal"
+      Counter.not_legal("#{quantity}".to_i)
+      "Not legal ".colorize(:red)
+    when json["legalities"][game_format] == "restricted"
+      Counter.restricted("#{quantity}".to_i)
+      "  Restr   ".colorize(:blue)
+    when json["legalities"][game_format] == "banned"
+      Counter.banned("#{quantity}".to_i)
+      "   BAN    ".colorize(:red)
+    else
+      raise "ERROR: legalities"
     end
   end
 
