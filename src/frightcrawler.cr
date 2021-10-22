@@ -51,7 +51,8 @@ if game_format != ""
 end
 
 if csv_file != Nil
-  Crawler.print_line("#{game_format}", "#{csv_file}")
+  Crawler.check_csv("#{csv_file}")
+  Crawler.validate_csv("#{csv_file}","#{game_format}")
 end
 
 t2 = Time.monotonic
