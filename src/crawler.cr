@@ -10,12 +10,15 @@ struct Crawler
     if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
       @@csv_helvault = true
       puts "\n  * Helvault CSV file loaded"
+      "helvault file"
     elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language")
       @@csv_helvaultpro = true
       puts "\n  * Helvault Pro CSV file loaded"
+      "Helvault pro file"
     elsif csv_header.includes? %(AetherHub Card Id)
       @@csv_aetherhub = true
       puts "\n  * AetherHub CSV file loaded"
+      "aetherhub file"
     else
       raise "Unsupported CSV layout"
     end
