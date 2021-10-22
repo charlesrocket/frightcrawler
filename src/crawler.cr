@@ -24,7 +24,7 @@ struct Crawler
     end
   end
 
-  def self.validate_csv(file,fmt)
+  def self.validate_csv(file, fmt)
     content = File.read(file)
     cardlist = CSV.new(content, headers: true)
     puts "\n  * Loading bulk data ..."
