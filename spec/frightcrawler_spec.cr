@@ -34,4 +34,12 @@ describe Crawler do
       Crawler.card_info("989a3960-0cfc-4eab-ae9e-503b934e9835").should contain("Servo")
     end
   end
+
+  describe "#check_csv" do
+    it "checks CSV file" do
+      File.write("test_csv", "extras,language,name,quantity,scryfall_id")
+      Crawler.check_csv("test_csv").should eq("helvault file")
+      File.delete("test_csv")
+    end
+  end
 end
