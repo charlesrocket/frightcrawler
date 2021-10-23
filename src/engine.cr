@@ -1,9 +1,9 @@
 struct Crawler
-  @@csv_aetherhub = false
-  @@csv_helvault = false
-  @@csv_helvaultpro = false
+  @@csv_aetherhub : Bool = false
+  @@csv_helvault : Bool = false
+  @@csv_helvaultpro : Bool = false
 
-  @@legality_stat = ""
+  @@legality_stat : String = ""
 
   def self.check_csv(file)
     content = File.read(file)
