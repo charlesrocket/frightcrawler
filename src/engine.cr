@@ -68,6 +68,29 @@ struct Crawler
     end
   end
 
+  def self.legalities(json, game_format, quantity)
+    case
+    when json["legalities"][game_format] == "legal"
+      @@legality_stat = "LEGAL"
+      Counter.legal("#{quantity}".to_i)
+      "  Legal   ".colorize(:green)
+    when json["legalities"][game_format] == "not_legal"
+      @@legality_stat = "NOT LEGAL"
+      Counter.not_legal("#{quantity}".to_i)
+      "Not legal ".colorize(:red)
+    when json["legalities"][game_format] == "restricted"
+      @@legality_stat = "RESTRICTED"
+      Counter.restricted("#{quantity}".to_i)
+      "  Restr   ".colorize(:blue)
+    when json["legalities"][game_format] == "banned"
+      @@legality_stat = "BANNED"
+      Counter.banned("#{quantity}".to_i)
+      "   BAN    ".colorize(:red)
+    else
+      raise "ERROR: legalities"
+    end
+  end
+
   def self.foils(foil_status, quantity)
     case
     when foil_status == "1", foil_status == "foil"
@@ -105,29 +128,6 @@ struct Crawler
       :B.colorize(:light_blue)
     else
       raise "ERROR: rarity"
-    end
-  end
-
-  def self.legalities(json, game_format, quantity)
-    case
-    when json["legalities"][game_format] == "legal"
-      @@legality_stat = "LEGAL"
-      Counter.legal("#{quantity}".to_i)
-      "  Legal   ".colorize(:green)
-    when json["legalities"][game_format] == "not_legal"
-      @@legality_stat = "NOT LEGAL"
-      Counter.not_legal("#{quantity}".to_i)
-      "Not legal ".colorize(:red)
-    when json["legalities"][game_format] == "restricted"
-      @@legality_stat = "RESTRICTED"
-      Counter.restricted("#{quantity}".to_i)
-      "  Restr   ".colorize(:blue)
-    when json["legalities"][game_format] == "banned"
-      @@legality_stat = "BANNED"
-      Counter.banned("#{quantity}".to_i)
-      "   BAN    ".colorize(:red)
-    else
-      raise "ERROR: legalities"
     end
   end
 
