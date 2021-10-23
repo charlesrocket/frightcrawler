@@ -42,4 +42,18 @@ describe Crawler do
       File.delete("test_csv")
     end
   end
+
+  describe "#foils" do
+    it "checks foil layout" do
+      Crawler.foils("1", "5").should eq(:▲.colorize(:light_gray))
+    end
+
+    it "checks etched layout" do
+      Crawler.foils("etchedFoil", "1").should eq(:◭.colorize(:light_gray))
+    end
+
+    it "checks non-foil layout" do
+      Crawler.foils("0", "1").should eq(:△.colorize(:dark_gray))
+    end
+  end
 end
