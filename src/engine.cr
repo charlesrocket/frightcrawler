@@ -3,6 +3,8 @@ struct Crawler
   @@csv_helvault = false
   @@csv_helvaultpro = false
 
+  @@legality_stat = ""
+
   def self.check_csv(file)
     content = File.read(file)
     cardlist = CSV.new(content, headers: true)
@@ -62,8 +64,7 @@ struct Crawler
       Counter.unique
       # TODO: Add icons
       puts "▓▒░░░  #{legalities(scry_json, game_format, quantity)} #{foils(foil_status, quantity)} #{rarities(scry_json, quantity)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
-      # TODO: Improve logging
-      # Log.info { "#{game_format}: #{legalities(scry_json, game_format, quantity)} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
+      Log.info { "#{game_format}: #{@@legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
   end
 
@@ -110,15 +111,19 @@ struct Crawler
   def self.legalities(json, game_format, quantity)
     case
     when json["legalities"][game_format] == "legal"
+      @@legality_stat = "LEGAL"
       Counter.legal("#{quantity}".to_i)
       "  Legal   ".colorize(:green)
     when json["legalities"][game_format] == "not_legal"
+      @@legality_stat = "NOT LEGAL"
       Counter.not_legal("#{quantity}".to_i)
       "Not legal ".colorize(:red)
     when json["legalities"][game_format] == "restricted"
+      @@legality_stat = "RESTRICTED"
       Counter.restricted("#{quantity}".to_i)
       "  Restr   ".colorize(:blue)
     when json["legalities"][game_format] == "banned"
+      @@legality_stat = "BANNED"
       Counter.banned("#{quantity}".to_i)
       "   BAN    ".colorize(:red)
     else
