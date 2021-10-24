@@ -37,9 +37,7 @@ describe Crawler do
 
   describe "#check_csv" do
     it "checks CSV file" do
-      File.write("test_csv", "extras,language,name,quantity,scryfall_id")
-      Crawler.check_csv("test_csv").should eq("helvault file")
-      File.delete("test_csv")
+      Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
     end
   end
 
