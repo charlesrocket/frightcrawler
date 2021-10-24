@@ -23,7 +23,7 @@ puts intro, VERSION
 
 game_format : String = ""
 sf_id : String = ""
-csv_file = Nil
+csv_file : Nil.class | String = Nil
 
 OptionParser.parse do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
