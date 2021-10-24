@@ -29,6 +29,9 @@ struct Crawler
   def self.validate_csv(file, game_format)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
+    unless File.exists?("bulk-data.json")
+      Bulk.pull
+    end
     puts "\n  * Loading bulk data ..."
     bulk_json = JSON.parse(File.read("bulk-data.json"))
     puts "\n  * Bulk data loaded"
