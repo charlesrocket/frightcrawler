@@ -26,7 +26,7 @@ struct Crawler
     end
   end
 
-  def self.validate_csv(file, game_format)
+  def self.validate_csv(file, game_format) : String
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     unless File.exists?("bulk-data.json")
@@ -69,6 +69,7 @@ struct Crawler
       puts "▓▒░░░  #{legalities(scry_json, game_format, quantity)} #{foils(foil_status, quantity)} #{rarities(scry_json, quantity)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{@@legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
+    "validated"
   end
 
   def self.legalities(json, game_format, quantity)
