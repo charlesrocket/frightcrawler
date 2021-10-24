@@ -41,6 +41,13 @@ describe Crawler do
     end
   end
 
+  describe "#validate_csv" do
+    it "validates CSV file against provided game format" do
+      Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
+      Crawler.validate_csv("spec/data/test.csv", "legacy").should eq("validated")
+    end
+  end
+
   describe "#foils" do
     it "checks foil layout" do
       Crawler.foils("1", "5").should eq(:▲.colorize(:light_gray))
