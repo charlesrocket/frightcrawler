@@ -95,21 +95,6 @@ struct Crawler
     end
   end
 
-  def self.foils(foil_status, quantity)
-    case
-    when foil_status == "1", foil_status == "foil"
-      Counter.foil("#{quantity}".to_i)
-      :▲.colorize(:light_gray)
-    when foil_status == "etchedFoil"
-      Counter.efoil("#{quantity}".to_i)
-      :◭.colorize(:light_gray)
-    when foil_status == "0", foil_status == ""
-      :△.colorize(:dark_gray)
-    else
-      raise "ERROR: foil_status"
-    end
-  end
-
   def self.rarities(json, quantity)
     case
     when json["rarity"] == "common"
@@ -132,6 +117,21 @@ struct Crawler
       :B.colorize(:light_blue)
     else
       raise "ERROR: rarity"
+    end
+  end
+
+  def self.foils(foil_status, quantity)
+    case
+    when foil_status == "1", foil_status == "foil"
+      Counter.foil("#{quantity}".to_i)
+      :▲.colorize(:light_gray)
+    when foil_status == "etchedFoil"
+      Counter.efoil("#{quantity}".to_i)
+      :◭.colorize(:light_gray)
+    when foil_status == "0", foil_status == ""
+      :△.colorize(:dark_gray)
+    else
+      raise "ERROR: foil_status"
     end
   end
 
