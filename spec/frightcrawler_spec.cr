@@ -37,42 +37,10 @@ describe Crawler do
     end
   end
 
-  describe "#check_csv", tags: "csv" do
-    it "checks CSV file" do
-      Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
-    end
-  end
-
-  describe "#validate_csv" do
+  describe "#validate_csv", tags: ["api", "csv"] do
     it "validates CSV file against provided game format" do
       Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
       Crawler.validate_csv("spec/data/test.csv", "legacy").should eq("validated")
-    end
-  end
-
-  describe "#legalities" do
-    it "checks legality status" do
-      Crawler.legalities(get_json, "legacy", "1").should eq("  Legal   ".colorize(:green))
-    end
-  end
-
-  describe "#rarities" do
-    it "checks rarity status" do
-      Crawler.rarities(get_json, "1").should eq(:R.colorize(:light_yellow))
-    end
-  end
-
-  describe "#foils" do
-    it "checks foil layout" do
-      Crawler.foils("1", "5").should eq(:▲.colorize(:light_gray))
-    end
-
-    it "checks etched layout" do
-      Crawler.foils("etchedFoil", "1").should eq(:◭.colorize(:light_gray))
-    end
-
-    it "checks non-foil layout" do
-      Crawler.foils("0", "1").should eq(:△.colorize(:dark_gray))
     end
   end
 end
