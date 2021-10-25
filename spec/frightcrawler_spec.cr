@@ -12,7 +12,7 @@ end
 describe Counter do
   describe "#get_total" do
     it "counts totals" do
-      Counter.reset
+      reset
       Counter.total(2)
       Counter.total(3)
       Counter.get_total.should eq(5)
@@ -21,7 +21,7 @@ describe Counter do
 
   describe "#get_unique" do
     it "counts uniques" do
-      Counter.reset
+      reset
       Counter.unique
       Counter.unique
       Counter.unique
