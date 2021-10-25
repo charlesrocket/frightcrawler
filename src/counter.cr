@@ -147,10 +147,12 @@ class Counter
   def self.reset
     @@total_count = 0
     @@unique_count = 0
+
     @@legal = 0
     @@not_legal = 0
     @@restricted = 0
     @@banned = 0
+
     @@common = 0
     @@uncommon = 0
     @@rare = 0
