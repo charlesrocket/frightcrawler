@@ -56,6 +56,12 @@ describe Crawler do
     end
   end
 
+  describe "#rarities" do
+    it "checks rarity status" do
+      Crawler.rarities(get_json, "1").should eq(:R.colorize(:light_yellow))
+    end
+  end
+
   describe "#foils" do
     it "checks foil layout" do
       Crawler.foils("1", "5").should eq(:▲.colorize(:light_gray))
