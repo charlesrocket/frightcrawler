@@ -20,7 +20,7 @@ jobs:
         LLVM_CONFIG: /usr/local/opt/llvm@9/bin/llvm-config
       run: |
         ln -s /usr/lib/libxml2.2.dylib /usr/local/lib/liblibxml2.tbd.dylib
-        shards build --production --release --stats --progress
+        shards build --release --stats --progress
     - name: Compress the binary
       run: zip -rjX ./frightcrawler-darwin.zip ./bin/frightcrawler
     - name: Upload
@@ -40,7 +40,7 @@ jobs:
         run: shards install
       - name: Build the binary
         run: |
-          shards build --production --release --static --stats --progress
+          shards build --release --static --stats --progress
       - name: Compress the binary
         run: |
           gzip ./bin/frightcrawler
