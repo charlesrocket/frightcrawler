@@ -35,7 +35,7 @@ describe Crawler do
     end
   end
 
-  describe "#check_csv" do
+  describe "#check_csv", tags: "csv" do
     it "checks CSV file" do
       Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
     end
