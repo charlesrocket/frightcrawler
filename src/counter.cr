@@ -143,7 +143,7 @@ class Counter
   def self.get_efoil
     @@efoil
   end
-  
+
   def self.reset
     @@total_count = 0
     @@unique_count = 0
