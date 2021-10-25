@@ -50,6 +50,12 @@ describe Crawler do
     end
   end
 
+  describe "#legalities" do
+    it "checks legality status" do
+      Crawler.legalities(get_json, "legacy", "1").should eq("  Legal   ".colorize(:green))
+    end
+  end
+
   describe "#foils" do
     it "checks foil layout" do
       Crawler.foils("1", "5").should eq(:▲.colorize(:light_gray))
