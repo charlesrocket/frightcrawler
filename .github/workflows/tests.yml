@@ -17,7 +17,7 @@ jobs:
         with:
           crystal: ${{ matrix.crystal }}
       - name: Install shards
-        run: shards install --ignore-crystal-version
+        run: shards install
       - name: Build
         run: shards build
       - name: Check formatting
