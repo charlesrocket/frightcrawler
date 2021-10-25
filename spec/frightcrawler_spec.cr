@@ -12,7 +12,7 @@ end
 describe Counter do
   describe "#get_total" do
     it "counts totals" do
-      Counter.reset
+      reset
       Counter.total(2)
       Counter.total(3)
       Counter.get_total.should eq(5)
@@ -21,7 +21,7 @@ describe Counter do
 
   describe "#get_unique" do
     it "counts uniques" do
-      Counter.reset
+      reset
       Counter.unique
       Counter.unique
       Counter.unique
@@ -37,13 +37,7 @@ describe Crawler do
     end
   end
 
-  describe "#check_csv", tags: "csv" do
-    it "checks CSV file" do
-      Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
-    end
-  end
-
-  describe "#validate_csv" do
+  describe "#validate_csv", tags: ["api", "csv"] do
     it "validates CSV file against provided game format" do
       Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
       Crawler.validate_csv("spec/data/test.csv", "legacy").should eq("validated")
