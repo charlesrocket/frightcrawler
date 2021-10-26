@@ -37,10 +37,16 @@ describe Crawler do
     end
   end
 
+  describe "#check_csv", tags: "csv" do
+    it "checks CSV file layout" do
+      Crawler.check_csv("spec/data/test_hv.csv").should eq("helvault file")
+      Crawler.check_csv("spec/data/test_hvp.csv").should eq("helvault pro file")
+    end
+  end
+
   describe "#validate_csv", tags: ["api", "csv"] do
     it "validates CSV file against provided game format" do
-      Crawler.check_csv("spec/data/test.csv").should eq("helvault file")
-      Crawler.validate_csv("spec/data/test.csv", "legacy").should eq("validated")
+      Crawler.validate_csv("spec/data/test_hv.csv", "legacy").should eq("validated")
     end
   end
 end
