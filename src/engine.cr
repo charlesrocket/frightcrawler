@@ -59,14 +59,14 @@ struct Crawler
         # OPTIMIZE: Not good enough!
         x += 1
       end
-      scry_json = bulk_json[x]
-      card_name = scry_json["name"]
-      set_name = scry_json["set_name"]
-      set_code = scry_json["set"].to_s.upcase.colorize.mode(:underline)
+      id_json = bulk_json[x]
+      card_name = id_json["name"]
+      set_name = id_json["set_name"]
+      set_code = id_json["set"].to_s.upcase.colorize.mode(:underline)
       Counter.total("#{quantity}".to_i)
       Counter.unique
       # TODO: Add icons
-      puts "▓▒░░░  #{legalities(scry_json, game_format, quantity)} #{foils(foil_status, quantity)} #{rarities(scry_json, quantity)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      puts "▓▒░░░  #{legalities(id_json, game_format, quantity)} #{foils(foil_status, quantity)} #{rarities(id_json, quantity)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
       Log.info { "#{game_format}: #{@@legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
     end
     "validated"
