@@ -74,7 +74,7 @@ struct Crawler
     "validated"
   end
 
-  def self.legalities(json, game_format, quantity)
+  def self.legalities(json, game_format, quantity) : Colorize::Object(String) | String
     case
     when json["legalities"][game_format] == "legal"
       @@legality_stat = "LEGAL"
@@ -97,7 +97,7 @@ struct Crawler
     end
   end
 
-  def self.rarities(json, quantity)
+  def self.rarities(json, quantity) : Colorize::Object(Symbol)
     case
     when json["rarity"] == "common"
       Counter.common("#{quantity}".to_i)
@@ -122,7 +122,7 @@ struct Crawler
     end
   end
 
-  def self.foils(foil_status, quantity)
+  def self.foils(foil_status, quantity) : Colorize::Object(Symbol)
     case
     when foil_status == "1", foil_status == "foil"
       Counter.foil("#{quantity}".to_i)
@@ -137,7 +137,7 @@ struct Crawler
     end
   end
 
-  def self.card_info(z)
+  def self.card_info(z) : String
     Log.info { "Card info requested (#{z})" }
     JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{z}").body).to_pretty_json
   end
