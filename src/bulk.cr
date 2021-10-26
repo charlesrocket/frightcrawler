@@ -1,5 +1,5 @@
 class Bulk
-  def self.pull
+  def self.pull : Nil
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     download_link = bulk_data["data"][3]["download_uri"]
     if File.exists?("bulk-data.json")
