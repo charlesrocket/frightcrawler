@@ -5,7 +5,7 @@ struct Crawler
 
   @@legality_stat : String = ""
 
-  def self.check_csv(file)
+  def self.check_csv(file) : String
     @@csv_aetherhub = @@csv_helvault = @@csv_helvaultpro = false
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
