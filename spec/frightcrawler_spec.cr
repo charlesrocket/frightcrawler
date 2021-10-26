@@ -38,8 +38,15 @@ describe Crawler do
   end
 
   describe "#check_csv", tags: "csv" do
-    it "checks CSV file layout" do
+    it "checks for AetherHub CSV file layout" do
+      Crawler.check_csv("spec/data/test_ah.csv").should eq("aetherhub file")
+    end
+
+    it "checks for Helvault CSV file layout" do
       Crawler.check_csv("spec/data/test_hv.csv").should eq("helvault file")
+    end
+
+    it "checks for Helvault Pro CSV file layout" do
       Crawler.check_csv("spec/data/test_hvp.csv").should eq("helvault pro file")
     end
   end
