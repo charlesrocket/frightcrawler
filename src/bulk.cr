@@ -17,6 +17,7 @@ class Bulk
       HTTP::Client.get("#{download_link}") do |response|
         File.write("bulk-data.json", response.body_io)
       end
+      puts "\n  * Bulk data downloaded"
     end
   end
 end
