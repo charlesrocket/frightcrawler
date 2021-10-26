@@ -50,7 +50,6 @@ if game_format != ""
 end
 
 if csv_file != Nil
-  Crawler.check_csv("#{csv_file}")
   Crawler.validate_csv("#{csv_file}", "#{game_format}")
 end
 

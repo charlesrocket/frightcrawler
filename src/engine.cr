@@ -6,6 +6,9 @@ struct Crawler
   @@legality_stat : String = ""
 
   def self.check_csv(file)
+    @@csv_aetherhub = false
+    @@csv_helvault = false
+    @@csv_helvaultpro = false
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     csv_header = cardlist.headers.to_s
@@ -27,6 +30,7 @@ struct Crawler
   end
 
   def self.validate_csv(file, game_format) : String
+    Crawler.check_csv(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     unless File.exists?("bulk-data.json")
