@@ -31,7 +31,7 @@ class Counter
     puts "  | B #{Counter.get_bonus.colorize(:light_blue)}"
     puts "\n  Unique/total processed: #{Counter.get_unique}/#{Counter.get_total}"
     puts "  Elapsed time: #{T2 - T1}"
-    puts "\n  DONE"
+    puts "\nDONE"
   end
 
   def self.total(x)
