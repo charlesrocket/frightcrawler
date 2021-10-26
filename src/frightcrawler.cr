@@ -47,7 +47,6 @@ end
 
 if game_format != ""
   puts "\n  * Using #{game_format} format list"
-  Bulk.pull
 end
 
 if csv_file != Nil
