@@ -3,7 +3,7 @@ class Bulk
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     download_link = bulk_data["data"][3]["download_uri"]
     if File.exists?("bulk-data.json")
-      # daily bulk data pulls
+      # Daily bulk data pulls
       local_time = Time.utc.to_unix
       modification_time = File.info("bulk-data.json").modification_time.to_unix
       bulk_time = 86000
