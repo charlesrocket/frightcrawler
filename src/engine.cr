@@ -144,8 +144,8 @@ struct Crawler
   end
 
   # Returns card info for provided Scryfall ID
-  def self.card_info(z) : String
-    Log.info { "Card info requested (#{z})" }
-    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{z}").body).to_pretty_json
+  def self.card_info(id) : String
+    Log.info { "Card info requested (#{id})" }
+    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}").body).to_pretty_json
   end
 end
