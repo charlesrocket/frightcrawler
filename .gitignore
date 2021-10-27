@@ -4,7 +4,6 @@ frightcrawler
 *.log
 .DS_Store
 
-/docs/
 /lib/
 /bin/
 /.shards/
