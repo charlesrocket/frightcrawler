@@ -1,3 +1,4 @@
+# Tracks validated data's types and count
 class Counter
   @@total_count : Int16 = 0
   @@unique_count : Int16 = 0
@@ -16,6 +17,7 @@ class Counter
   @@foil : Int16 = 0
   @@efoil : Int16 = 0
 
+  # Prints out validation summary
   def self.output
     puts "\n  Legal: #{Counter.get_legal.colorize(:green)}"
     puts "  Not legal: #{Counter.get_not_legal.colorize(:red)}"
@@ -146,6 +148,7 @@ class Counter
     @@efoil
   end
 
+  # Resets `Counter`
   def self.reset
     @@total_count = 0
     @@unique_count = 0
