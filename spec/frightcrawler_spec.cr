@@ -53,7 +53,9 @@ describe Crawler do
 
   describe "#validate_csv", tags: ["api", "csv"] do
     it "validates CSV file against provided game format" do
+      Crawler.validate_csv("spec/data/test_ah.csv", "legacy").should eq("validated")
       Crawler.validate_csv("spec/data/test_hv.csv", "legacy").should eq("validated")
+      Crawler.validate_csv("spec/data/test_hvp.csv", "legacy").should eq("validated")
     end
   end
 end
