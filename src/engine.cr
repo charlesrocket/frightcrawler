@@ -5,6 +5,7 @@ struct Crawler
 
   @@legality_stat : String = ""
 
+  # Checks if CSV file is supported
   def self.csv_layout(file) : String
     @@csv_aetherhub = @@csv_helvault = @@csv_helvaultpro = false
     csv_file = File.read(file)
@@ -27,6 +28,7 @@ struct Crawler
     end
   end
 
+  # Validates CSV file against provided format
   def self.validate_csv(file, game_format) : String
     Crawler.csv_layout(file)
     csv_file = File.read(file)
@@ -74,6 +76,7 @@ struct Crawler
     "validated"
   end
 
+  # Sets legality status
   def self.legalities(json, game_format, quantity) : Colorize::Object(String) | String
     case
     when json["legalities"][game_format] == "legal"
@@ -97,6 +100,7 @@ struct Crawler
     end
   end
 
+  # Sets rarity status
   def self.rarities(json, quantity) : Colorize::Object(Symbol)
     case
     when json["rarity"] == "common"
@@ -122,6 +126,7 @@ struct Crawler
     end
   end
 
+  # Sets foil status
   def self.foils(foil_status, quantity) : Colorize::Object(Symbol)
     case
     when foil_status == "1", foil_status == "foil"
