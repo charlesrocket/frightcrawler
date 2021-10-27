@@ -12,14 +12,22 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
-intro = "
+BULK_DATA = begin
+  puts INTRO, VERSION
+  puts "\n  * Loading bulk data ..."
+  Bulk.pull
+  File.open "bulk-data.json", "r" do |file|
+    JSON.parse file
+  end
+end
+
+INTRO = "
 ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
 ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
 ▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
 ▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
-puts intro, VERSION
 
 game_format : String = ""
 sf_id : String = ""

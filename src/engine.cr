@@ -6,14 +6,6 @@ struct Crawler
 
   @@legality_stat : String = ""
 
-  BULK_DATA = begin
-    puts "\n  * Loading bulk data ..."
-    Bulk.pull
-    File.open "bulk-data.json", "r" do |file|
-      JSON.parse file
-    end
-  end
-
   # Checks if CSV file is supported
   def self.csv_layout(file) : String
     @@csv_aetherhub = @@csv_helvault = @@csv_helvaultpro = false
