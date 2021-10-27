@@ -1,5 +1,6 @@
+# Pulls bulk data from Scryfall
 class Bulk
-  # Pulls bulk data from Scryfall
+  # Downloads bulk data and keeps it up to date
   def self.pull : Nil
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     download_link = bulk_data["data"][3]["download_uri"]
