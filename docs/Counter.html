@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 1.2.0">
+<meta name="crystal_docs.project_version" content="master">
+<meta name="crystal_docs.project_name" content="frightcrawler">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="frightcrawler">
+  <title>Counter - frightcrawler master</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          frightcrawler
+        </a>
+      </h1>
+
+      <span class="project-version">
+        master
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="frightcrawler/toplevel" data-name="top level namespace">
+      <a href="toplevel.html">Top Level Namespace</a>
+      
+    </li>
+  
+  <li class=" " data-id="frightcrawler/Bulk" data-name="bulk">
+      <a href="Bulk.html">Bulk</a>
+      
+    </li>
+  
+  <li class=" current" data-id="frightcrawler/Counter" data-name="counter">
+      <a href="Counter.html">Counter</a>
+      
+    </li>
+  
+  <li class=" " data-id="frightcrawler/Crawler" data-name="crawler">
+      <a href="Crawler.html">Crawler</a>
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">class</span> Counter
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="Counter.html">Counter</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L1" target="_blank">
+        counter.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+
+
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#banned%28x%29-class-method" class="signature"><strong>.banned</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#bonus%28x%29-class-method" class="signature"><strong>.bonus</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#common%28x%29-class-method" class="signature"><strong>.common</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#efoil%28x%29-class-method" class="signature"><strong>.efoil</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#foil%28x%29-class-method" class="signature"><strong>.foil</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_banned-class-method" class="signature"><strong>.get_banned</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_bonus-class-method" class="signature"><strong>.get_bonus</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_common-class-method" class="signature"><strong>.get_common</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_efoil-class-method" class="signature"><strong>.get_efoil</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_foil-class-method" class="signature"><strong>.get_foil</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_legal-class-method" class="signature"><strong>.get_legal</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_mythic-class-method" class="signature"><strong>.get_mythic</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_not_legal-class-method" class="signature"><strong>.get_not_legal</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_rare-class-method" class="signature"><strong>.get_rare</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_restricted-class-method" class="signature"><strong>.get_restricted</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_special-class-method" class="signature"><strong>.get_special</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_total-class-method" class="signature"><strong>.get_total</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_uncommon-class-method" class="signature"><strong>.get_uncommon</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_unique-class-method" class="signature"><strong>.get_unique</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#legal%28x%29-class-method" class="signature"><strong>.legal</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#mythic%28x%29-class-method" class="signature"><strong>.mythic</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#not_legal%28x%29-class-method" class="signature"><strong>.not_legal</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output-class-method" class="signature"><strong>.output</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#rare%28x%29-class-method" class="signature"><strong>.rare</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#reset-class-method" class="signature"><strong>.reset</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#restricted%28x%29-class-method" class="signature"><strong>.restricted</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#special%28x%29-class-method" class="signature"><strong>.special</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#total%28x%29-class-method" class="signature"><strong>.total</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#uncommon%28x%29-class-method" class="signature"><strong>.uncommon</strong>(x)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unique-class-method" class="signature"><strong>.unique</strong></a>
+        
+      </li>
+    
+  </ul>
+
+
+
+
+
+
+
+<div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
+  
+</div>
+
+
+
+
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="banned(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>banned</strong>(x)
+
+        <a class="method-permalink" href="#banned%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L57" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="bonus(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>bonus</strong>(x)
+
+        <a class="method-permalink" href="#bonus%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L81" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="common(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>common</strong>(x)
+
+        <a class="method-permalink" href="#common%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L61" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="efoil(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>efoil</strong>(x)
+
+        <a class="method-permalink" href="#efoil%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L89" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="foil(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>foil</strong>(x)
+
+        <a class="method-permalink" href="#foil%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L85" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_banned-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_banned</strong>
+
+        <a class="method-permalink" href="#get_banned-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L113" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_bonus-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_bonus</strong>
+
+        <a class="method-permalink" href="#get_bonus-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L137" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_common-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_common</strong>
+
+        <a class="method-permalink" href="#get_common-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L117" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_efoil-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_efoil</strong>
+
+        <a class="method-permalink" href="#get_efoil-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L145" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_foil-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_foil</strong>
+
+        <a class="method-permalink" href="#get_foil-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L141" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_legal-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_legal</strong>
+
+        <a class="method-permalink" href="#get_legal-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L101" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_mythic-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_mythic</strong>
+
+        <a class="method-permalink" href="#get_mythic-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L133" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_not_legal-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_not_legal</strong>
+
+        <a class="method-permalink" href="#get_not_legal-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L105" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_rare-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_rare</strong>
+
+        <a class="method-permalink" href="#get_rare-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L125" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_restricted-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_restricted</strong>
+
+        <a class="method-permalink" href="#get_restricted-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L109" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_special-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_special</strong>
+
+        <a class="method-permalink" href="#get_special-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L129" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_total-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_total</strong>
+
+        <a class="method-permalink" href="#get_total-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L93" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_uncommon-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_uncommon</strong>
+
+        <a class="method-permalink" href="#get_uncommon-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L121" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_unique-class-method">
+      <div class="signature">
+        
+        def self.<strong>get_unique</strong>
+
+        <a class="method-permalink" href="#get_unique-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L97" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="legal(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>legal</strong>(x)
+
+        <a class="method-permalink" href="#legal%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L45" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="mythic(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>mythic</strong>(x)
+
+        <a class="method-permalink" href="#mythic%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L77" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="not_legal(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>not_legal</strong>(x)
+
+        <a class="method-permalink" href="#not_legal%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L49" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output-class-method">
+      <div class="signature">
+        
+        def self.<strong>output</strong>
+
+        <a class="method-permalink" href="#output-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rare(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>rare</strong>(x)
+
+        <a class="method-permalink" href="#rare%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L69" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reset-class-method">
+      <div class="signature">
+        
+        def self.<strong>reset</strong>
+
+        <a class="method-permalink" href="#reset-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L149" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="restricted(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>restricted</strong>(x)
+
+        <a class="method-permalink" href="#restricted%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="special(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>special</strong>(x)
+
+        <a class="method-permalink" href="#special%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L73" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="total(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>total</strong>(x)
+
+        <a class="method-permalink" href="#total%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="uncommon(x)-class-method">
+      <div class="signature">
+        
+        def self.<strong>uncommon</strong>(x)
+
+        <a class="method-permalink" href="#uncommon%28x%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L65" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unique-class-method">
+      <div class="signature">
+        
+        def self.<strong>unique</strong>
+
+        <a class="method-permalink" href="#unique-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/6c16ce39d036dea423575331986c08816d05c739/src/counter.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+
+
+
+</div>
+
+</body>
+</html>
