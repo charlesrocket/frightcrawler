@@ -1,3 +1,4 @@
+# Checks CSV files and prints out summary for each line
 struct Crawler
   @@csv_aetherhub : Bool = false
   @@csv_helvault : Bool = false
