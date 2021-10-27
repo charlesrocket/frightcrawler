@@ -6,6 +6,14 @@ struct Crawler
 
   @@legality_stat : String = ""
 
+  BULK_DATA = begin
+    puts "\n  * Loading bulk data ..."
+    Bulk.pull
+    File.open "bulk-data.json", "r" do |file|
+      JSON.parse file
+    end
+  end
+
   # Checks if CSV file is supported
   def self.csv_layout(file) : String
     @@csv_aetherhub = @@csv_helvault = @@csv_helvaultpro = false
@@ -37,9 +45,6 @@ struct Crawler
     unless File.exists?("bulk-data.json")
       Bulk.pull
     end
-    puts "\n  * Loading bulk data ..."
-    bulk_json = JSON.parse(File.read("bulk-data.json"))
-    puts "\n  * Bulk data loaded"
     puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
@@ -60,11 +65,11 @@ struct Crawler
       else
         raise "ERROR: csv"
       end
-      until bulk_json[x]["id"] == "#{scry_id}"
+      until BULK_DATA[x]["id"] == "#{scry_id}"
         # OPTIMIZE: Not good enough!
         x += 1
       end
-      id_json = bulk_json[x]
+      id_json = BULK_DATA[x]
       card_name = id_json["name"]
       set_name = id_json["set_name"]
       set_code = id_json["set"].to_s.upcase.colorize.mode(:underline)
