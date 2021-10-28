@@ -1,7 +1,7 @@
 # Pulls bulk data from Scryfall
 class Bulk
   # Downloads bulk data and keeps it up to date with *bulk_time*
-  def self.pull(bulk_time = 2629743 ) : Nil
+  def self.pull(bulk_time = 2629743) : Nil
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     download_link = bulk_data["data"][3]["download_uri"]
     if File.exists?("bulk-data.json")
