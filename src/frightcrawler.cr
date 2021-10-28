@@ -8,18 +8,29 @@ require "json"
 require "csv"
 require "log"
 
+# :nodoc:
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
-intro = "
+# :nodoc:
+BULK_DATA = begin
+  puts INTRO, VERSION
+  Bulk.pull
+  puts "\n  * Loading bulk data ..."
+  File.open "bulk-data.json", "r" do |file|
+    JSON.parse file
+  end.tap { puts "\n  * Bulk data loaded" }
+end
+
+# :nodoc:
+INTRO = "
 ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
 ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
 ▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
 ▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
-puts intro, VERSION
 
 game_format : String = ""
 sf_id : String = ""
