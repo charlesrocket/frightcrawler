@@ -47,9 +47,9 @@ describe Crawler do
     end
 
     {% if flag? :extended %}
-    it "checks for AetherHub CSV file layout" do
-      Crawler.csv_layout("spec/data/test_ah.csv").should eq("aetherhub file")
-    end
+      it "checks for AetherHub CSV file layout" do
+        Crawler.csv_layout("spec/data/test_ah.csv").should eq("aetherhub file")
+      end
     {% end %}
   end
 
@@ -63,9 +63,9 @@ describe Crawler do
     end
 
     {% if flag? :extended %}
-    it "validates CSV AetherHub file against provided game format" do
-      Crawler.validate_csv("spec/data/test_ah.csv", "legacy").should eq("validated")
-    end
+      it "validates CSV AetherHub file against provided game format" do
+        Crawler.validate_csv("spec/data/test_ah.csv", "legacy").should eq("validated")
+      end
     {% end %}
   end
 end
