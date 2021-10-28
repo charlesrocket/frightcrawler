@@ -14,8 +14,8 @@ Log.setup(:info, backend)
 
 BULK_DATA = begin
   puts INTRO, VERSION
-  puts "\n  * Loading bulk data ..."
   Bulk.pull
+  puts "\n  * Loading bulk data ..."
   File.open "bulk-data.json", "r" do |file|
     JSON.parse file
   end.tap { puts "\n  * Bulk data loaded" }
