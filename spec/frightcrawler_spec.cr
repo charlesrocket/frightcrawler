@@ -38,10 +38,6 @@ describe Crawler do
   end
 
   describe "#csv_layout", tags: "csv" do
-    it "checks for AetherHub CSV file layout" do
-      Crawler.csv_layout("spec/data/test_ah.csv").should eq("aetherhub file")
-    end
-
     it "checks for Helvault CSV file layout" do
       Crawler.csv_layout("spec/data/test_hv.csv").should eq("helvault file")
     end
@@ -49,13 +45,15 @@ describe Crawler do
     it "checks for Helvault Pro CSV file layout" do
       Crawler.csv_layout("spec/data/test_hvp.csv").should eq("helvault pro file")
     end
+
+    {% if flag? :extended %}
+    it "checks for AetherHub CSV file layout" do
+      Crawler.csv_layout("spec/data/test_ah.csv").should eq("aetherhub file")
+    end
+    {% end %}
   end
 
   describe "#validate_csv", tags: ["api", "csv"] do
-    it "validates CSV AetherHub file against provided game format" do
-      Crawler.validate_csv("spec/data/test_ah.csv", "legacy").should eq("validated")
-    end
-
     it "validates CSV Helvault file against provided game format" do
       Crawler.validate_csv("spec/data/test_hv.csv", "legacy").should eq("validated")
     end
@@ -63,5 +61,11 @@ describe Crawler do
     it "validates CSV Helvault Pro file against provided game format" do
       Crawler.validate_csv("spec/data/test_hvp.csv", "legacy").should eq("validated")
     end
+
+    {% if flag? :extended %}
+    it "validates CSV AetherHub file against provided game format" do
+      Crawler.validate_csv("spec/data/test_ah.csv", "legacy").should eq("validated")
+    end
+    {% end %}
   end
 end
