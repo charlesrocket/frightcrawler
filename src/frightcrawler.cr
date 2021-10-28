@@ -13,6 +13,10 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
+game_format : String = ""
+sf_id : String = ""
+csv_file : Nil.class | String = Nil
+
 OptionParser.parse do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
@@ -45,10 +49,6 @@ INTRO = "
 ▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
-
-game_format : String = ""
-sf_id : String = ""
-csv_file : Nil.class | String = Nil
 
 T1 = Time.monotonic
 
