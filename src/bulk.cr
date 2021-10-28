@@ -27,6 +27,7 @@ class Bulk
     end
   end
 
+  # Deletes bulk data on start
   def self.force_bulk_enable : Bool
     @@force_bulk_enabled = true
     @@force_bulk_enabled
