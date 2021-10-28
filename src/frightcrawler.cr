@@ -8,10 +8,12 @@ require "json"
 require "csv"
 require "log"
 
+# :nodoc:
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
+# :nodoc:
 BULK_DATA = begin
   puts INTRO, VERSION
   Bulk.pull
@@ -21,6 +23,7 @@ BULK_DATA = begin
   end.tap { puts "\n  * Bulk data loaded" }
 end
 
+# :nodoc:
 INTRO = "
 ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
 ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
