@@ -13,6 +13,20 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
+OptionParser.parse do |parser|
+  parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
+  parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
+  parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
+  parser.on("-b", "Force bulk pull") { Bulk.force_bulk_enable }
+  parser.on("-h", "--help", "Print documentation") do
+    parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
+    parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub.")
+    parser.separator("Supported formats: standard, future, historic, gladiator, pioneer, modern, legacy, pauper,\nvintage, penny, commander, brawl, historicbrawl, paupercommander, duel, oldschool, premodern.")
+    puts parser
+    exit
+  end
+end
+
 # :nodoc:
 BULK_DATA = begin
   puts INTRO, VERSION
@@ -35,20 +49,6 @@ INTRO = "
 game_format : String = ""
 sf_id : String = ""
 csv_file : Nil.class | String = Nil
-
-OptionParser.parse do |parser|
-  parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
-  parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
-  parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
-  parser.on("-b", "Force bulk pull") { Bulk.force_bulk_enable }
-  parser.on("-h", "--help", "Print documentation") do
-    parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
-    parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub.")
-    parser.separator("Supported formats: standard, future, historic, gladiator, pioneer, modern, legacy, pauper,\nvintage, penny, commander, brawl, historicbrawl, paupercommander, duel, oldschool, premodern.")
-    puts parser
-    exit
-  end
-end
 
 T1 = Time.monotonic
 
