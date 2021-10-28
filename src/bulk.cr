@@ -5,8 +5,10 @@ class Bulk
   # Downloads bulk data and keeps it up to date with *bulk_time*
   def self.pull(bulk_time = 2629743) : Nil
     if @@force_bulk_enabled == true
-      File.delete("bulk-data.json")
-      puts "\n  * Bulk data deleted"
+      if File.exists?("bulk-data.json")
+        File.delete("bulk-data.json")
+        puts "\n  * Bulk data deleted"
+      end
     end
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     download_link = bulk_data["data"][3]["download_uri"]

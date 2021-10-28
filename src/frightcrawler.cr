@@ -21,7 +21,7 @@ OptionParser.parse do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
   parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
-  parser.on("-b", "Force bulk pull") { Bulk.force_bulk_enable }
+  parser.on("-b", "Redownload bulk data") { Bulk.force_bulk_enable }
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
     parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub.")
