@@ -18,7 +18,7 @@ BULK_DATA = begin
   Bulk.pull
   File.open "bulk-data.json", "r" do |file|
     JSON.parse file
-  end
+  end.tap { puts "\n  * Bulk data loaded" }
 end
 
 INTRO = "
