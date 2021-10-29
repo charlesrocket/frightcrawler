@@ -13,14 +13,19 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
+# :nodoc:
+START = begin
+  puts INTRO, VERSION
+end
+
+sf_id = ""
 game_format : String = ""
-sf_id : String = ""
 csv_file : Nil.class | String = Nil
 
 OptionParser.parse do |parser|
   parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
-  parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
+  parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id && puts Crawler.card_info("#{_sf_id}") }
   parser.on("-b", "Redownload bulk data") { Bulk.force_bulk_enable }
   parser.on("-h", "--help", "Print documentation") do
     parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
@@ -31,9 +36,12 @@ OptionParser.parse do |parser|
   end
 end
 
+if game_format != ""
+  puts "\n  * Using #{game_format} format list"
+end
+
 # :nodoc:
 BULK_DATA = begin
-  puts INTRO, VERSION
   Bulk.pull
   puts "\n  * Loading bulk data ..."
   File.open "bulk-data.json", "r" do |file|
@@ -51,15 +59,6 @@ INTRO = "
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
 
 T1 = Time.monotonic
-
-if sf_id != ""
-  puts "\n  * Printing card info ..."
-  puts Crawler.card_info("#{sf_id}")
-end
-
-if game_format != ""
-  puts "\n  * Using #{game_format} format list"
-end
 
 if csv_file != Nil
   Crawler.validate_csv("#{csv_file}", "#{game_format}")
