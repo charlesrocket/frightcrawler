@@ -1,4 +1,4 @@
-# Checks CSV files and prints out summary for each line
+# Checks CSV files and prints out summary for each line.
 struct Crawler
   @@csv_aetherhub : Bool = false
   @@csv_helvault : Bool = false
@@ -6,7 +6,7 @@ struct Crawler
 
   @@legality_stat : String = ""
 
-  # Checks if CSV file is supported
+  # Checks if CSV file is supported.
   def self.csv_layout(file) : String
     @@csv_aetherhub = @@csv_helvault = @@csv_helvaultpro = false
     csv_file = File.read(file)
@@ -29,7 +29,7 @@ struct Crawler
     end
   end
 
-  # Validates CSV file against provided format
+  # Validates CSV file against provided format.
   def self.validate_csv(file, game_format) : String
     Crawler.csv_layout(file)
     csv_file = File.read(file)
@@ -74,7 +74,7 @@ struct Crawler
     "validated"
   end
 
-  # Sets legality status
+  # Sets legality status.
   def self.legalities(json, game_format, quantity) : Colorize::Object(String) | String
     case
     when json["legalities"][game_format] == "legal"
@@ -98,7 +98,7 @@ struct Crawler
     end
   end
 
-  # Sets rarity status
+  # Sets rarity status.
   def self.rarities(json, quantity) : Colorize::Object(Symbol)
     case
     when json["rarity"] == "common"
@@ -124,7 +124,7 @@ struct Crawler
     end
   end
 
-  # Sets foil status
+  # Sets foil status.
   def self.foils(foil_status, quantity) : Colorize::Object(Symbol)
     case
     when foil_status == "1", foil_status == "foil"
@@ -140,7 +140,7 @@ struct Crawler
     end
   end
 
-  # Returns card info for provided Scryfall ID
+  # Returns card info for provided Scryfall ID.
   def self.card_info(id) : String
     Log.info { "Card info requested (#{id})" }
     JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}").body).to_pretty_json

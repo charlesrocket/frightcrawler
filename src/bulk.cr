@@ -1,8 +1,8 @@
-# Pulls bulk data from Scryfall
+# Pulls bulk data from Scryfall.
 class Bulk
   @@force_bulk_enabled : Bool = false
 
-  # Downloads bulk data and keeps it up to date with *bulk_time*
+  # Downloads bulk data and keeps it up to date with *bulk_time*.
   def self.pull(bulk_time = 2629743) : Nil
     if @@force_bulk_enabled == true
       if File.exists?("bulk-data.json")
@@ -29,7 +29,7 @@ class Bulk
     end
   end
 
-  # Deletes bulk data on start
+  # Deletes bulk data on start.
   def self.force_bulk_enable : Bool
     @@force_bulk_enabled = true
     @@force_bulk_enabled
