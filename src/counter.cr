@@ -18,7 +18,7 @@ class Counter
   @@efoil : Int16 = 0
 
   # Prints out validation summary.
-  def self.output
+  def self.output : Nil
     puts "\n  Legal: #{Counter.get_legal.colorize(:green)}"
     puts "  Not legal: #{Counter.get_not_legal.colorize(:red)}"
     puts "  Restricted: #{Counter.get_restricted.colorize(:blue)}"
@@ -36,120 +36,120 @@ class Counter
     puts "\nDONE"
   end
 
-  def self.total(x)
+  def self.total(x) : Int16
     @@total_count += x
   end
 
-  def self.unique
+  def self.unique : Int16
     @@unique_count += 1
   end
 
-  def self.legal(x)
+  def self.legal(x) : Int16
     @@legal += x
   end
 
-  def self.not_legal(x)
+  def self.not_legal(x) : Int16
     @@not_legal += x
   end
 
-  def self.restricted(x)
+  def self.restricted(x) : Int16
     @@restricted += x
   end
 
-  def self.banned(x)
+  def self.banned(x) : Int16
     @@banned += x
   end
 
-  def self.common(x)
+  def self.common(x) : Int16
     @@common += x
   end
 
-  def self.uncommon(x)
+  def self.uncommon(x) : Int16
     @@uncommon += x
   end
 
-  def self.rare(x)
+  def self.rare(x) : Int16
     @@rare += x
   end
 
-  def self.special(x)
+  def self.special(x) : Int16
     @@special += x
   end
 
-  def self.mythic(x)
+  def self.mythic(x) : Int16
     @@mythic += x
   end
 
-  def self.bonus(x)
+  def self.bonus(x) : Int16
     @@bonus += x
   end
 
-  def self.foil(x)
+  def self.foil(x) : Int16
     @@foil += x
   end
 
-  def self.efoil(x)
+  def self.efoil(x) : Int16
     @@efoil += x
   end
 
-  def self.get_total
+  def self.get_total : Int16
     @@total_count
   end
 
-  def self.get_unique
+  def self.get_unique : Int16
     @@unique_count
   end
 
-  def self.get_legal
+  def self.get_legal : Int16
     @@legal
   end
 
-  def self.get_not_legal
+  def self.get_not_legal : Int16
     @@not_legal
   end
 
-  def self.get_restricted
+  def self.get_restricted : Int16
     @@restricted
   end
 
-  def self.get_banned
+  def self.get_banned : Int16
     @@banned
   end
 
-  def self.get_common
+  def self.get_common : Int16
     @@common
   end
 
-  def self.get_uncommon
+  def self.get_uncommon : Int16
     @@uncommon
   end
 
-  def self.get_rare
+  def self.get_rare : Int16
     @@rare
   end
 
-  def self.get_special
+  def self.get_special : Int16
     @@special
   end
 
-  def self.get_mythic
+  def self.get_mythic : Int16
     @@mythic
   end
 
-  def self.get_bonus
+  def self.get_bonus : Int16
     @@bonus
   end
 
-  def self.get_foil
+  def self.get_foil : Int16
     @@foil
   end
 
-  def self.get_efoil
+  def self.get_efoil : Int16
     @@efoil
   end
 
   # Resets `Counter`.
-  def self.reset
+  def self.reset : Nil
     @@total_count = 0
     @@unique_count = 0
 
