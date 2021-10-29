@@ -18,7 +18,6 @@ START = begin
   puts INTRO, VERSION
 end
 
-sf_id = ""
 game_format : String = ""
 csv_file : Nil.class | String = Nil
 
@@ -71,6 +70,6 @@ if csv_file != Nil
   Counter.output
 end
 
-if csv_file == Nil && sf_id == "" && game_format == ""
+if csv_file == Nil && game_format == ""
   puts "\nNo data provided"
 end
