@@ -76,5 +76,5 @@ if csv_file != Nil
 end
 
 if csv_file == Nil && game_format == ""
-  puts "\nNo data provided"
+  puts "\nNo data provided. Exiting..."
 end
