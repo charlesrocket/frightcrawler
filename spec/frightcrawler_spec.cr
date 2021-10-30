@@ -1,7 +1,7 @@
 require "./spec_helper"
 
 describe Bulk, tags: "api" do
-  describe "#pull" do
+  describe ".pull" do
     it "downloads bulk data" do
       Bulk.pull
       File.exists?("bulk-data.json").should be_true
@@ -10,7 +10,7 @@ describe Bulk, tags: "api" do
 end
 
 describe Counter do
-  describe "#get_total" do
+  describe ".get_total" do
     it "counts totals" do
       reset
       Counter.total(2)
@@ -19,7 +19,7 @@ describe Counter do
     end
   end
 
-  describe "#get_unique" do
+  describe ".get_unique" do
     it "counts uniques" do
       reset
       Counter.unique
@@ -31,7 +31,7 @@ describe Counter do
 end
 
 describe Crawler do
-  describe "#csv_layout", tags: "csv" do
+  describe ".csv_layout", tags: "csv" do
     it "checks for Helvault CSV file layout" do
       Crawler.csv_layout("spec/data/test_hv.csv").should eq("helvault file")
     end
@@ -47,7 +47,7 @@ describe Crawler do
     {% end %}
   end
 
-  describe "#validate_csv", tags: ["api", "csv"] do
+  describe ".validate_csv", tags: ["api", "csv"] do
     it "validates CSV Helvault file against provided game format" do
       Crawler.validate_csv("spec/data/test_hv.csv", "legacy").should eq("validated")
     end
