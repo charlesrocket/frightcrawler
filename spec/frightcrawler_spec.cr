@@ -1,5 +1,7 @@
 require "./spec_helper"
 
+Spec.before_each { reset }
+
 describe Bulk, tags: "api" do
   describe ".pull" do
     it "downloads bulk data" do
@@ -12,7 +14,6 @@ end
 describe Counter do
   describe ".get_total" do
     it "counts totals" do
-      reset
       Counter.total(2)
       Counter.total(3)
       Counter.get_total.should eq(5)
@@ -21,7 +22,6 @@ describe Counter do
 
   describe ".get_unique" do
     it "counts uniques" do
-      reset
       Counter.unique
       Counter.unique
       Counter.unique
