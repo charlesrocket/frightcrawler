@@ -2,10 +2,10 @@ require "./spec_helper"
 
 Spec.before_each { reset }
 
-describe Bulk, tags: "api" do
-  describe ".pull" do
+describe Bulk::Puller, tags: "api" do
+  describe ".update" do
     it "downloads bulk data" do
-      Bulk.pull
+      Bulk::Puller.update
       File.exists?("bulk-data.json").should be_true
     end
   end
