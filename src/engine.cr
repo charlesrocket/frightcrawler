@@ -146,6 +146,5 @@ struct Crawler
     Log.info { "Card info requested (#{id})" }
     puts "\n  * Printing card info ..."
     puts JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}").body).to_pretty_json
-    exit
   end
 end
