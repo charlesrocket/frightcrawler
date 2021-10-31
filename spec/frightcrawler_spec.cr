@@ -31,7 +31,7 @@ describe Counter do
 end
 
 describe Crawler do
-  describe "#card_info", tags: "api" do
+  describe ".card_info", tags: "api" do
     it "prints card info for provided ID" do
       Crawler.card_info("989a3960-0cfc-4eab-ae9e-503b934e9835").should contain("Servo")
     end
