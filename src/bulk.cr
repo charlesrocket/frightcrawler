@@ -2,14 +2,12 @@
 module Bulk
   @@bulk_loaded : Bool = false
 
-  struct Data
-    class_getter get : JSON::Any { File.open("bulk-data.json", "r") { |file| JSON.parse file } }
-  end
+  class_getter get : JSON::Any { File.open("bulk-data.json", "r") { |file| JSON.parse file } }
 
   def self.bootstrap : Nil
     if @@bulk_loaded == false
       puts "\n  * Loading bulk data ..."
-      Bulk::Data.get
+      Bulk.get
       puts "\n  * Bulk data loaded"
       @@bulk_loaded = true
     end
