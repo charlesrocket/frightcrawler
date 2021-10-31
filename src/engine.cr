@@ -35,8 +35,9 @@ struct Crawler
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     unless File.exists?("bulk-data.json")
-      Bulk.pull
+      Bulk::Puller.update
     end
+    Bulk.bootstrap
     puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
@@ -57,11 +58,11 @@ struct Crawler
       else
         raise "ERROR: csv"
       end
-      until BulkData.get[x]["id"] == "#{scry_id}"
+      until Bulk.get[x]["id"] == "#{scry_id}"
         # OPTIMIZE: Not good enough!
         x += 1
       end
-      id_json = BulkData.get[x]
+      id_json = Bulk.get[x]
       card_name = id_json["name"]
       set_name = id_json["set_name"]
       set_code = id_json["set"].to_s.upcase.colorize.mode(:underline)
@@ -141,10 +142,9 @@ struct Crawler
   end
 
   # Returns card info for provided Scryfall ID.
-  def self.card_info(id) : Nil
-    START
+  def self.card_info(id) : String
     Log.info { "Card info requested (#{id})" }
     puts "\n  * Printing card info ..."
-    puts JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}").body).to_pretty_json
+    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}").body).to_pretty_json
   end
 end
