@@ -57,11 +57,11 @@ struct Crawler
       else
         raise "ERROR: csv"
       end
-      until BULK_DATA[x]["id"] == "#{scry_id}"
+      until BulkData.get[x]["id"] == "#{scry_id}"
         # OPTIMIZE: Not good enough!
         x += 1
       end
-      id_json = BULK_DATA[x]
+      id_json = BulkData.get[x]
       card_name = id_json["name"]
       set_name = id_json["set_name"]
       set_code = id_json["set"].to_s.upcase.colorize.mode(:underline)

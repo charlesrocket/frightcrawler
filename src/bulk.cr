@@ -1,3 +1,7 @@
+module BulkData
+  class_getter get : JSON::Any { File.open("bulk-data.json", "r") { |file| JSON.parse file } }
+end
+
 # Pulls bulk data from Scryfall.
 class Bulk
   @@force_bulk_enabled : Bool = false

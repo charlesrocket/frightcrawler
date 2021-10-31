@@ -18,6 +18,7 @@ START = begin
   puts INTRO, VERSION
 end
 
+bulk_data : Bool = false
 game_format : String = ""
 csv_file : Nil.class | String = Nil
 
@@ -41,16 +42,12 @@ OptionParser.parse do |parser|
 end
 
 if game_format != ""
+  bulk_data = true
   puts "\n  * Using #{game_format} format list"
 end
 
-# :nodoc:
-BULK_DATA = begin
-  Bulk.pull
-  puts "\n  * Loading bulk data ..."
-  File.open "bulk-data.json", "r" do |file|
-    JSON.parse file
-  end.tap { puts "\n  * Bulk data loaded" }
+if bulk_data == true
+  BulkData
 end
 
 # :nodoc:
