@@ -9,13 +9,13 @@
 
 
 
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/doc.js"></script>
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="frightcrawler">
-  <title>Bulk - frightcrawler master</title>
+  <title>Bulk::Puller - frightcrawler master</title>
   <script type="text/javascript">
-    CrystalDocs.base_path = "";
+    CrystalDocs.base_path = "../";
   </script>
 </head>
 <body>
@@ -33,7 +33,7 @@
 
     <div class="project-summary">
       <h1 class="project-name">
-        <a href="index.html">
+        <a href="../index.html">
           frightcrawler
         </a>
       </h1>
@@ -52,17 +52,17 @@
     <ul>
   
   <li class=" " data-id="frightcrawler/toplevel" data-name="top level namespace">
-      <a href="toplevel.html">Top Level Namespace</a>
+      <a href="../toplevel.html">Top Level Namespace</a>
       
     </li>
   
   <li class="parent open current" data-id="frightcrawler/Bulk" data-name="bulk">
-      <a href="Bulk.html">Bulk</a>
+      <a href="../Bulk.html">Bulk</a>
       
         <ul>
   
-  <li class=" " data-id="frightcrawler/Bulk/Puller" data-name="bulk::puller">
-      <a href="Bulk/Puller.html">Puller</a>
+  <li class=" current" data-id="frightcrawler/Bulk/Puller" data-name="bulk::puller">
+      <a href="../Bulk/Puller.html">Puller</a>
       
     </li>
   
@@ -72,12 +72,12 @@
     </li>
   
   <li class=" " data-id="frightcrawler/Counter" data-name="counter">
-      <a href="Counter.html">Counter</a>
+      <a href="../Counter.html">Counter</a>
       
     </li>
   
   <li class=" " data-id="frightcrawler/Crawler" data-name="crawler">
-      <a href="Crawler.html">Crawler</a>
+      <a href="../Crawler.html">Crawler</a>
       
     </li>
   
@@ -90,10 +90,12 @@
 <div class="main-content">
 <h1 class="type-name">
 
-  <span class="kind">module</span> Bulk
+  <span class="kind">class</span> Bulk::Puller
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Bulk/Puller.html">Bulk::Puller</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -107,7 +109,7 @@
     Overview
   </h2>
 
-  <p>Manages bulk data.</p>
+  <p>Pulls bulk data from Scryfall.</p>
 
 
 
@@ -132,7 +134,7 @@
   </h2>
   
     
-      <a href="https://github.com/charlesrocket/frightcrawler/blob/4ba24ae384c778666d8ce74005230601f9a38f36/src/bulk.cr#L2" target="_blank">
+      <a href="https://github.com/charlesrocket/frightcrawler/blob/4ba24ae384c778666d8ce74005230601f9a38f36/src/bulk.cr#L17" target="_blank">
         bulk.cr
       </a>
     
@@ -156,12 +158,16 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#bootstrap%3ANil-class-method" class="signature"><strong>.bootstrap</strong> : Nil</a>
+        <a href="#force_bulk_enable%3ABool-class-method" class="signature"><strong>.force_bulk_enable</strong> : Bool</a>
+        
+          <div class="summary"><p>Deletes bulk data on start.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#get%3AJSON%3A%3AAny-class-method" class="signature"><strong>.get</strong> : JSON::Any</a>
+        <a href="#update%28bulk_time%3D2629743%29%3ANil-class-method" class="signature"><strong>.update</strong>(bulk_time = <span class="n">2629743</span>) : Nil</a>
+        
+          <div class="summary"><p>Downloads bulk data and keeps it up to date with <em>bulk_time</em>.</p></div>
         
       </li>
     
@@ -174,6 +180,26 @@
 
 
 <div class="methods-inherited">
+  
+    
+
+
+    
+
+
+    
+
+
+  
+    
+
+
+    
+
+
+    
+
+
   
 </div>
 
@@ -189,34 +215,44 @@
     Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="bootstrap:Nil-class-method">
+    <div class="entry-detail" id="force_bulk_enable:Bool-class-method">
       <div class="signature">
         
-        def self.<strong>bootstrap</strong> : Nil
+        def self.<strong>force_bulk_enable</strong> : Bool
 
-        <a class="method-permalink" href="#bootstrap%3ANil-class-method">#</a>
+        <a class="method-permalink" href="#force_bulk_enable%3ABool-class-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Deletes bulk data on start.</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/charlesrocket/frightcrawler/blob/4ba24ae384c778666d8ce74005230601f9a38f36/src/bulk.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/4ba24ae384c778666d8ce74005230601f9a38f36/src/bulk.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="get:JSON::Any-class-method">
+    <div class="entry-detail" id="update(bulk_time=2629743):Nil-class-method">
       <div class="signature">
         
-        def self.<strong>get</strong> : JSON::Any
+        def self.<strong>update</strong>(bulk_time = <span class="n">2629743</span>) : Nil
 
-        <a class="method-permalink" href="#get%3AJSON%3A%3AAny-class-method">#</a>
+        <a class="method-permalink" href="#update%28bulk_time%3D2629743%29%3ANil-class-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Downloads bulk data and keeps it up to date with <em>bulk_time</em>.</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/charlesrocket/frightcrawler/blob/4ba24ae384c778666d8ce74005230601f9a38f36/src/bulk.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/4ba24ae384c778666d8ce74005230601f9a38f36/src/bulk.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
