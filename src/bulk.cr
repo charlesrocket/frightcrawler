@@ -1,4 +1,4 @@
-# Manages bulk data
+# Manages bulk data.
 module Bulk
   @@bulk_loaded : Bool = false
 
