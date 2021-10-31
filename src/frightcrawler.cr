@@ -13,7 +13,6 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
-bulk_data : Bool = false
 game_format : String = ""
 sf_id : String = ""
 csv_file : Nil.class | String = Nil
@@ -44,7 +43,6 @@ if !sf_id.empty?
 end
 
 if game_format != ""
-  bulk_data = true
   puts "\n  * Using #{game_format} format list"
 end
 
