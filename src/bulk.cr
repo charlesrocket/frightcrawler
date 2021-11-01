@@ -1,8 +1,8 @@
 # Manages bulk data.
 module Bulk
-  @@bulk_loaded : Bool = false
-
   class_getter get : JSON::Any { File.open("bulk-data.json", "r") { |file| JSON.parse file } }
+
+  @@bulk_loaded : Bool = false
 
   def self.bootstrap : Nil
     if @@bulk_loaded == false
