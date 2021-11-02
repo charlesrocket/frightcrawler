@@ -76,24 +76,24 @@ struct Crawler
   end
 
   # Sets legality status.
-  def self.legalities(json, game_format, quantity) : Colorize::Object(String) | String
+  def self.legalities(json, game_format, quantity) : Colorize::Object(Symbol) | Symbol
     case
     when json["legalities"][game_format] == "legal"
       @@legality_stat = "LEGAL"
       Counter.legal("#{quantity}".to_i)
-      "  Legal   ".colorize(:green)
+      :"  Legal   ".colorize(:green)
     when json["legalities"][game_format] == "not_legal"
       @@legality_stat = "NOT LEGAL"
       Counter.not_legal("#{quantity}".to_i)
-      "Not legal ".colorize(:red)
+      :"Not legal ".colorize(:red)
     when json["legalities"][game_format] == "restricted"
       @@legality_stat = "RESTRICTED"
       Counter.restricted("#{quantity}".to_i)
-      "  Restr   ".colorize(:blue)
+      :"  Restr   ".colorize(:blue)
     when json["legalities"][game_format] == "banned"
       @@legality_stat = "BANNED"
       Counter.banned("#{quantity}".to_i)
-      "   BAN    ".colorize(:red)
+      :"   BAN    ".colorize(:red)
     else
       raise "ERROR: legalities"
     end
