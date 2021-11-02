@@ -6,6 +6,7 @@ module Bulk
 
   def self.bootstrap : Nil
     if @@bulk_loaded == false
+      Bulk::Puller.update
       puts "\n  * Loading bulk data ..."
       Bulk.get
       puts "\n  * Bulk data loaded"
