@@ -1,10 +1,17 @@
 # Checks CSV files and prints out summary for each line.
-struct Crawler
+module Engine
   @@csv_aetherhub : Bool = false
   @@csv_helvault : Bool = false
   @@csv_helvaultpro : Bool = false
 
   @@legality_stat : String = ""
+
+  struct Crawler
+    getter scry_id : String, foil_status : String, quantity : String
+
+    def initialize(@scry_id, @foil_status, @quantity)
+    end
+  end
 
   # Checks if CSV file is supported.
   def self.csv_layout(file) : String
@@ -31,7 +38,7 @@ struct Crawler
 
   # Validates CSV file against provided format.
   def self.validate_csv(file, game_format) : String
-    Crawler.csv_layout(file)
+    Engine.csv_layout(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     unless File.exists?("bulk-data.json")
@@ -44,21 +51,15 @@ struct Crawler
       x = 0
       case
       when @@csv_helvault
-        scry_id = row[4]
-        foil_status = row[0]
-        quantity = row[3]
+        card = Engine::Crawler.new row[4], row[0], row[3]
       when @@csv_helvaultpro
-        scry_id = row[8]
-        foil_status = row[2]
-        quantity = row[6]
+        card = Engine::Crawler.new row[8], row[2], row[6]
       when @@csv_aetherhub
-        scry_id = row[13]
-        foil_status = row[7]
-        quantity = row[6]
+        card = Engine::Crawler.new row[13], row[7], row[6]
       else
         raise "ERROR: csv"
       end
-      until Bulk.get[x]["id"] == "#{scry_id}"
+      until Bulk.get[x]["id"] == "#{card.scry_id}"
         # OPTIMIZE: Not good enough!
         x += 1
       end
@@ -66,11 +67,11 @@ struct Crawler
       card_name = id_json["name"]
       set_name = id_json["set_name"]
       set_code = id_json["set"].to_s.upcase.colorize.mode(:underline)
-      Counter.total("#{quantity}".to_i)
+      Counter.total("#{card.quantity}".to_i)
       Counter.unique
       # TODO: Add icons
-      puts "▓▒░░░  #{legalities(id_json, game_format, quantity)} #{foils(foil_status, quantity)} #{rarities(id_json, quantity)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
-      Log.info { "#{game_format}: #{@@legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
+      puts "▓▒░░░  #{legalities(id_json, game_format, card.quantity)} #{foils(card.foil_status, card.quantity)} #{rarities(id_json, card.quantity)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      Log.info { "#{game_format}: #{@@legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{card.quantity}" }
     end
     "validated"
   end

@@ -39,7 +39,7 @@ OptionParser.parse do |parser|
 end
 
 if !sf_id.empty?
-  puts Crawler.card_info("#{sf_id}")
+  puts Engine.card_info("#{sf_id}")
 end
 
 if game_format != ""
@@ -58,7 +58,7 @@ INTRO = "
 T1 = Time.monotonic
 
 if csv_file != Nil
-  Crawler.validate_csv("#{csv_file}", "#{game_format}")
+  Engine.validate_csv("#{csv_file}", "#{game_format}")
 end
 
 T2 = Time.monotonic
