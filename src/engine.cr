@@ -12,11 +12,6 @@ module Engine
     def initialize(@scry_id, @foil_status, @quantity)
     end
 
-    # Returns legality status.
-    def legality_stat
-      @legality_stat
-    end
-
     # Sets legality status.
     def legalities(json, game_format) : Colorize::Object(Symbol) | Symbol
       case
@@ -39,6 +34,11 @@ module Engine
       else
         raise "ERROR: legalities"
       end
+    end
+
+    # Returns legality status.
+    def legality_stat
+      @legality_stat
     end
 
     # Sets rarity status.
