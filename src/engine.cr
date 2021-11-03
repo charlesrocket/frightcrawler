@@ -82,8 +82,6 @@ module Engine
         raise "ERROR: foil_status"
       end
     end
-
-
   end
 
   # Checks if CSV file is supported.
