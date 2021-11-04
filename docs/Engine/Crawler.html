@@ -133,7 +133,7 @@
   </h2>
   
     
-      <a href="https://github.com/charlesrocket/frightcrawler/blob/ead836a53cb74ac163743c3f73864bb71796433c/src/engine.cr#L9" target="_blank">
+      <a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L7" target="_blank">
         engine.cr
       </a>
     
@@ -155,7 +155,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28scry_id%2Cfoil_status%2Cquantity%29-class-method" class="signature"><strong>.new</strong>(scry_id, foil_status, quantity)</a>
+        <a href="#new%28game_format%2Cscry_id%2Cfoil_status%2Cquantity%29-class-method" class="signature"><strong>.new</strong>(game_format, scry_id, foil_status, quantity)</a>
         
       </li>
     
@@ -176,7 +176,48 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#card_bulk%3AJSON%3A%3AAny%7CString-instance-method" class="signature"><strong>#card_bulk</strong> : JSON::Any | String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#card_json-instance-method" class="signature"><strong>#card_json</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#card_name%3AString-instance-method" class="signature"><strong>#card_name</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#foil_status%3AString-instance-method" class="signature"><strong>#foil_status</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#foils%3AColorize%3A%3AObject%28Symbol%29-instance-method" class="signature"><strong>#foils</strong> : Colorize::Object(Symbol)</a>
+        
+          <div class="summary"><p>Sets foil status.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#game_format%3AString-instance-method" class="signature"><strong>#game_format</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#legalities%3AColorize%3A%3AObject%28Symbol%29-instance-method" class="signature"><strong>#legalities</strong> : Colorize::Object(Symbol)</a>
+        
+          <div class="summary"><p>Sets legality status.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#legality_stat%3AString-instance-method" class="signature"><strong>#legality_stat</strong> : String</a>
+        
+          <div class="summary"><p>Returns legality status.</p></div>
         
       </li>
     
@@ -186,7 +227,24 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#rarities%3AColorize%3A%3AObject%28Symbol%29-instance-method" class="signature"><strong>#rarities</strong> : Colorize::Object(Symbol)</a>
+        
+          <div class="summary"><p>Sets rarity status.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#scry_id%3AString-instance-method" class="signature"><strong>#scry_id</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set_code%3AString-instance-method" class="signature"><strong>#set_code</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set_name%3AString-instance-method" class="signature"><strong>#set_name</strong> : String</a>
         
       </li>
     
@@ -240,18 +298,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(scry_id,foil_status,quantity)-class-method">
+    <div class="entry-detail" id="new(game_format,scry_id,foil_status,quantity)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(scry_id, foil_status, quantity)
+        def self.<strong>new</strong>(game_format, scry_id, foil_status, quantity)
 
-        <a class="method-permalink" href="#new%28scry_id%2Cfoil_status%2Cquantity%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28game_format%2Cscry_id%2Cfoil_status%2Cquantity%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/charlesrocket/frightcrawler/blob/ead836a53cb74ac163743c3f73864bb71796433c/src/engine.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -270,6 +328,54 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="card_bulk:JSON::Any|String-instance-method">
+      <div class="signature">
+        
+        def <strong>card_bulk</strong> : JSON::Any | String
+
+        <a class="method-permalink" href="#card_bulk%3AJSON%3A%3AAny%7CString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="card_json-instance-method">
+      <div class="signature">
+        
+        def <strong>card_json</strong>
+
+        <a class="method-permalink" href="#card_json-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="card_name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>card_name</strong> : String
+
+        <a class="method-permalink" href="#card_name%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L36" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="foil_status:String-instance-method">
       <div class="signature">
         
@@ -281,7 +387,86 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/charlesrocket/frightcrawler/blob/ead836a53cb74ac163743c3f73864bb71796433c/src/engine.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="foils:Colorize::Object(Symbol)-instance-method">
+      <div class="signature">
+        
+        def <strong>foils</strong> : Colorize::Object(Symbol)
+
+        <a class="method-permalink" href="#foils%3AColorize%3A%3AObject%28Symbol%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets foil status.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L104" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="game_format:String-instance-method">
+      <div class="signature">
+        
+        def <strong>game_format</strong> : String
+
+        <a class="method-permalink" href="#game_format%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="legalities:Colorize::Object(Symbol)-instance-method">
+      <div class="signature">
+        
+        def <strong>legalities</strong> : Colorize::Object(Symbol)
+
+        <a class="method-permalink" href="#legalities%3AColorize%3A%3AObject%28Symbol%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets legality status.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L49" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="legality_stat:String-instance-method">
+      <div class="signature">
+        
+        def <strong>legality_stat</strong> : String
+
+        <a class="method-permalink" href="#legality_stat%3AString-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Returns legality status.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L73" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -297,7 +482,28 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/charlesrocket/frightcrawler/blob/ead836a53cb74ac163743c3f73864bb71796433c/src/engine.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rarities:Colorize::Object(Symbol)-instance-method">
+      <div class="signature">
+        
+        def <strong>rarities</strong> : Colorize::Object(Symbol)
+
+        <a class="method-permalink" href="#rarities%3AColorize%3A%3AObject%28Symbol%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Sets rarity status.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -313,7 +519,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/charlesrocket/frightcrawler/blob/ead836a53cb74ac163743c3f73864bb71796433c/src/engine.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set_code:String-instance-method">
+      <div class="signature">
+        
+        def <strong>set_code</strong> : String
+
+        <a class="method-permalink" href="#set_code%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L44" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set_name:String-instance-method">
+      <div class="signature">
+        
+        def <strong>set_name</strong> : String
+
+        <a class="method-permalink" href="#set_name%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/charlesrocket/frightcrawler/blob/7eadc67d611f63ae5d00e1d67611964772d9c613/src/engine.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
