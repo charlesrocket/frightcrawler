@@ -5,29 +5,62 @@ module Engine
   @@csv_helvaultpro : Bool = false
 
   struct Crawler
-    getter scry_id : String, foil_status : String, quantity : String
+    getter game_format : String, scry_id : String, foil_status : String, quantity : String
 
     @legality_stat : String = ""
+    @card_bulk : JSON::Any | String = ""
+    @card_name : String = ""
+    @set_name : String = ""
+    @set_code : String = ""
 
-    def initialize(@scry_id, @foil_status, @quantity)
+    def initialize(@game_format, @scry_id, @foil_status, @quantity)
+      card_json
+    end
+
+    def card_json
+      x = 0
+      until Bulk.get[x]["id"] == "#{@scry_id}"
+        # OPTIMIZE: Not good enough!
+        x += 1
+      end
+      @card_bulk = Bulk.get[x]
+      @card_name = "#{@card_bulk["name"]}"
+      @set_name = "#{@card_bulk["set_name"]}"
+      @set_code = "#{@card_bulk["set"].to_s.upcase.colorize.mode(:underline)}"
+    end
+
+    def card_bulk
+      @card_bulk
+    end
+
+    def card_name
+      @card_name
+    end
+
+    def set_name
+      @set_name
+    end
+
+    def set_code
+      @set_code
     end
 
     # Sets legality status.
-    def legalities(json, game_format) : Colorize::Object(Symbol) | Symbol
+    def legalities : Colorize::Object(Symbol)
       case
-      when json["legalities"][game_format] == "legal"
+      when @card_bulk["legalities"][@game_format] == "legal"
         @legality_stat = "LEGAL"
         Counter.legal("#{@quantity}".to_i)
         :"  Legal   ".colorize(:green)
-      when json["legalities"][game_format] == "not_legal"
+      when @card_bulk["legalities"][@game_format] == "not_legal"
         @legality_stat = "NOT LEGAL"
         Counter.not_legal("#{@quantity}".to_i)
         :"Not legal ".colorize(:red)
-      when json["legalities"][game_format] == "restricted"
+      when @card_bulk["legalities"][@game_format] == "restricted"
         @legality_stat = "RESTRICTED"
         Counter.restricted("#{@quantity}".to_i)
         :"  Restr   ".colorize(:blue)
-      when json["legalities"][game_format] == "banned"
+      when @card_bulk["legalities"][@game_format] == "banned"
         @legality_stat = "BANNED"
         Counter.banned("#{@quantity}".to_i)
         :"   BAN    ".colorize(:red)
@@ -42,24 +75,24 @@ module Engine
     end
 
     # Sets rarity status.
-    def rarities(json) : Colorize::Object(Symbol)
+    def rarities : Colorize::Object(Symbol)
       case
-      when json["rarity"] == "common"
+      when @card_bulk["rarity"] == "common"
         Counter.common("#{@quantity}".to_i)
         :C.colorize(:white)
-      when json["rarity"] == "uncommon"
+      when @card_bulk["rarity"] == "uncommon"
         Counter.uncommon("#{@quantity}".to_i)
         :U.colorize(:cyan)
-      when json["rarity"] == "rare"
+      when @card_bulk["rarity"] == "rare"
         Counter.rare("#{@quantity}".to_i)
         :R.colorize(:light_yellow)
-      when json["rarity"] == "special"
+      when @card_bulk["rarity"] == "special"
         Counter.special("#{@quantity}".to_i)
         :S.colorize(:yellow)
-      when json["rarity"] == "mythic"
+      when @card_bulk["rarity"] == "mythic"
         Counter.mythic("#{@quantity}".to_i)
         :M.colorize(:magenta)
-      when json["rarity"] == "bonus"
+      when @card_bulk["rarity"] == "bonus"
         Counter.bonus("#{@quantity}".to_i)
         :B.colorize(:light_blue)
       else
@@ -119,30 +152,21 @@ module Engine
     puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
-      x = 0
       case
       when @@csv_helvault
-        card = Engine::Crawler.new row[4], row[0], row[3]
+        card = Engine::Crawler.new game_format, row[4], row[0], row[3]
       when @@csv_helvaultpro
-        card = Engine::Crawler.new row[8], row[2], row[6]
+        card = Engine::Crawler.new game_format, row[8], row[2], row[6]
       when @@csv_aetherhub
-        card = Engine::Crawler.new row[13], row[7], row[6]
+        card = Engine::Crawler.new game_format, row[13], row[7], row[6]
       else
         raise "ERROR: csv"
       end
-      until Bulk.get[x]["id"] == "#{card.scry_id}"
-        # OPTIMIZE: Not good enough!
-        x += 1
-      end
-      id_json = Bulk.get[x]
-      card_name = id_json["name"]
-      set_name = id_json["set_name"]
-      set_code = id_json["set"].to_s.upcase.colorize.mode(:underline)
       Counter.total("#{card.quantity}".to_i)
       Counter.unique
       # TODO: Add icons
-      puts "▓▒░░░  #{card.legalities(id_json, game_format)} #{card.foils} #{card.rarities(id_json)} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
-      Log.info { "#{game_format}: #{card.legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{card.quantity}" }
+      puts "▓▒░░░  #{card.legalities} #{card.foils} #{card.rarities} #{card.card_name} ⬡ #{card.set_name} ◄ #{card.set_code} ►"
+      Log.info { "#{card.game_format}: #{card.legality_stat} #{card.card_name} ◄ #{card.set_name} ► ⑇ #{card.quantity}" }
     end
     "validated"
   end
