@@ -7,11 +7,11 @@ module Engine
   struct Crawler
     getter game_format : String, scry_id : String, foil_status : String, quantity : String
 
-    @legality_stat : String = ""
     @card_bulk : JSON::Any = JSON::Any.new("")
     @card_name : String = ""
     @set_name : String = ""
     @set_code : String = ""
+    @legality_stat : String = ""
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
       card_json
