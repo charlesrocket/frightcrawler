@@ -55,12 +55,14 @@ INTRO = "
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
 
+# :nodoc:
 T1 = Time.monotonic
 
 if csv_file != Nil
   Engine.validate_csv("#{csv_file}", "#{game_format}")
 end
 
+# :nodoc:
 T2 = Time.monotonic
 
 if csv_file != Nil
