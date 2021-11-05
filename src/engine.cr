@@ -8,7 +8,7 @@ module Engine
     getter game_format : String, scry_id : String, foil_status : String, quantity : String
 
     @legality_stat : String = ""
-    @card_bulk : JSON::Any | String = ""
+    @card_bulk : JSON::Any = JSON::Any.new("")
     @card_name : String = ""
     @set_name : String = ""
     @set_code : String = ""
