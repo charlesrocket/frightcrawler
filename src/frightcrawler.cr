@@ -65,11 +65,6 @@ end
 # :nodoc:
 T2 = Time.monotonic
 
-if csv_file != Nil
-  Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
-  Counter.output
-end
-
 if csv_file == Nil && sf_id == "" && game_format == ""
   puts "\nNo data provided. Exiting."
 end
