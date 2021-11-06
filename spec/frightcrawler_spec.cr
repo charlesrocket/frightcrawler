@@ -31,6 +31,29 @@ describe Counter do
 end
 
 describe Engine do
+  describe Engine::Crawler, tags: ["api", "crawler"] do
+    describe "#legalities" do
+      it "returns legality status" do
+        card = Engine::Crawler.new "legacy", "bd1751ca-4945-4071-87f1-9d5f282c35f0", "foil", "2"
+        card.legalities.should eq(:"  Legal   ".colorize(:green))
+      end
+    end
+
+    describe "#rarities" do
+      it "returns rarity status" do
+        card = Engine::Crawler.new "legacy", "bd1751ca-4945-4071-87f1-9d5f282c35f0", "foil", "2"
+        card.rarities.should eq(:R.colorize(:light_yellow))
+      end
+    end
+
+    describe "#foils" do
+      it "returns foil status" do
+        card = Engine::Crawler.new "legacy", "bd1751ca-4945-4071-87f1-9d5f282c35f0", "foil", "2"
+        card.foils.should eq(:▲.colorize(:light_gray))
+      end
+    end
+  end
+
   describe ".card_info", tags: "api" do
     it "prints card info for provided ID" do
       Engine.card_info("989a3960-0cfc-4eab-ae9e-503b934e9835").should contain("Servo")
