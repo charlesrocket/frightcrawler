@@ -14,7 +14,7 @@
 
 #### Usage
 
-```sh
+```shell
 frightcrawler -h
 frightcrawler -g modern -f PATH/TO/FILE
 ```
