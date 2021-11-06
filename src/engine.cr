@@ -17,7 +17,7 @@ module Engine
       card_json
     end
 
-    def card_json
+    def card_json : Nil
       x = 0
       until Bulk.get[x]["id"] == "#{@scry_id}"
         # OPTIMIZE: Not good enough!
@@ -29,19 +29,19 @@ module Engine
       @set_code = "#{@card_bulk["set"].to_s.upcase.colorize.mode(:underline)}"
     end
 
-    def card_bulk
+    def card_bulk : JSON::Any
       @card_bulk
     end
 
-    def card_name
+    def card_name : String
       @card_name
     end
 
-    def set_name
+    def set_name : String
       @set_name
     end
 
-    def set_code
+    def set_code : String
       @set_code
     end
 
