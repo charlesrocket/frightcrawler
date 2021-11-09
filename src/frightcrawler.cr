@@ -1,12 +1,13 @@
-require "./bulk"
-require "./counter"
-require "./engine"
 require "http/client"
 require "option_parser"
 require "colorize"
 require "json"
 require "csv"
 require "log"
+
+require "./bulk"
+require "./counter"
+require "./engine"
 
 # :nodoc:
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
