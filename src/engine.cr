@@ -18,6 +18,7 @@ module Engine
     end
 
     def card_json : Nil
+      Bulk.bootstrap
       x = 0
       until Bulk.get[x]["id"] == "#{@scry_id}"
         # OPTIMIZE: Not good enough!
