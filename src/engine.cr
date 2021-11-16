@@ -30,23 +30,27 @@ module Engine
       @set_code = "#{@card_bulk["set"].to_s.upcase.colorize.mode(:underline)}"
     end
 
+    # Returns card's bulk data.
     def card_bulk : JSON::Any
       @card_bulk
     end
 
+    # Returns card's name.
     def card_name : String
       @card_name
     end
 
+    # Returns card's set name.
     def set_name : String
       @set_name
     end
 
+    # Returns card's set code.
     def set_code : String
       @set_code
     end
 
-    # Returns legality status.
+    # Returns card's legality status.
     def legality_stat : String
       @legality_stat
     end
