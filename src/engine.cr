@@ -46,6 +46,11 @@ module Engine
       @set_code
     end
 
+    # Returns legality status.
+    def legality_stat : String
+      @legality_stat
+    end
+
     # Sets legality status.
     def legalities : Colorize::Object(Symbol)
       case
@@ -68,11 +73,6 @@ module Engine
       else
         raise "ERROR: legalities"
       end
-    end
-
-    # Returns legality status.
-    def legality_stat
-      @legality_stat
     end
 
     # Sets rarity status.
