@@ -8,7 +8,7 @@ module Bulk
     if @@bulk_loaded == false
       Puller.update
       puts "\n  * Loading bulk data ..."
-      Bulk.get
+      get
       puts "\n  * Bulk data loaded"
       @@bulk_loaded = true
     end

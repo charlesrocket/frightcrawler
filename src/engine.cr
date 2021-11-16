@@ -143,7 +143,7 @@ module Engine
 
   # Validates CSV file against provided format.
   def self.validate_csv(file, game_format) : String
-    Engine.csv_layout(file)
+    csv_layout(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     unless File.exists?("bulk-data.json")
@@ -155,11 +155,11 @@ module Engine
       row = entry.row.to_a
       case
       when @@csv_helvault
-        card = Engine::Crawler.new game_format, row[4], row[0], row[3]
+        card = Crawler.new game_format, row[4], row[0], row[3]
       when @@csv_helvaultpro
-        card = Engine::Crawler.new game_format, row[8], row[2], row[6]
+        card = Crawler.new game_format, row[8], row[2], row[6]
       when @@csv_aetherhub
-        card = Engine::Crawler.new game_format, row[13], row[7], row[6]
+        card = Crawler.new game_format, row[13], row[7], row[6]
       else
         raise "ERROR: csv"
       end
