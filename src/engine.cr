@@ -30,6 +30,12 @@ module Engine
       @set_code = "#{@card_bulk["set"].to_s.upcase.colorize.mode(:underline)}"
     end
 
+    # Prints card's summary
+    def summary : Nil
+      # TODO: Add icons
+      puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+    end
+
     # Returns card's bulk data.
     def card_bulk : JSON::Any
       @card_bulk
@@ -169,8 +175,7 @@ module Engine
       end
       Counter.total("#{card.quantity}".to_i)
       Counter.unique
-      # TODO: Add icons
-      puts "▓▒░░░  #{card.legalities} #{card.foils} #{card.rarities} #{card.card_name} ⬡ #{card.set_name} ◄ #{card.set_code} ►"
+      card.summary
       Log.info { "#{card.game_format}: #{card.legality_stat} #{card.card_name} ◄ #{card.set_name} ► ⑇ #{card.quantity}" }
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
