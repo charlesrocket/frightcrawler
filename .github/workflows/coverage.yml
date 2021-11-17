@@ -1,0 +1,22 @@
+name: Coverage
+
+on: [push, pull_request]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    container:
+      image: charlie137/crystal-kcov:latest
+      options: --security-opt seccomp=unconfined
+    steps:
+      - name: Download source
+        uses: actions/checkout@v2
+      - name: Cache bulk data
+        uses: actions/cache@v2
+        with:
+          path: ./bulk-data.json
+          key: ${{ runner.os }}-${{ hashFiles('**/bulk-data.json') }}
+      - name: Install shards
+        run: shards install --without-development
+      - name: Run kcov
+        run: ./.github/workflows/coverage
