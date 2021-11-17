@@ -14,6 +14,15 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
+# :nodoc:
+INTRO = "
+▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
+▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
+▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
+▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
+▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
+▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
+
 game_format : String = ""
 sf_id : String = ""
 csv_file : Nil.class | String = Nil
@@ -46,15 +55,6 @@ end
 if game_format != ""
   puts "\n  * Using #{game_format} format list"
 end
-
-# :nodoc:
-INTRO = "
-▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
-▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
-▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
-▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
-▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
-▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
 
 # :nodoc:
 T1 = Time.monotonic
