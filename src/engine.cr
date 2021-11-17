@@ -33,6 +33,7 @@ module Engine
     # Prints card's summary
     def summary : Nil
       # TODO: Add icons
+      Log.info { "#{game_format}: #{legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
       puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
     end
 
@@ -176,7 +177,6 @@ module Engine
       Counter.total("#{card.quantity}".to_i)
       Counter.unique
       card.summary
-      Log.info { "#{card.game_format}: #{card.legality_stat} #{card.card_name} ◄ #{card.set_name} ► ⑇ #{card.quantity}" }
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
     Counter.output
