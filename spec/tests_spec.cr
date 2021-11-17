@@ -78,7 +78,7 @@ describe Engine do
 
   describe ".validate_csv", tags: ["api", "csv"] do
     it "validates CSV Helvault file against provided game format" do
-      Engine.validate_csv("spec/data/test_hv.csv", "legacy").should eq("validated")
+      Engine.validate_csv("spec/data/test_hv.csv", "vintage").should eq("validated")
     end
 
     it "validates CSV Helvault Pro file against provided game format" do
