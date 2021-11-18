@@ -23,14 +23,14 @@ INTRO = "
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
 
-game_format : String = ""
+game_format_in : String = ""
 sf_id : String = ""
 csv_file : Nil.class | String = Nil
 
 puts INTRO, VERSION
 
 OptionParser.parse do |parser|
-  parser.on("-g GAME_FORMAT", "Set game format") { |_game_format| game_format = _game_format }
+  parser.on("-g GAME_FORMAT", "Set game format") { |_game_format_in| game_format_in = _game_format_in }
   parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
   parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
   parser.on("-b", "Redownload bulk data") { Bulk::Puller.force_bulk_enable }
@@ -52,20 +52,20 @@ if !sf_id.empty?
   puts Engine.card_info("#{sf_id}")
 end
 
-if game_format != ""
-  puts "\n  * Using #{game_format} format list"
+if game_format_in != ""
+  puts "\n  * Using #{game_format_in} format list"
 end
 
 # :nodoc:
 T1 = Time.monotonic
 
 if csv_file != Nil
-  Engine.validate_csv("#{csv_file}", "#{game_format}")
+  Engine.validate_csv("#{csv_file}", "#{game_format_in}")
 end
 
 # :nodoc:
 T2 = Time.monotonic
 
-if csv_file == Nil && sf_id == "" && game_format == ""
+if csv_file == Nil && sf_id == "" && game_format_in == ""
   puts "\nNo data provided. Exiting."
 end
