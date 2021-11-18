@@ -1,5 +1,6 @@
 # Manages bulk data.
 module Bulk
+  # Loads bulk data.
   class_getter get : JSON::Any { File.open("bulk-data.json", "r") { |file| JSON.parse file } }
 
   @@bulk_loaded : Bool = false
