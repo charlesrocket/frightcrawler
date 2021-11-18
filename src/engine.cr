@@ -30,34 +30,34 @@ module Engine
       @set_code = "#{@card_bulk["set"].to_s.upcase.colorize.mode(:underline)}"
     end
 
-    # Prints card's summary
+    # Prints card summary
     def summary : Nil
       # TODO: Add icons
       Log.info { "#{game_format}: #{legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
       puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
     end
 
-    # Returns card's bulk data.
+    # Returns card bulk data.
     def card_bulk : JSON::Any
       @card_bulk
     end
 
-    # Returns card's name.
+    # Returns card name.
     def card_name : String
       @card_name
     end
 
-    # Returns card's set name.
+    # Returns card set name.
     def set_name : String
       @set_name
     end
 
-    # Returns card's set code.
+    # Returns card set code.
     def set_code : String
       @set_code
     end
 
-    # Returns card's legality status.
+    # Returns card legality status.
     def legality_stat : String
       @legality_stat
     end
