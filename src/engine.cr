@@ -4,6 +4,7 @@ module Engine
   @@csv_helvault : Bool = false
   @@csv_helvaultpro : Bool = false
 
+  # Generates card summary
   struct Crawler
     getter game_format : String, scry_id : String, foil_status : String, quantity : String
 
@@ -17,6 +18,7 @@ module Engine
       card_json
     end
 
+    # Sets card attributes and filters bulk data.
     def card_json : Nil
       Bulk.bootstrap
       x = 0
