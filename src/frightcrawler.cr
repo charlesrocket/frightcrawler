@@ -59,13 +59,13 @@ end
 # :nodoc:
 T1 = Time.monotonic
 
-if csv_file != Nil
+if csv_file != nil
   Engine.validate_csv("#{csv_file}", "#{game_format_in}")
 end
 
 # :nodoc:
 T2 = Time.monotonic
 
-if csv_file == Nil && sf_id == "" && game_format_in == ""
+if csv_file == nil && sf_id == "" && game_format_in == ""
   puts "\nNo data provided. Exiting."
 end
