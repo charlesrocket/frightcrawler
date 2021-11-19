@@ -25,7 +25,7 @@ INTRO = "
 
 game_format_in : String = ""
 sf_id : String = ""
-csv_file : Nil.class | String = Nil
+csv_file : String? = nil
 
 puts INTRO, VERSION
 
