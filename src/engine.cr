@@ -159,9 +159,7 @@ module Engine
     csv_layout(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
-    unless File.exists?("bulk-data.json")
-      Bulk.bootstrap
-    end
+    Bulk.bootstrap
     puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
