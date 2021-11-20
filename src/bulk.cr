@@ -5,6 +5,11 @@ module Bulk
 
   @@bulk_loaded : Bool = false
 
+  # Returns bulk pull status.
+  def self.bulk_loaded : Bool
+    @@bulk_loaded
+  end
+
   def self.bootstrap : Nil
     if @@bulk_loaded == false
       Puller.update

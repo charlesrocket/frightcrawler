@@ -20,7 +20,9 @@ module Engine
 
     # Sets card attributes and filters bulk data.
     def card_json : Nil
-      Bulk.bootstrap
+      if !Bulk.bulk_loaded
+        Bulk.bootstrap
+      end
       x = 0
       until Bulk.get[x]["id"] == "#{@scry_id}"
         # OPTIMIZE: Not good enough!
