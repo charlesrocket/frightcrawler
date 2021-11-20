@@ -3,5 +3,4 @@
 set -e
 echo "require \"./spec/**\"" > run_tests.cr && \
 crystal build -D extended run_tests.cr && \
-kcov --clean --include-path=$(pwd)/src $(pwd)/coverage ./run_tests && \
-bash <(curl -s https://codecov.io/bash) -s $(pwd)/coverage
+kcov --clean --include-path=$(pwd)/src $(pwd)/coverage ./run_tests
