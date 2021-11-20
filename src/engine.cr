@@ -12,7 +12,7 @@ module Engine
     @card_name : String = ""
     @set_name : String = ""
     @set_code : String = ""
-    @legality_stat : String = ""
+    @legality : String = ""
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
       card_json
@@ -37,7 +37,7 @@ module Engine
     # Prints card summary
     def summary : Nil
       # TODO: Add icons
-      Log.info { "#{game_format}: #{legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
+      Log.info { "#{game_format}: #{legality} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
       puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
     end
 
@@ -62,27 +62,27 @@ module Engine
     end
 
     # Returns card legality status.
-    def legality_stat : String
-      @legality_stat
+    def legality : String
+      @legality
     end
 
     # Sets legality status.
     def legalities : Colorize::Object(Symbol)
       case
       when @card_bulk["legalities"][@game_format] == "legal"
-        @legality_stat = "LEGAL"
+        @legality = "LEGAL"
         Counter.legal("#{@quantity}".to_i)
         :"  Legal   ".colorize(:green)
       when @card_bulk["legalities"][@game_format] == "not_legal"
-        @legality_stat = "NOT LEGAL"
+        @legality = "NOT LEGAL"
         Counter.not_legal("#{@quantity}".to_i)
         :"Not legal ".colorize(:red)
       when @card_bulk["legalities"][@game_format] == "restricted"
-        @legality_stat = "RESTRICTED"
+        @legality = "RESTRICTED"
         Counter.restricted("#{@quantity}".to_i)
         :"  Restr   ".colorize(:blue)
       when @card_bulk["legalities"][@game_format] == "banned"
-        @legality_stat = "BANNED"
+        @legality = "BANNED"
         Counter.banned("#{@quantity}".to_i)
         :"   BAN    ".colorize(:red)
       else
