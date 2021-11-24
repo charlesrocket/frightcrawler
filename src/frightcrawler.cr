@@ -1,3 +1,4 @@
+require "sqlite3"
 require "http/client"
 require "option_parser"
 require "colorize"
