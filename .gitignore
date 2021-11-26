@@ -1,4 +1,4 @@
-bulk-data.json
+db.sqlite
 frightcrawler
 *.csv
 *.log
