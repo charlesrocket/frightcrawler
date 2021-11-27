@@ -8,6 +8,7 @@ require "log"
 
 require "./bulk"
 require "./counter"
+require "./db"
 require "./engine"
 
 # :nodoc:
