@@ -7,12 +7,11 @@ module Engine
   # Generates card summary
   struct Crawler
     getter game_format : String, scry_id : String, foil_status : String, quantity : String
-
-    @card_bulk : JSON::Any = JSON::Any.new("")
     @card_name : String = ""
     @set_name : String = ""
     @set_code : String = ""
     @legality : String = ""
+    @card_bulk : String = "foo"
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
       card_json
@@ -20,18 +19,17 @@ module Engine
 
     # Sets card attributes and filters bulk data.
     def card_json : Nil
-      if !Bulk.bulk_loaded
-        Bulk.bootstrap
-      end
-      x = 0
-      until Bulk.get[x]["id"] == "#{@scry_id}"
-        # OPTIMIZE: Not good enough!
-        x += 1
-      end
-      @card_bulk = Bulk.get[x]
-      @card_name = "#{@card_bulk["name"]}"
-      @set_name = "#{@card_bulk["set_name"]}"
-      @set_code = "#{@card_bulk["set"].to_s.upcase.colorize.mode(:underline)}"
+      db = DB.open "sqlite3://./frightcrawler.db"
+      
+      puts db.query_one("SELECT * from cards where id = ?", @scry_id) { |rs| Database::Cards.from_rs rs }
+
+      #@card_name =
+      #@set_name =
+      #@set_code = "#{cards.set_code.upcase.colorize.mode(:underline)}"
+      puts @card_name
+
+      db.close
+      exit
     end
 
     # Prints card summary
@@ -39,11 +37,6 @@ module Engine
       # TODO: Add icons
       Log.info { "#{game_format}: #{legality} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
       puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
-    end
-
-    # Returns card bulk data.
-    def card_bulk : JSON::Any
-      @card_bulk
     end
 
     # Returns card name.
@@ -161,7 +154,6 @@ module Engine
     csv_layout(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
-    Bulk.bootstrap
     puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
