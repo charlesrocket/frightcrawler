@@ -8,30 +8,25 @@ module Engine
   struct Crawler
     getter game_format : String, scry_id : String, foil_status : String, quantity : String
 
-    @card_bulk : JSON::Any = JSON::Any.new("")
     @card_name : String = ""
     @set_name : String = ""
     @set_code : String = ""
     @legality : String = ""
+    @rarity : String = ""
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
-      card_json
+      card_query
     end
 
-    # Sets card attributes and filters bulk data.
-    def card_json : Nil
-      if !Bulk.bulk_loaded
-        Bulk.bootstrap
+    # Sets card attributes.
+    def card_query : Nil
+      DB.open "sqlite3://./frightcrawler.db" do |db|
+        db_card = db.query_one "SELECT * from cards where id = ?", "#{@scry_id}", as: Database::Cards
+        @card_name = db_card.name
+        @set_name = db_card.set_name
+        @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
+        @rarity = db_card.rarity
       end
-      x = 0
-      until Bulk.get[x]["id"] == "#{@scry_id}"
-        # OPTIMIZE: Not good enough!
-        x += 1
-      end
-      @card_bulk = Bulk.get[x]
-      @card_name = "#{@card_bulk["name"]}"
-      @set_name = "#{@card_bulk["set_name"]}"
-      @set_code = "#{@card_bulk["set"].to_s.upcase.colorize.mode(:underline)}"
     end
 
     # Prints card summary
@@ -39,11 +34,6 @@ module Engine
       # TODO: Add icons
       Log.info { "#{game_format}: #{legality} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
       puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
-    end
-
-    # Returns card bulk data.
-    def card_bulk : JSON::Any
-      @card_bulk
     end
 
     # Returns card name.
@@ -68,47 +58,50 @@ module Engine
 
     # Sets legality status.
     def legalities : Colorize::Object(Symbol)
-      case
-      when @card_bulk["legalities"][@game_format] == "legal"
-        @legality = "LEGAL"
-        Counter.legal("#{@quantity}".to_i)
-        :"  Legal   ".colorize(:green)
-      when @card_bulk["legalities"][@game_format] == "not_legal"
-        @legality = "NOT LEGAL"
-        Counter.not_legal("#{@quantity}".to_i)
-        :"Not legal ".colorize(:red)
-      when @card_bulk["legalities"][@game_format] == "restricted"
-        @legality = "RESTRICTED"
-        Counter.restricted("#{@quantity}".to_i)
-        :"  Restr   ".colorize(:blue)
-      when @card_bulk["legalities"][@game_format] == "banned"
-        @legality = "BANNED"
-        Counter.banned("#{@quantity}".to_i)
-        :"   BAN    ".colorize(:red)
-      else
-        raise "ERROR: legalities"
+      DB.open "sqlite3://./frightcrawler.db" do |db|
+        db_legality = db.query_one "SELECT legality_#{@game_format} from cards where id = ?", @scry_id, as: String
+        case
+        when db_legality == "legal"
+          @legality = "LEGAL"
+          Counter.legal("#{@quantity}".to_i)
+          :"  Legal   ".colorize(:green)
+        when db_legality == "not_legal"
+          @legality = "NOT LEGAL"
+          Counter.not_legal("#{@quantity}".to_i)
+          :"Not legal ".colorize(:red)
+        when db_legality == "restricted"
+          @legality = "RESTRICTED"
+          Counter.restricted("#{@quantity}".to_i)
+          :"  Restr   ".colorize(:blue)
+        when db_legality == "banned"
+          @legality = "BANNED"
+          Counter.banned("#{@quantity}".to_i)
+          :"   BAN    ".colorize(:red)
+        else
+          raise "ERROR: legalities"
+        end
       end
     end
 
     # Sets rarity status.
     def rarities : Colorize::Object(Symbol)
       case
-      when @card_bulk["rarity"] == "common"
+      when @rarity == "common"
         Counter.common("#{@quantity}".to_i)
         :C.colorize(:white)
-      when @card_bulk["rarity"] == "uncommon"
+      when @rarity == "uncommon"
         Counter.uncommon("#{@quantity}".to_i)
         :U.colorize(:cyan)
-      when @card_bulk["rarity"] == "rare"
+      when @rarity == "rare"
         Counter.rare("#{@quantity}".to_i)
         :R.colorize(:light_yellow)
-      when @card_bulk["rarity"] == "special"
+      when @rarity == "special"
         Counter.special("#{@quantity}".to_i)
         :S.colorize(:yellow)
-      when @card_bulk["rarity"] == "mythic"
+      when @rarity == "mythic"
         Counter.mythic("#{@quantity}".to_i)
         :M.colorize(:magenta)
-      when @card_bulk["rarity"] == "bonus"
+      when @rarity == "bonus"
         Counter.bonus("#{@quantity}".to_i)
         :B.colorize(:light_blue)
       else
@@ -161,7 +154,6 @@ module Engine
     csv_layout(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
-    Bulk.bootstrap
     puts "\n  * Reading CSV file ...", "\n"
     cardlist.each do |entry|
       row = entry.row.to_a
@@ -177,6 +169,7 @@ module Engine
       end
       Counter.total("#{card.quantity}".to_i)
       Counter.unique
+      sleep 0.001
       card.summary
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }

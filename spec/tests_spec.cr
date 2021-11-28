@@ -1,15 +1,7 @@
 require "./spec_helper"
 
+Spec.before_suite { Database.sync }
 Spec.before_each { reset }
-
-describe Bulk::Puller, tags: "api" do
-  describe ".update" do
-    it "downloads bulk data" do
-      Bulk::Puller.update
-      File.exists?("bulk-data.json").should be_true
-    end
-  end
-end
 
 describe Counter do
   describe ".get_total" do
