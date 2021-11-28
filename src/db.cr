@@ -45,55 +45,22 @@ module Database
   struct Legalities
     include JSON::Serializable
 
-    @[JSON::Field(key: "standard")]
     getter standard : String
-
-    @[JSON::Field(key: "future")]
     getter future : String
-
-    @[JSON::Field(key: "historic")]
     getter historic : String
-
-    @[JSON::Field(key: "gladiator")]
     getter gladiator : String
-
-    @[JSON::Field(key: "pioneer")]
     getter pioneer : String
-
-    @[JSON::Field(key: "modern")]
     getter modern : String
-
-    @[JSON::Field(key: "legacy")]
     getter legacy : String
-
-    @[JSON::Field(key: "pauper")]
     getter pauper : String
-
-    @[JSON::Field(key: "vintage")]
     getter vintage : String
-
-    @[JSON::Field(key: "penny")]
     getter penny : String
-
-    @[JSON::Field(key: "commander")]
     getter commander : String
-
-    @[JSON::Field(key: "brawl")]
     getter brawl : String
-
-    @[JSON::Field(key: "historicbrawl")]
     getter historicbrawl : String
-
-    @[JSON::Field(key: "paupercommander")]
     getter paupercommander : String
-
-    @[JSON::Field(key: "duel")]
     getter duel : String
-
-    @[JSON::Field(key: "oldschool")]
     getter oldschool : String
-
-    @[JSON::Field(key: "premodern")]
     getter premodern : String
   end
 
