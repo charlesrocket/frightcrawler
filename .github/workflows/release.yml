@@ -67,3 +67,20 @@ jobs:
             ./artifacts/frightcrawler-linux-x86_64/frightcrawler-linux-x86_64.gz
             ./artifacts/frightcrawler-windows-x86_64/frightcrawler-windows-x86_64.exe
           token: ${{ secrets.RLS_TOKEN }}
+
+  deploy_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+      - name: Install shards
+        run: shards install
+      - name: Build
+        run: crystal docs src/frightcrawler.cr
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          branch: gh-pages
+          folder: docs
+          single-commit: true
