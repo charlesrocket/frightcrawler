@@ -1,3 +1,4 @@
+# Manages DB data.
 module Database
   @@synced = false : Bool
 
@@ -64,16 +65,19 @@ module Database
     getter premodern : String
   end
 
+  # Returns synchronization status.
   def self.synced : Bool | Nil
     @@synced
   end
 
+  # Synchronizes DB.
   def self.sync : Bool | Nil
     if !Database.synced
       Database.update
     end
   end
 
+  # Updates DB data.
   def self.update : Nil
     puts "\n  * Database synchronization ..."
     private insert_sql = <<-SQL
