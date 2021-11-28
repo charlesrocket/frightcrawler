@@ -1,4 +1,6 @@
 module Database
+  @@synced = false : Bool
+
   struct Cards
     include DB::Serializable
 
@@ -95,7 +97,17 @@ module Database
     getter premodern : String
   end
 
-  def self.sync
+  def self.synced : Bool | Nil
+    @@synced
+  end
+
+  def self.sync : Bool | Nil
+    if !Database.synced
+      Database.update
+    end
+  end
+
+  def self.update : Nil
     puts "\n  * Database synchronization ..."
     private insert_sql = <<-SQL
     INSERT OR IGNORE INTO "cards" ("id", "name", "set_name", "set_code", "rarity", "legality_standard", "legality_future",
@@ -145,9 +157,9 @@ module Database
           )
         end
       end
-
       db.exec "COMMIT;"
     end
+    @@synced = true
+    puts "\n  * Database synchronized"
   end
-  puts "\n  * Database synchronized"
 end
