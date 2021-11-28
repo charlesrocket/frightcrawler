@@ -20,12 +20,12 @@ module Engine
     # Sets card attributes and filters bulk data.
     def card_json : Nil
       db = DB.open "sqlite3://./frightcrawler.db"
-      
+
       puts db.query_one("SELECT * from cards where id = ?", @scry_id) { |rs| Database::Cards.from_rs rs }
 
-      #@card_name =
-      #@set_name =
-      #@set_code = "#{cards.set_code.upcase.colorize.mode(:underline)}"
+      # @card_name =
+      # @set_name =
+      # @set_code = "#{cards.set_code.upcase.colorize.mode(:underline)}"
       puts @card_name
 
       db.close
