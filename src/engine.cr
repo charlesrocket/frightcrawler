@@ -11,25 +11,56 @@ module Engine
     @set_name : String = ""
     @set_code : String = ""
     @legality : String = ""
-    @card_bulk : String = "foo"
+    @rarity : String = ""
+
+    @legality_standard : String = ""
+    @legality_future : String = ""
+    @legality_historic : String = ""
+    @legality_gladiator : String = ""
+    @legality_pioneer : String = ""
+    @legality_modern : String = ""
+    @legality_legacy : String = ""
+    @legality_pauper : String = ""
+    @legality_vintage : String = ""
+    @legality_penny : String = ""
+    @legality_commander : String = ""
+    @legality_brawl : String = ""
+    @legality_historicbrawl : String = ""
+    @legality_paupercommander : String = ""
+    @legality_duel : String = ""
+    @legality_oldschool : String = ""
+    @legality_premodern : String = ""
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
-      card_json
+      card_query
     end
 
     # Sets card attributes and filters bulk data.
-    def card_json : Nil
-      db = DB.open "sqlite3://./frightcrawler.db"
-
-      puts db.query_one("SELECT * from cards where id = ?", @scry_id) { |rs| Database::Cards.from_rs rs }
-
-      # @card_name =
-      # @set_name =
-      # @set_code = "#{cards.set_code.upcase.colorize.mode(:underline)}"
-      puts @card_name
-
-      db.close
-      exit
+    def card_query : Nil
+      DB.open "sqlite3://./frightcrawler.db" do |db|
+        db_card = db.query_one "SELECT * from cards where id = ?", "#{@scry_id}", as: Database::Cards
+        @card_name = db_card.name
+        @set_name = db_card.set_name
+        @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
+        @rarity = db_card.rarity
+        @legality_standard = db_card.legality_standard
+        @legality_future = db_card.legality_future
+        @legality_historic = db_card.legality_historic
+        @legality_gladiator = db_card.legality_gladiator
+        @legality_pioneer = db_card.legality_pioneer
+        @legality_modern = db_card.legality_modern
+        @legality_legacy = db_card.legality_legacy
+        @legality_pauper = db_card.legality_pauper
+        @legality_vintage = db_card.legality_vintage
+        @legality_penny = db_card.legality_penny
+        @legality_commander = db_card.legality_commander
+        @legality_brawl = db_card.legality_brawl
+        @legality_historicbrawl = db_card.legality_historicbrawl
+        @legality_paupercommander = db_card.legality_paupercommander
+        @legality_duel = db_card.legality_duel
+        @legality_oldschool = db_card.legality_oldschool
+        @legality_premodern = db_card.legality_premodern
+      end
     end
 
     # Prints card summary
@@ -61,47 +92,50 @@ module Engine
 
     # Sets legality status.
     def legalities : Colorize::Object(Symbol)
-      case
-      when @card_bulk["legalities"][@game_format] == "legal"
-        @legality = "LEGAL"
-        Counter.legal("#{@quantity}".to_i)
-        :"  Legal   ".colorize(:green)
-      when @card_bulk["legalities"][@game_format] == "not_legal"
-        @legality = "NOT LEGAL"
-        Counter.not_legal("#{@quantity}".to_i)
-        :"Not legal ".colorize(:red)
-      when @card_bulk["legalities"][@game_format] == "restricted"
-        @legality = "RESTRICTED"
-        Counter.restricted("#{@quantity}".to_i)
-        :"  Restr   ".colorize(:blue)
-      when @card_bulk["legalities"][@game_format] == "banned"
-        @legality = "BANNED"
-        Counter.banned("#{@quantity}".to_i)
-        :"   BAN    ".colorize(:red)
-      else
-        raise "ERROR: legalities"
+      DB.open "sqlite3://./frightcrawler.db" do |db|
+        db_legality = db.query_one "SELECT legality_#{@game_format} from cards where id = ?", @scry_id, as: String
+        case
+        when db_legality == "legal"
+          @legality = "LEGAL"
+          Counter.legal("#{@quantity}".to_i)
+          :"  Legal   ".colorize(:green)
+        when db_legality == "not_legal"
+          @legality = "NOT LEGAL"
+          Counter.not_legal("#{@quantity}".to_i)
+          :"Not legal ".colorize(:red)
+        when db_legality == "restricted"
+          @legality = "RESTRICTED"
+          Counter.restricted("#{@quantity}".to_i)
+          :"  Restr   ".colorize(:blue)
+        when db_legality == "banned"
+          @legality = "BANNED"
+          Counter.banned("#{@quantity}".to_i)
+          :"   BAN    ".colorize(:red)
+        else
+          raise "ERROR: legalities"
+        end
       end
     end
 
     # Sets rarity status.
     def rarities : Colorize::Object(Symbol)
       case
-      when @card_bulk["rarity"] == "common"
+      when @rarity == "common"
         Counter.common("#{@quantity}".to_i)
         :C.colorize(:white)
-      when @card_bulk["rarity"] == "uncommon"
+      when @rarity == "uncommon"
         Counter.uncommon("#{@quantity}".to_i)
         :U.colorize(:cyan)
-      when @card_bulk["rarity"] == "rare"
+      when @rarity == "rare"
         Counter.rare("#{@quantity}".to_i)
         :R.colorize(:light_yellow)
-      when @card_bulk["rarity"] == "special"
+      when @rarity == "special"
         Counter.special("#{@quantity}".to_i)
         :S.colorize(:yellow)
-      when @card_bulk["rarity"] == "mythic"
+      when @rarity == "mythic"
         Counter.mythic("#{@quantity}".to_i)
         :M.colorize(:magenta)
-      when @card_bulk["rarity"] == "bonus"
+      when @rarity == "bonus"
         Counter.bonus("#{@quantity}".to_i)
         :B.colorize(:light_blue)
       else
@@ -169,6 +203,7 @@ module Engine
       end
       Counter.total("#{card.quantity}".to_i)
       Counter.unique
+      sleep 0.001
       card.summary
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
