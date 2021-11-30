@@ -71,7 +71,7 @@ module Database
   end
 
   # Synchronizes DB.
-  def self.sync : Bool | Nil
+  def self.sync : Nil
     if !Database.synced
       Database.update
     end
