@@ -22,6 +22,15 @@ describe Counter do
   end
 end
 
+describe Database do
+  describe ".sync" do
+    it "Synchronizes DB" do
+      Database.sync
+      Database.synced.should be_true
+    end
+  end
+end
+
 describe Engine do
   describe Engine::Crawler, tags: ["api", "crawler"] do
     describe "#legalities" do
