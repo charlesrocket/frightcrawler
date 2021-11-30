@@ -151,6 +151,7 @@ module Engine
 
   # Validates CSV file against provided format.
   def self.validate_csv(file, game_format) : String
+    puts "\n  * Using #{game_format} format list"
     csv_layout(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)

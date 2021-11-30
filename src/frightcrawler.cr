@@ -57,10 +57,6 @@ if !sf_id.empty?
   puts Engine.card_info("#{sf_id}")
 end
 
-if game_format_in != ""
-  puts "\n  * Using #{game_format_in} format list"
-end
-
 # :nodoc:
 T1 = Time.monotonic
 
