@@ -67,8 +67,8 @@ module Engine
     # Prints card summary
     def summary : Nil
       # TODO: Add icons
-      Log.info { "#{game_format}: #{legality} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
-      puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      Log.info { "#{game_format}: #{legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
+      puts "▓▒░░░  #{legality_stat} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
     end
 
     # Returns card name.
@@ -92,29 +92,51 @@ module Engine
     end
 
     # Sets legality status.
-    def legalities : Colorize::Object(Symbol)
-      DB.open "sqlite3://./frightcrawler.db" do |db|
-        db_legality = db.query_one "SELECT legality_#{@game_format} from cards where id = ?", @scry_id, as: String
-        case
-        when db_legality == "legal"
-          @legality = "LEGAL"
-          Counter.legal("#{@quantity}".to_i)
-          :"  Legal   ".colorize(:green)
-        when db_legality == "not_legal"
-          @legality = "NOT LEGAL"
-          Counter.not_legal("#{@quantity}".to_i)
-          :"Not legal ".colorize(:red)
-        when db_legality == "restricted"
-          @legality = "RESTRICTED"
-          Counter.restricted("#{@quantity}".to_i)
-          :"  Restr   ".colorize(:blue)
-        when db_legality == "banned"
-          @legality = "BANNED"
-          Counter.banned("#{@quantity}".to_i)
-          :"   BAN    ".colorize(:red)
-        else
-          raise "ERROR: legalities"
-        end
+    def legality_stat : Colorize::Object(Symbol)
+      case
+      when legalities(@game_format) == "legal"
+        @legality = "LEGAL"
+        Counter.legal("#{@quantity}".to_i)
+        :"  Legal   ".colorize(:green)
+      when legalities(@game_format) == "not_legal"
+        @legality = "NOT LEGAL"
+        Counter.not_legal("#{@quantity}".to_i)
+        :"Not legal ".colorize(:red)
+      when legalities(@game_format) == "restricted"
+        @legality = "RESTRICTED"
+        Counter.restricted("#{@quantity}".to_i)
+        :"  Restr   ".colorize(:blue)
+      when legalities(@game_format) == "banned"
+        @legality = "BANNED"
+        Counter.banned("#{@quantity}".to_i)
+        :"   BAN    ".colorize(:red)
+      else
+        raise "ERROR: legality_stat"
+      end
+    end
+
+    # Sets legality status.
+    def legalities(for @game_format) : String
+      case @game_format
+      when "standard" then @legality_standard
+      when "future" then @legality_future
+      when "historic" then @legality_historic
+      when "gladiator" then @legality_gladiator
+      when "pioneer" then @legality_pioneer
+      when "modern" then @legality_modern
+      when "legacy" then @legality_legacy
+      when "pauper" then @legality_pauper
+      when "vintage" then @legality_vintage
+      when "penny" then @legality_penny
+      when "commander" then @legality_commander
+      when "brawl" then @legality_brawl
+      when "historicbrawl" then @legality_historicbrawl
+      when "paupercommander" then @legality_paupercommander
+      when "duel" then @legality_duel
+      when "oldschool" then @legality_oldschool
+      when "premodern" then @legality_premodern
+      else
+        raise "ERROR: Unsupported format '#{@game_format}'."
       end
     end
 
