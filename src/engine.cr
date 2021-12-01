@@ -119,23 +119,23 @@ module Engine
     # Sets legality format.
     def legalities(for @game_format) : String
       case @game_format
-      when "standard" then @legality_standard
-      when "future" then @legality_future
-      when "historic" then @legality_historic
-      when "gladiator" then @legality_gladiator
-      when "pioneer" then @legality_pioneer
-      when "modern" then @legality_modern
-      when "legacy" then @legality_legacy
-      when "pauper" then @legality_pauper
-      when "vintage" then @legality_vintage
-      when "penny" then @legality_penny
-      when "commander" then @legality_commander
-      when "brawl" then @legality_brawl
-      when "historicbrawl" then @legality_historicbrawl
+      when "standard"        then @legality_standard
+      when "future"          then @legality_future
+      when "historic"        then @legality_historic
+      when "gladiator"       then @legality_gladiator
+      when "pioneer"         then @legality_pioneer
+      when "modern"          then @legality_modern
+      when "legacy"          then @legality_legacy
+      when "pauper"          then @legality_pauper
+      when "vintage"         then @legality_vintage
+      when "penny"           then @legality_penny
+      when "commander"       then @legality_commander
+      when "brawl"           then @legality_brawl
+      when "historicbrawl"   then @legality_historicbrawl
       when "paupercommander" then @legality_paupercommander
-      when "duel" then @legality_duel
-      when "oldschool" then @legality_oldschool
-      when "premodern" then @legality_premodern
+      when "duel"            then @legality_duel
+      when "oldschool"       then @legality_oldschool
+      when "premodern"       then @legality_premodern
       else
         raise "ERROR: Unsupported format '#{@game_format}'."
       end
