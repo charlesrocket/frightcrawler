@@ -116,7 +116,7 @@ module Engine
       end
     end
 
-    # Sets legality status.
+    # Sets legality format.
     def legalities(for @game_format) : String
       case @game_format
       when "standard" then @legality_standard
