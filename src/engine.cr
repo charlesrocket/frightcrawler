@@ -14,6 +14,24 @@ module Engine
     @legality : String = ""
     @rarity : String = ""
 
+    @legality_standard : String = ""
+    @legality_future : String = ""
+    @legality_historic : String = ""
+    @legality_gladiator : String = ""
+    @legality_pioneer : String = ""
+    @legality_modern : String = ""
+    @legality_legacy : String = ""
+    @legality_pauper : String = ""
+    @legality_vintage : String = ""
+    @legality_penny : String = ""
+    @legality_commander : String = ""
+    @legality_brawl : String = ""
+    @legality_historicbrawl : String = ""
+    @legality_paupercommander : String = ""
+    @legality_duel : String = ""
+    @legality_oldschool : String = ""
+    @legality_premodern : String = ""
+
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
       card_query
     end
@@ -26,6 +44,23 @@ module Engine
         @set_name = db_card.set_name
         @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
         @rarity = db_card.rarity
+        @legality_standard = db_card.legality_standard
+        @legality_future = db_card.legality_future
+        @legality_historic = db_card.legality_historic
+        @legality_gladiator = db_card.legality_gladiator
+        @legality_pioneer = db_card.legality_pioneer
+        @legality_modern = db_card.legality_modern
+        @legality_legacy = db_card.legality_legacy
+        @legality_pauper = db_card.legality_pauper
+        @legality_vintage = db_card.legality_vintage
+        @legality_penny = db_card.legality_penny
+        @legality_commander = db_card.legality_commander
+        @legality_brawl = db_card.legality_brawl
+        @legality_historicbrawl = db_card.legality_historicbrawl
+        @legality_paupercommander = db_card.legality_paupercommander
+        @legality_duel = db_card.legality_duel
+        @legality_oldschool = db_card.legality_oldschool
+        @legality_premodern = db_card.legality_premodern
       end
     end
 
