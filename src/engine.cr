@@ -117,7 +117,7 @@ module Engine
     end
 
     # Sets legality format.
-    def legalities(for @game_format) : String
+    def legalities(for @game_format) : String # ameba:disable Metrics/CyclomaticComplexity
       case @game_format
       when "standard"        then @legality_standard
       when "future"          then @legality_future
