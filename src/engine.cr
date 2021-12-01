@@ -6,62 +6,18 @@ module Engine
 
   # Generates card summary
   struct Crawler
-    getter game_format : String, scry_id : String, foil_status : String, quantity : String
+    getter game_format : String
+    getter scry_id : String
+    getter foil_status : String
+    getter quantity : String
+    getter legality : String
 
-    @card_name : String = ""
-    @set_name : String = ""
-    @set_code : String = ""
-    @rarity : String = ""
-    @legality : String = ""
+    @card : Database::Cards
 
-    @legality_standard : String = ""
-    @legality_future : String = ""
-    @legality_historic : String = ""
-    @legality_gladiator : String = ""
-    @legality_pioneer : String = ""
-    @legality_modern : String = ""
-    @legality_legacy : String = ""
-    @legality_pauper : String = ""
-    @legality_vintage : String = ""
-    @legality_penny : String = ""
-    @legality_commander : String = ""
-    @legality_brawl : String = ""
-    @legality_historicbrawl : String = ""
-    @legality_paupercommander : String = ""
-    @legality_duel : String = ""
-    @legality_oldschool : String = ""
-    @legality_premodern : String = ""
-
-    def initialize(@game_format, @scry_id, @foil_status, @quantity)
-      card_query
-    end
-
-    # Sets card attributes.
-    def card_query : Nil
+    def initialize(@game_format : String, @scry_id : String, @foil_status : String, @quantity : String)
       DB.open "sqlite3://./frightcrawler.db" do |db|
-        db_card = db.query_one "SELECT * from cards where id = ?", "#{@scry_id}", as: Database::Cards
-        @card_name = db_card.name
-        @set_name = db_card.set_name
-        @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
-        @rarity = db_card.rarity
-
-        @legality_standard = db_card.legality_standard
-        @legality_future = db_card.legality_future
-        @legality_historic = db_card.legality_historic
-        @legality_gladiator = db_card.legality_gladiator
-        @legality_pioneer = db_card.legality_pioneer
-        @legality_modern = db_card.legality_modern
-        @legality_legacy = db_card.legality_legacy
-        @legality_pauper = db_card.legality_pauper
-        @legality_vintage = db_card.legality_vintage
-        @legality_penny = db_card.legality_penny
-        @legality_commander = db_card.legality_commander
-        @legality_brawl = db_card.legality_brawl
-        @legality_historicbrawl = db_card.legality_historicbrawl
-        @legality_paupercommander = db_card.legality_paupercommander
-        @legality_duel = db_card.legality_duel
-        @legality_oldschool = db_card.legality_oldschool
-        @legality_premodern = db_card.legality_premodern
+        @card = db.query_one "SELECT * from cards where id = ?", "#{@scry_id}", as: Database::Cards
+        @legality = @card.legality @game_format
       end
     end
 
@@ -72,72 +28,23 @@ module Engine
       puts "▓▒░░░  #{legality_stat} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
     end
 
-    # Returns card name.
-    def card_name : String
-      @card_name
-    end
-
-    # Returns card set name.
-    def set_name : String
-      @set_name
-    end
-
-    # Returns card set code.
-    def set_code : String
-      @set_code
-    end
-
-    # Returns card legality status.
-    def legality : String
-      @legality
-    end
-
     # Sets legality status.
     def legality_stat : Colorize::Object(Symbol)
-      case
-      when legalities(@game_format) == "legal"
-        @legality = "LEGAL"
+      case @legality
+      when "LEGAL"
         Counter.legal("#{@quantity}".to_i)
         :"  Legal   ".colorize(:green)
-      when legalities(@game_format) == "not_legal"
-        @legality = "NOT LEGAL"
+      when "NOT LEGAL"
         Counter.not_legal("#{@quantity}".to_i)
         :"Not legal ".colorize(:red)
-      when legalities(@game_format) == "restricted"
-        @legality = "RESTRICTED"
+      when "RESTRICTED"
         Counter.restricted("#{@quantity}".to_i)
         :"  Restr   ".colorize(:blue)
-      when legalities(@game_format) == "banned"
-        @legality = "BANNED"
+      when "BANNED"
         Counter.banned("#{@quantity}".to_i)
         :"   BAN    ".colorize(:red)
       else
         raise "ERROR: legality_stat"
-      end
-    end
-
-    # Sets legality format.
-    def legalities(for @game_format) : String # ameba:disable Metrics/CyclomaticComplexity
-      case @game_format
-      when "standard"        then @legality_standard
-      when "future"          then @legality_future
-      when "historic"        then @legality_historic
-      when "gladiator"       then @legality_gladiator
-      when "pioneer"         then @legality_pioneer
-      when "modern"          then @legality_modern
-      when "legacy"          then @legality_legacy
-      when "pauper"          then @legality_pauper
-      when "vintage"         then @legality_vintage
-      when "penny"           then @legality_penny
-      when "commander"       then @legality_commander
-      when "brawl"           then @legality_brawl
-      when "historicbrawl"   then @legality_historicbrawl
-      when "paupercommander" then @legality_paupercommander
-      when "duel"            then @legality_duel
-      when "oldschool"       then @legality_oldschool
-      when "premodern"       then @legality_premodern
-      else
-        raise "ERROR: Unsupported format '#{@game_format}'."
       end
     end
 
