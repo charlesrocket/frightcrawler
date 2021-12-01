@@ -33,10 +33,10 @@ end
 
 describe Engine do
   describe Engine::Crawler, tags: ["api", "crawler"] do
-    describe "#legalities" do
+    describe "#legality_stat" do
       it "returns legality status" do
         card = Engine::Crawler.new "legacy", "bd1751ca-4945-4071-87f1-9d5f282c35f0", "foil", "2"
-        card.legalities.should eq(:"  Legal   ".colorize(:green))
+        card.legality_stat.should eq(:"  Legal   ".colorize(:green))
       end
     end
 
