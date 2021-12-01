@@ -11,8 +11,8 @@ module Engine
     @card_name : String = ""
     @set_name : String = ""
     @set_code : String = ""
-    @legality : String = ""
     @rarity : String = ""
+    @legality : String = ""
 
     @legality_standard : String = ""
     @legality_future : String = ""
@@ -44,6 +44,7 @@ module Engine
         @set_name = db_card.set_name
         @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
         @rarity = db_card.rarity
+
         @legality_standard = db_card.legality_standard
         @legality_future = db_card.legality_future
         @legality_historic = db_card.legality_historic
@@ -202,7 +203,7 @@ module Engine
       puts "\n  * AetherHub CSV file loaded"
       "aetherhub file"
     else
-      raise "Unsupported CSV layout"
+      raise "ERROR: Unsupported CSV layout"
     end
   end
 
