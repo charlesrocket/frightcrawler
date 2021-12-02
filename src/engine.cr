@@ -6,7 +6,10 @@ module Engine
 
   # Generates card summary
   struct Crawler
-    getter game_format : String, scry_id : String, foil_status : String, quantity : String
+    getter game_format : String
+    getter scry_id : String
+    getter foil_status : String
+    getter quantity : String
 
     @card_name : String = ""
     @set_name : String = ""
@@ -68,8 +71,8 @@ module Engine
     # Prints card summary
     def summary : Nil
       # TODO: Add icons
-      Log.info { "#{game_format}: #{legality_stat} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
-      puts "▓▒░░░  #{legality_stat} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
+      Log.info { "#{@game_format}: #{@legality} #{@card_name} ◄ #{@set_name} ► ⑇ #{@quantity}" }
+      puts "▓▒░░░  #{legality_stat} #{foils} #{rarities} #{@card_name} ⬡ #{@set_name} ◄ #{@set_code} ►"
     end
 
     # Returns card name.
