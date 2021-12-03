@@ -36,11 +36,6 @@ module Engine
     @legality_premodern : String = ""
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
-      card_query
-    end
-
-    # Sets card attributes.
-    def card_query : Nil
       DB.open "sqlite3://./frightcrawler.db" do |db|
         db_card = db.query_one "SELECT * from cards where id = ?", "#{@scry_id}", as: Database::Cards
         @card_name = db_card.name
