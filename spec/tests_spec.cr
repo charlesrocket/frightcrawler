@@ -61,6 +61,12 @@ describe Engine do
     end
   end
 
+  describe ".check_format" do
+    it "Checks if provided format is valid." do
+      Engine.check_format("premodern").should be_nil
+    end
+  end
+
   describe ".csv_layout", tags: "csv" do
     it "checks for Helvault CSV file layout" do
       Engine.csv_layout("spec/data/test_hv.csv").should eq("helvault file")
