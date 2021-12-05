@@ -15,6 +15,10 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
+FORMATS = ["standard", "future", "historic", "gladiator", "pioneer", "modern",
+           "legacy", "pauper", "vintage", "penny", "commander", "brawl",
+           "historicbrawl", "paupercommander", "duel", "oldschool", "premodern"]
+
 # :nodoc:
 INTRO = "
 ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
@@ -49,6 +53,13 @@ OptionParser.parse do |parser|
   parser.invalid_option do |flag|
     STDERR.puts "ERROR: #{flag} is not a valid option"
     STDERR.puts parser
+    exit(1)
+  end
+end
+
+if !FORMATS.includes? "#{game_format_in}"
+  if !game_format_in.empty?
+    STDERR.puts "ERROR: Unknown game format #{game_format_in}"
     exit(1)
   end
 end
