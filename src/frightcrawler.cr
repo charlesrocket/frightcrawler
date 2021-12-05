@@ -58,12 +58,7 @@ OptionParser.parse do |parser|
   end
 end
 
-if !FORMATS.includes? "#{game_format_in}"
-  if !game_format_in.empty?
-    STDERR.puts "ERROR: Unknown game format #{game_format_in}"
-    exit(1)
-  end
-end
+Engine.check_format(game_format_in)
 
 if !sf_id.empty?
   puts Engine.card_info("#{sf_id}")

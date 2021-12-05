@@ -160,4 +160,13 @@ module Engine
     puts "\n  * Printing card info ..."
     JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}").body).to_pretty_json
   end
+
+  def self.check_format(input)
+    if !FORMATS.includes? "#{input}"
+      if !input.empty?
+        STDERR.puts "ERROR: Unknown game format #{input}"
+        exit(1)
+      end
+    end
+  end
 end
