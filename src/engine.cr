@@ -6,80 +6,56 @@ module Engine
 
   # Generates card summary
   struct Crawler
-    getter game_format : String, scry_id : String, foil_status : String, quantity : String
+    getter game_format : String
+    getter scry_id : String
+    getter foil_status : String
+    getter quantity : String
 
     @card_name : String = ""
     @set_name : String = ""
     @set_code : String = ""
-    @legality : String = ""
     @rarity : String = ""
+    @legality : String = ""
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
-      card_query
-    end
-
-    # Sets card attributes.
-    def card_query : Nil
       DB.open "sqlite3://./frightcrawler.db" do |db|
-        db_card = db.query_one "SELECT * from cards where id = ?", "#{@scry_id}", as: Database::Cards
+        db_card = db.query_one "SELECT id, name, set_name, set_code, rarity, legality_#{@game_format} AS legality from cards where id = ?", @scry_id, as: Database::Cards
         @card_name = db_card.name
         @set_name = db_card.set_name
         @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
         @rarity = db_card.rarity
+        @legality = db_card.legality
       end
     end
 
     # Prints card summary
     def summary : Nil
       # TODO: Add icons
-      Log.info { "#{game_format}: #{legality} #{card_name} ◄ #{set_name} ► ⑇ #{quantity}" }
-      puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{card_name} ⬡ #{set_name} ◄ #{set_code} ►"
-    end
-
-    # Returns card name.
-    def card_name : String
-      @card_name
-    end
-
-    # Returns card set name.
-    def set_name : String
-      @set_name
-    end
-
-    # Returns card set code.
-    def set_code : String
-      @set_code
-    end
-
-    # Returns card legality status.
-    def legality : String
-      @legality
+      Log.info { "#{@game_format}: #{@legality} #{@card_name} ◄ #{@set_name} ► ⑇ #{@quantity}" }
+      puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{@card_name} ⬡ #{@set_name} ◄ #{@set_code} ►"
     end
 
     # Sets legality status.
     def legalities : Colorize::Object(Symbol)
-      DB.open "sqlite3://./frightcrawler.db" do |db|
-        db_legality = db.query_one "SELECT legality_#{@game_format} from cards where id = ?", @scry_id, as: String
-        case
-        when db_legality == "legal"
-          @legality = "LEGAL"
-          Counter.legal("#{@quantity}".to_i)
-          :"  Legal   ".colorize(:green)
-        when db_legality == "not_legal"
-          @legality = "NOT LEGAL"
-          Counter.not_legal("#{@quantity}".to_i)
-          :"Not legal ".colorize(:red)
-        when db_legality == "restricted"
-          @legality = "RESTRICTED"
-          Counter.restricted("#{@quantity}".to_i)
-          :"  Restr   ".colorize(:blue)
-        when db_legality == "banned"
-          @legality = "BANNED"
-          Counter.banned("#{@quantity}".to_i)
-          :"   BAN    ".colorize(:red)
-        else
-          raise "ERROR: legalities"
-        end
+      case
+      when @legality == "legal"
+        @legality = "LEGAL"
+        Counter.legal("#{@quantity}".to_i)
+        :"  Legal   ".colorize(:green)
+      when @legality == "not_legal"
+        @legality = "NOT LEGAL"
+        Counter.not_legal("#{@quantity}".to_i)
+        :"Not legal ".colorize(:red)
+      when @legality == "restricted"
+        @legality = "RESTRICTED"
+        Counter.restricted("#{@quantity}".to_i)
+        :"  Restr   ".colorize(:blue)
+      when @legality == "banned"
+        @legality = "BANNED"
+        Counter.banned("#{@quantity}".to_i)
+        :"   BAN    ".colorize(:red)
+      else
+        raise "ERROR: legalities"
       end
     end
 
@@ -105,7 +81,7 @@ module Engine
         Counter.bonus("#{@quantity}".to_i)
         :B.colorize(:light_blue)
       else
-        raise "ERROR: rarity"
+        raise "ERROR: rarities"
       end
     end
 
@@ -121,7 +97,7 @@ module Engine
       when @foil_status == "0", @foil_status == ""
         :△.colorize(:dark_gray)
       else
-        raise "ERROR: foil_status"
+        raise "ERROR: foils"
       end
     end
   end
@@ -145,7 +121,7 @@ module Engine
       puts "\n  * AetherHub CSV file loaded"
       "aetherhub file"
     else
-      raise "Unsupported CSV layout"
+      raise "ERROR: Unsupported CSV layout"
     end
   end
 
