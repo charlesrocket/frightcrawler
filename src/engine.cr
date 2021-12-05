@@ -161,6 +161,7 @@ module Engine
     JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}").body).to_pretty_json
   end
 
+  # Validates provided format.
   def self.check_format(input)
     if !FORMATS.includes? "#{input}"
       if !input.empty?
