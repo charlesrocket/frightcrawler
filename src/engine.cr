@@ -32,11 +32,11 @@ module Engine
     def summary : Nil
       # TODO: Add icons
       Log.info { "#{@game_format}: #{@legality} #{@card_name} ◄ #{@set_name} ► ⑇ #{@quantity}" }
-      puts "▓▒░░░  #{legality_stat} #{foils} #{rarities} #{@card_name} ⬡ #{@set_name} ◄ #{@set_code} ►"
+      puts "▓▒░░░  #{legalities} #{foils} #{rarities} #{@card_name} ⬡ #{@set_name} ◄ #{@set_code} ►"
     end
 
     # Sets legality status.
-    def legality_stat : Colorize::Object(Symbol)
+    def legalities : Colorize::Object(Symbol)
       case
       when @legality == "legal"
         @legality = "LEGAL"
@@ -55,7 +55,7 @@ module Engine
         Counter.banned("#{@quantity}".to_i)
         :"   BAN    ".colorize(:red)
       else
-        raise "ERROR: legality_stat"
+        raise "ERROR: legalities"
       end
     end
 
