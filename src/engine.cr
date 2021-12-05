@@ -81,7 +81,7 @@ module Engine
         Counter.bonus("#{@quantity}".to_i)
         :B.colorize(:light_blue)
       else
-        raise "ERROR: rarity"
+        raise "ERROR: rarities"
       end
     end
 
@@ -97,7 +97,7 @@ module Engine
       when @foil_status == "0", @foil_status == ""
         :△.colorize(:dark_gray)
       else
-        raise "ERROR: foil_status"
+        raise "ERROR: foils"
       end
     end
   end
