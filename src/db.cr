@@ -10,23 +10,7 @@ module Database
     getter set_name : String
     getter set_code : String
     getter rarity : String
-    getter legality_standard : String
-    getter legality_future : String
-    getter legality_historic : String
-    getter legality_gladiator : String
-    getter legality_pioneer : String
-    getter legality_modern : String
-    getter legality_legacy : String
-    getter legality_pauper : String
-    getter legality_vintage : String
-    getter legality_penny : String
-    getter legality_commander : String
-    getter legality_brawl : String
-    getter legality_historicbrawl : String
-    getter legality_paupercommander : String
-    getter legality_duel : String
-    getter legality_oldschool : String
-    getter legality_premodern : String
+    getter legality : String
   end
 
   struct Card
