@@ -22,7 +22,7 @@ describe Counter do
   end
 end
 
-describe Database do
+describe Database, tags: "api" do
   describe ".sync" do
     it "Synchronizes DB" do
       Database.sync
@@ -32,7 +32,7 @@ describe Database do
 end
 
 describe Engine do
-  describe Engine::Crawler, tags: ["api", "crawler"] do
+  describe Engine::Crawler do
     describe "#legalities" do
       it "returns legality status" do
         card = Engine::Crawler.new "legacy", "bd1751ca-4945-4071-87f1-9d5f282c35f0", "foil", "2"
@@ -83,7 +83,7 @@ describe Engine do
     {% end %}
   end
 
-  describe ".validate_csv", tags: ["api", "csv"] do
+  describe ".validate_csv", tags: "csv" do
     it "validates CSV Helvault file against provided game format" do
       Engine.validate_csv("spec/data/test_hv.csv", "vintage").should eq("validated")
     end
