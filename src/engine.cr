@@ -24,7 +24,7 @@ module Engine
         @set_name = db_card.set_name
         @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
         @rarity = db_card.rarity
-        @legality = db_card.legality
+        @legality = db_card.legality.upcase
       end
     end
 
@@ -37,21 +37,17 @@ module Engine
 
     # Sets legality status.
     def legalities : Colorize::Object(Symbol)
-      case
-      when @legality == "legal"
-        @legality = "LEGAL"
+      case @legality
+      when "LEGAL"
         Counter.legal("#{@quantity}".to_i)
         :"  Legal   ".colorize(:green)
-      when @legality == "not_legal"
-        @legality = "NOT LEGAL"
+      when "NOT_LEGAL"
         Counter.not_legal("#{@quantity}".to_i)
         :"Not legal ".colorize(:red)
-      when @legality == "restricted"
-        @legality = "RESTRICTED"
+      when "RESTRICTED"
         Counter.restricted("#{@quantity}".to_i)
         :"  Restr   ".colorize(:blue)
-      when @legality == "banned"
-        @legality = "BANNED"
+      when "BANNED"
         Counter.banned("#{@quantity}".to_i)
         :"   BAN    ".colorize(:red)
       else
@@ -61,23 +57,23 @@ module Engine
 
     # Sets rarity status.
     def rarities : Colorize::Object(Symbol)
-      case
-      when @rarity == "common"
+      case @rarity
+      when "common"
         Counter.common("#{@quantity}".to_i)
         :C.colorize(:white)
-      when @rarity == "uncommon"
+      when "uncommon"
         Counter.uncommon("#{@quantity}".to_i)
         :U.colorize(:cyan)
-      when @rarity == "rare"
+      when "rare"
         Counter.rare("#{@quantity}".to_i)
         :R.colorize(:light_yellow)
-      when @rarity == "special"
+      when "special"
         Counter.special("#{@quantity}".to_i)
         :S.colorize(:yellow)
-      when @rarity == "mythic"
+      when "mythic"
         Counter.mythic("#{@quantity}".to_i)
         :M.colorize(:magenta)
-      when @rarity == "bonus"
+      when "bonus"
         Counter.bonus("#{@quantity}".to_i)
         :B.colorize(:light_blue)
       else
@@ -87,14 +83,14 @@ module Engine
 
     # Sets foil status.
     def foils : Colorize::Object(Symbol)
-      case
-      when @foil_status == "1", @foil_status == "foil"
+      case @foil_status
+      when "1", "foil"
         Counter.foil("#{@quantity}".to_i)
         :▲.colorize(:light_gray)
-      when @foil_status == "etchedFoil"
+      when "etchedFoil"
         Counter.efoil("#{@quantity}".to_i)
         :◭.colorize(:light_gray)
-      when @foil_status == "0", @foil_status == ""
+      when "0", ""
         :△.colorize(:dark_gray)
       else
         raise "ERROR: foils"
