@@ -19,12 +19,12 @@ module Engine
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
       DB.open "sqlite3://./frightcrawler.db" do |db|
-        db_card = db.query_one "SELECT id, name, set_name, set_code, rarity, legality_#{@game_format} AS legality from cards where id = ?", @scry_id, as: Database::Cards
-        @card_name = db_card.name
-        @set_name = db_card.set_name
-        @set_code = "#{db_card.set_code.upcase.colorize.mode(:underline)}"
-        @rarity = db_card.rarity
-        @legality = db_card.legality.upcase
+        card = db.query_one "SELECT id, name, set_name, set_code, rarity, legality_#{@game_format} AS legality from cards where id = ?", @scry_id, as: Database::Cards
+        @card_name = card.name
+        @set_name = card.set_name
+        @set_code = "#{card.set_code.upcase.colorize.mode(:underline)}"
+        @rarity = card.rarity
+        @legality = card.legality.upcase
       end
     end
 
