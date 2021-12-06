@@ -72,6 +72,6 @@ end
 # :nodoc:
 T2 = Time.monotonic
 
-if csv_file == nil && sf_id == "" && game_format_in == ""
+if csv_file == nil && sf_id.empty? && game_format_in.empty?
   puts "\nNo data provided. Exiting."
 end
