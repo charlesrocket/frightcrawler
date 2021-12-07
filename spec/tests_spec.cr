@@ -6,18 +6,15 @@ Spec.before_each { reset }
 describe Counter do
   describe ".get_total" do
     it "counts totals" do
-      Counter.total(2)
-      Counter.total(3)
-      Counter.get_total.should eq(5)
+      Engine.validate_csv("spec/data/test_hv.csv", "legacy")
+      Counter.get_total.should eq(13)
     end
   end
 
   describe ".get_unique" do
     it "counts uniques" do
-      Counter.unique
-      Counter.unique
-      Counter.unique
-      Counter.get_unique.should eq(3)
+      Engine.validate_csv("spec/data/test_hv.csv", "legacy")
+      Counter.get_unique.should eq(9)
     end
   end
 end
