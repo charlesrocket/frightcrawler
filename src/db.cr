@@ -2,6 +2,18 @@
 module Database
   @@synced = false : Bool
 
+  # Returns synchronization status.
+  def self.synced : Bool | Nil
+    @@synced
+  end
+
+  # Synchronizes DB.
+  def self.sync : Nil
+    if !Database.synced
+      Database.update
+    end
+  end
+
   struct Cards
     include DB::Serializable
 
@@ -47,18 +59,6 @@ module Database
     getter duel : String
     getter oldschool : String
     getter premodern : String
-  end
-
-  # Returns synchronization status.
-  def self.synced : Bool | Nil
-    @@synced
-  end
-
-  # Synchronizes DB.
-  def self.sync : Nil
-    if !Database.synced
-      Database.update
-    end
   end
 
   # Updates DB data.
