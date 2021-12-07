@@ -58,9 +58,9 @@ describe Engine do
     end
   end
 
-  describe ".check_format" do
+  describe ".format_check" do
     it "Checks if provided format is valid." do
-      Engine.check_format("premodern").should be_nil
+      Engine.format_check("premodern").should be_nil
     end
   end
 

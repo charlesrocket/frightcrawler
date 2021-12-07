@@ -56,8 +56,6 @@ OptionParser.parse do |parser|
   end
 end
 
-Engine.check_format(game_format_in)
-
 if !sf_id.empty?
   puts Engine.card_info("#{sf_id}")
 end

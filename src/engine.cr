@@ -135,6 +135,7 @@ module Engine
   # Validates CSV file against provided format.
   def self.validate_csv(file, game_format) : Nil
     puts "\n  * Using #{game_format} format list"
+    format_check(game_format)
     csv_layout(file)
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
@@ -166,12 +167,10 @@ module Engine
   end
 
   # Validates provided format.
-  def self.check_format(input)
+  def self.format_check(input)
     if !FORMATS.includes? "#{input}"
-      if !input.empty?
-        STDERR.puts "ERROR: Unknown game format #{input}"
-        exit(1)
-      end
+      STDERR.puts "ERROR: Unknown game format #{input}"
+      exit(1)
     end
   end
 end
