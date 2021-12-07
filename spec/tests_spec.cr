@@ -66,32 +66,35 @@ describe Engine do
 
   describe ".csv_layout", tags: "csv" do
     it "checks for Helvault CSV file layout" do
-      Engine.csv_layout("spec/data/test_hv.csv").should eq("helvault file")
+      Engine.csv_layout("spec/data/test_hv.csv")
+      Engine.helvault.should be_true
     end
 
     it "checks for Helvault Pro CSV file layout" do
-      Engine.csv_layout("spec/data/test_hvp.csv").should eq("helvault pro file")
+      Engine.csv_layout("spec/data/test_hvp.csv")
+      Engine.helvaultpro.should be_true
     end
 
     {% if flag? :extended %}
       it "checks for AetherHub CSV file layout" do
-        Engine.csv_layout("spec/data/test_ah.csv").should eq("aetherhub file")
+        Engine.csv_layout("spec/data/test_ah.csv")
+        Engine.aetherhub.should be_true
       end
     {% end %}
   end
 
   describe ".validate_csv", tags: "csv" do
     it "validates CSV Helvault file against provided game format" do
-      Engine.validate_csv("spec/data/test_hv.csv", "vintage").should eq("validated")
+      Engine.validate_csv("spec/data/test_hv.csv", "vintage").should be_nil
     end
 
     it "validates CSV Helvault Pro file against provided game format" do
-      Engine.validate_csv("spec/data/test_hvp.csv", "legacy").should eq("validated")
+      Engine.validate_csv("spec/data/test_hvp.csv", "legacy").should be_nil
     end
 
     {% if flag? :extended %}
       it "validates CSV AetherHub file against provided game format" do
-        Engine.validate_csv("spec/data/test_ah.csv", "legacy").should eq("validated")
+        Engine.validate_csv("spec/data/test_ah.csv", "legacy").should be_nil
       end
     {% end %}
   end
