@@ -1,8 +1,20 @@
 # Checks CSV files and prints out summary for each line.
 module Engine
-  @@csv_aetherhub : Bool = false
-  @@csv_helvault : Bool = false
-  @@csv_helvaultpro : Bool = false
+  @@aetherhub : Bool = false
+  @@helvault : Bool = false
+  @@helvaultpro : Bool = false
+
+  def self.aetherhub
+    @@aetherhub
+  end
+
+  def self.helvault
+    @@helvault
+  end
+
+  def self.helvaultpro
+    @@helvaultpro
+  end
 
   # Generates card summary
   struct Crawler
@@ -101,30 +113,27 @@ module Engine
   end
 
   # Checks if CSV file is supported.
-  def self.csv_layout(file) : String
-    @@csv_aetherhub = @@csv_helvault = @@csv_helvaultpro = false
+  def self.csv_layout(file) : Bool
+    @@aetherhub = @@helvault = @@helvaultpro = false
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     csv_header = cardlist.headers.to_s
     if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
-      @@csv_helvault = true
       puts "\n  * Helvault CSV file loaded"
-      "helvault file"
+      @@helvault = true
     elsif csv_header.includes? %("collector_number", "estimated_price", "extras", "language")
-      @@csv_helvaultpro = true
       puts "\n  * Helvault Pro CSV file loaded"
-      "helvault pro file"
+      @@helvaultpro = true
     elsif csv_header.includes? %(AetherHub Card Id)
-      @@csv_aetherhub = true
       puts "\n  * AetherHub CSV file loaded"
-      "aetherhub file"
+      @@aetherhub = true
     else
       raise "ERROR: Unsupported CSV layout"
     end
   end
 
   # Validates CSV file against provided format.
-  def self.validate_csv(file, game_format) : String
+  def self.validate_csv(file, game_format) : Nil
     puts "\n  * Using #{game_format} format list"
     csv_layout(file)
     csv_file = File.read(file)
@@ -133,11 +142,11 @@ module Engine
     cardlist.each do |entry|
       row = entry.row.to_a
       case
-      when @@csv_helvault
+      when @@helvault
         card = Crawler.new game_format, row[4], row[0], row[3]
-      when @@csv_helvaultpro
+      when @@helvaultpro
         card = Crawler.new game_format, row[8], row[2], row[6]
-      when @@csv_aetherhub
+      when @@aetherhub
         card = Crawler.new game_format, row[13], row[7], row[6]
       else
         raise "ERROR: csv"
@@ -147,7 +156,6 @@ module Engine
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
     Counter.output
-    "validated"
   end
 
   # Returns card info for provided Scryfall ID.
