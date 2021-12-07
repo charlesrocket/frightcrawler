@@ -4,18 +4,22 @@ Spec.before_suite { Database.sync }
 Spec.before_each { reset }
 
 describe Counter do
-  describe ".get_total" do
-    it "counts totals" do
-      Engine.validate_csv("spec/data/test_hv.csv", "legacy")
-      Counter.get_total.should eq(13)
-    end
-  end
-
-  describe ".get_unique" do
-    it "counts uniques" do
-      Engine.validate_csv("spec/data/test_hv.csv", "legacy")
-      Counter.get_unique.should eq(9)
-    end
+  it "counts attributes" do
+    Engine.validate_csv("spec/data/test_hv.csv", "vintage")
+    Counter.get_unique.should eq(9)
+    Counter.get_total.should eq(13)
+    Counter.get_legal.should eq(10)
+    Counter.get_not_legal.should eq(1)
+    Counter.get_restricted.should eq(1)
+    Counter.get_banned.should eq(1)
+    Counter.get_common.should eq(2)
+    Counter.get_uncommon.should eq(2)
+    Counter.get_rare.should eq(5)
+    Counter.get_special.should eq(1)
+    Counter.get_mythic.should eq(2)
+    Counter.get_bonus.should eq(1)
+    Counter.get_foil.should eq(4)
+    Counter.get_efoil.should eq(1)
   end
 end
 
