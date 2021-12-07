@@ -26,6 +26,8 @@ module Engine
         @rarity = card.rarity
         @legality = card.legality.upcase
       end
+      Counter.total(@quantity.to_i)
+      Counter.unique
     end
 
     # Prints card summary
@@ -140,8 +142,6 @@ module Engine
       else
         raise "ERROR: csv"
       end
-      Counter.total("#{card.quantity}".to_i)
-      Counter.unique
       sleep 0.001
       card.summary
     end
