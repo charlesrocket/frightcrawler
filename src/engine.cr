@@ -16,7 +16,7 @@ module Engine
     @@helvaultpro
   end
 
-  # Generates card summary
+  # Generates card summary.
   struct Crawler
     getter game_format : String
     getter scry_id : String
@@ -42,7 +42,7 @@ module Engine
       Counter.unique
     end
 
-    # Prints card summary
+    # Prints card summary.
     def summary : Nil
       # TODO: Add icons
       Log.info { "#{@game_format}: #{@legality} #{@card_name} ◄ #{@set_name} ► ⑇ #{@quantity}" }
