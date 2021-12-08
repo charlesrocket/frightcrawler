@@ -3,6 +3,14 @@ require "./spec_helper"
 Spec.before_suite { Database.sync }
 Spec.before_each { reset }
 
+describe CLI do
+  describe ".parse" do
+    it "Loads CLI options" do
+      CLI.parse.should be_nil
+    end
+  end
+end
+
 describe Counter do
   it "counts attributes" do
     Engine.validate_csv("spec/data/test_hv.csv", "vintage")
