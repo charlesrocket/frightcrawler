@@ -16,7 +16,7 @@ VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
-# :nodoc:
+# Supported formats.
 FORMATS = ["standard", "future", "historic", "gladiator", "pioneer", "modern", "legacy", "pauper", "vintage", "penny", "commander", "brawl", "historicbrawl", "paupercommander", "duel", "oldschool", "premodern"]
 
 # :nodoc:
