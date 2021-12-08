@@ -37,6 +37,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
       - name: Install dependencies
+        run: apt-get update && apt-get install -y libsqlite3-dev
+      - name: Install shards
         run: shards install
       - name: Build the binary
         run: |
