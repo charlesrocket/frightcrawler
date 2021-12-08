@@ -1,3 +1,4 @@
+# Handles CLI options.
 module CLI
   def self.parse : Nil
     csv_file : String? = nil
