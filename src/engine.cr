@@ -4,15 +4,15 @@ module Engine
   @@helvault : Bool = false
   @@helvaultpro : Bool = false
 
-  def self.aetherhub
+  def self.aetherhub : Bool
     @@aetherhub
   end
 
-  def self.helvault
+  def self.helvault : Bool
     @@helvault
   end
 
-  def self.helvaultpro
+  def self.helvaultpro : Bool
     @@helvaultpro
   end
 
@@ -167,7 +167,7 @@ module Engine
   end
 
   # Validates provided format.
-  def self.format_check(input)
+  def self.format_check(input) : Nil
     if !FORMATS.includes? "#{input}"
       STDERR.puts "ERROR: Unknown game format #{input}"
       exit(1)
