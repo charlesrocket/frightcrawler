@@ -27,11 +27,11 @@ module CLI
     end
 
     if !sf_id.empty?
-      puts Engine.card_info("#{sf_id}")
+      puts Engine.card_info(sf_id)
     end
 
     if csv_file != nil
-      Engine.validate_csv("#{csv_file}", "#{game_format_in}", "#{speed}")
+      Engine.validate_csv("#{csv_file}", game_format_in, speed)
     end
 
     if csv_file == nil && sf_id.empty? && game_format_in.empty?
