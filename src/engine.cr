@@ -133,7 +133,7 @@ module Engine
   end
 
   # Validates CSV file against provided format.
-  def self.validate_csv(file, game_format) : Nil
+  def self.validate_csv(file, game_format, speed) : Nil
     puts "\n  * Using #{game_format} format list"
     format_check(game_format)
     csv_layout(file)
@@ -152,11 +152,24 @@ module Engine
       else
         raise "ERROR: csv"
       end
-      sleep 0.001
+      delay(speed)
       card.summary
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
     Counter.output
+  end
+
+  def self.delay(speed : String = "normal")
+    case speed
+    when "slow"
+      sleep 0.1
+    when "normal"
+      sleep 0.001
+    when "fast"
+    else
+      STDERR.puts "ERROR: Unsupported #{speed} value"
+      exit(1)
+    end
   end
 
   # Returns card info for provided Scryfall ID.
