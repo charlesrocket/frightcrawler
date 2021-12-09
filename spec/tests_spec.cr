@@ -13,7 +13,7 @@ end
 
 describe Counter do
   it "counts attributes" do
-    Engine.validate_csv("spec/data/test_hv.csv", "vintage")
+    Engine.validate_csv("spec/data/test_hv.csv", "vintage", "fast")
     Counter.get_unique.should eq(9)
     Counter.get_total.should eq(13)
     Counter.get_legal.should eq(10)
@@ -97,16 +97,16 @@ describe Engine do
 
   describe ".validate_csv", tags: "csv" do
     it "validates csv helvault file against provided game format" do
-      Engine.validate_csv("spec/data/test_hv.csv", "vintage").should be_nil
+      Engine.validate_csv("spec/data/test_hv.csv", "vintage", "fast").should be_nil
     end
 
     it "validates csv helvault pro file against provided game format" do
-      Engine.validate_csv("spec/data/test_hvp.csv", "legacy").should be_nil
+      Engine.validate_csv("spec/data/test_hvp.csv", "legacy", "slow").should be_nil
     end
 
     {% if flag? :extended %}
       it "validates csv aetherhub file against provided game format" do
-        Engine.validate_csv("spec/data/test_ah.csv", "legacy").should be_nil
+        Engine.validate_csv("spec/data/test_ah.csv", "legacy", "normal").should be_nil
       end
     {% end %}
   end
