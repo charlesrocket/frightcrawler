@@ -159,6 +159,7 @@ module Engine
     Counter.output
   end
 
+  # Sets output delay.
   def self.delay(speed : String = "normal")
     case speed
     when "slow"
