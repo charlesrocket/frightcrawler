@@ -133,7 +133,7 @@ module Engine
   end
 
   # Validates CSV file against provided format.
-  def self.validate_csv(file, game_format, speed) : Nil
+  def self.validate_csv(file, game_format, speed_str) : Nil
     puts "\n  * Using #{game_format} format list"
     format_check(game_format)
     csv_layout(file)
@@ -152,7 +152,7 @@ module Engine
       else
         raise "ERROR: csv"
       end
-      delay(speed)
+      delay(speed_str)
       card.summary
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
