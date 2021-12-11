@@ -160,7 +160,7 @@ module Engine
   end
 
   # Sets output delay.
-  def self.delay(speed : String = "normal") : Nil
+  def self.delay(speed : String) : Nil
     case speed
     when "slow"
       sleep 0.1
