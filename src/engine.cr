@@ -53,16 +53,16 @@ module Engine
     def legalities : Colorize::Object(Symbol)
       case @legality
       when "LEGAL"
-        Counter.legal("#{@quantity}".to_i)
+        Counter.legal(@quantity.to_i)
         :"  Legal   ".colorize(:green)
       when "NOT_LEGAL"
-        Counter.not_legal("#{@quantity}".to_i)
+        Counter.not_legal(@quantity.to_i)
         :"Not legal ".colorize(:red)
       when "RESTRICTED"
-        Counter.restricted("#{@quantity}".to_i)
+        Counter.restricted(@quantity.to_i)
         :"  Restr   ".colorize(:blue)
       when "BANNED"
-        Counter.banned("#{@quantity}".to_i)
+        Counter.banned(@quantity.to_i)
         :"   BAN    ".colorize(:red)
       else
         raise "ERROR: legalities"
@@ -73,22 +73,22 @@ module Engine
     def rarities : Colorize::Object(Symbol)
       case @rarity
       when "common"
-        Counter.common("#{@quantity}".to_i)
+        Counter.common(@quantity.to_i)
         :C.colorize(:white)
       when "uncommon"
-        Counter.uncommon("#{@quantity}".to_i)
+        Counter.uncommon(@quantity.to_i)
         :U.colorize(:cyan)
       when "rare"
-        Counter.rare("#{@quantity}".to_i)
+        Counter.rare(@quantity.to_i)
         :R.colorize(:light_yellow)
       when "special"
-        Counter.special("#{@quantity}".to_i)
+        Counter.special(@quantity.to_i)
         :S.colorize(:yellow)
       when "mythic"
-        Counter.mythic("#{@quantity}".to_i)
+        Counter.mythic(@quantity.to_i)
         :M.colorize(:magenta)
       when "bonus"
-        Counter.bonus("#{@quantity}".to_i)
+        Counter.bonus(@quantity.to_i)
         :B.colorize(:light_blue)
       else
         raise "ERROR: rarities"
@@ -99,10 +99,10 @@ module Engine
     def foils : Colorize::Object(Symbol)
       case @foil_status
       when "1", "foil"
-        Counter.foil("#{@quantity}".to_i)
+        Counter.foil(@quantity.to_i)
         :▲.colorize(:light_gray)
       when "etchedFoil"
-        Counter.efoil("#{@quantity}".to_i)
+        Counter.efoil(@quantity.to_i)
         :◭.colorize(:light_gray)
       when "0", ""
         :△.colorize(:dark_gray)
@@ -133,7 +133,7 @@ module Engine
   end
 
   # Validates CSV file against provided format.
-  def self.validate_csv(file, game_format) : Nil
+  def self.validate_csv(file, game_format, speed_str) : Nil
     puts "\n  * Using #{game_format} format list"
     format_check(game_format)
     csv_layout(file)
@@ -152,11 +152,25 @@ module Engine
       else
         raise "ERROR: csv"
       end
-      sleep 0.001
+      delay(speed_str)
       card.summary
     end
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
     Counter.output
+  end
+
+  # Sets output delay.
+  def self.delay(speed : String) : Nil
+    case speed
+    when "slow"
+      sleep 0.1
+    when "normal"
+      sleep 0.001
+    when "fast"
+    else
+      STDERR.puts "ERROR: Unsupported #{speed} value"
+      exit(1)
+    end
   end
 
   # Returns card info for provided Scryfall ID.
@@ -168,7 +182,7 @@ module Engine
 
   # Validates provided format.
   def self.format_check(input) : Nil
-    if !FORMATS.includes? "#{input}"
+    if !FORMATS.includes? input
       STDERR.puts "ERROR: Unknown game format #{input}"
       exit(1)
     end

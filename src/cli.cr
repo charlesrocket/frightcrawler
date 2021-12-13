@@ -4,10 +4,12 @@ module CLI
     csv_file : String? = nil
     game_format_in : String = ""
     sf_id : String = ""
+    speed : String = "normal"
 
     OptionParser.parse do |parser|
       parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
       parser.on("-g GAME_FORMAT", "Set game format") { |_game_format_in| game_format_in = _game_format_in }
+      parser.on("-p SPEED", "Set speed [slow/normal/fast]") { |_speed| speed = _speed }
       parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
       parser.on("-s", "--sync", "Sync DB") { Database.sync }
       parser.on("-h", "--help", "Print documentation") do
@@ -25,11 +27,11 @@ module CLI
     end
 
     if !sf_id.empty?
-      puts Engine.card_info("#{sf_id}")
+      puts Engine.card_info(sf_id)
     end
 
     if csv_file != nil
-      Engine.validate_csv("#{csv_file}", "#{game_format_in}")
+      Engine.validate_csv("#{csv_file}", game_format_in, speed)
     end
 
     if csv_file == nil && sf_id.empty? && game_format_in.empty?
