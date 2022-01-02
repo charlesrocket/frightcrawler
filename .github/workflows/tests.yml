@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ./bulk-data.json
-          key: ${{ runner.os }}-${{ hashFiles('**/frightcrawler.db') }}
+          key: ${{ runner.os }}-${{ hashFiles('~/frightcrawler/frightcrawler.db') }}
       - name: Install shards
         run: shards install
       - name: Build
