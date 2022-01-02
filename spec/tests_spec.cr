@@ -59,7 +59,7 @@ describe Engine do
     describe "#foils" do
       it "returns foil status" do
         card = Engine::Crawler.new "legacy", "bd1751ca-4945-4071-87f1-9d5f282c35f0", "foil", "2"
-        card.foils.should eq(:▲.colorize(:light_gray))
+        card.foils.should eq(:"▲".colorize(:light_gray))
       end
     end
   end

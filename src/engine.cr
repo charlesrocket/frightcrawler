@@ -100,12 +100,12 @@ module Engine
       case @foil_status
       when "1", "foil"
         Counter.foil(@quantity.to_i)
-        :▲.colorize(:light_gray)
+        :"▲".colorize(:light_gray)
       when "etchedFoil"
         Counter.efoil(@quantity.to_i)
-        :◭.colorize(:light_gray)
+        :"◭".colorize(:light_gray)
       when "0", ""
-        :△.colorize(:dark_gray)
+        :"△".colorize(:dark_gray)
       else
         raise "ERROR: foils"
       end
