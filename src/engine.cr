@@ -155,6 +155,7 @@ module Engine
       delay(speed_str)
       card.summary
     end
+
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
     Counter.output
   end

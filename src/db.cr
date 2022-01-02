@@ -69,6 +69,7 @@ module Database
     if !Dir.exists?(DB_HOME)
       Dir.mkdir_p(DB_HOME)
     end
+
     puts "\n  * Database synchronization ..."
     private insert_sql = <<-SQL
     INSERT OR IGNORE INTO "cards" ("id", "name", "set_name", "set_code", "rarity", "legality_standard", "legality_future",
@@ -120,6 +121,7 @@ module Database
       end
       db.exec "COMMIT;"
     end
+
     @@synced = true
     puts "\n  * Database synchronized"
   end
