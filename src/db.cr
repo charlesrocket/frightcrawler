@@ -119,6 +119,7 @@ module Database
           )
         end
       end
+
       db.exec "COMMIT;"
     end
 
