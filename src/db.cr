@@ -1,5 +1,8 @@
 # Manages DB data.
 module Database
+  DB_HOME = Path.home / "frightcrawler"
+  DB_FILE = "#{DB_HOME}/frightcrawler.db"
+
   @@synced = false : Bool
 
   # Returns synchronization status.
@@ -63,6 +66,9 @@ module Database
 
   # Updates DB data.
   def self.update : Nil
+    if !Dir.exists?(DB_HOME)
+      Dir.mkdir_p(DB_HOME)
+    end
     puts "\n  * Database synchronization ..."
     private insert_sql = <<-SQL
     INSERT OR IGNORE INTO "cards" ("id", "name", "set_name", "set_code", "rarity", "legality_standard", "legality_future",
@@ -76,7 +82,7 @@ module Database
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     bulk_link = bulk_data["data"][3]["download_uri"]
 
-    DB.open "sqlite3://./frightcrawler.db" do |db|
+    DB.open "sqlite3://#{DB_FILE}" do |db|
       db.exec "create table if not exists cards (id text primary key, name text, set_name text, set_code text, rarity text, legality_standard text,
                         legality_future text, legality_historic text, legality_gladiator text, legality_pioneer text, legality_modern text,
                         legality_legacy text, legality_pauper text, legality_vintage text, legality_penny text, legality_commander text,
