@@ -19,6 +19,7 @@ module CLI
         puts parser
         exit
       end
+
       parser.invalid_option do |flag|
         STDERR.puts "ERROR: #{flag} is not a valid option"
         STDERR.puts parser

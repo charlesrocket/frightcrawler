@@ -30,7 +30,7 @@ INTRO = "
 
 puts INTRO, VERSION
 
-if !File.exists?("frightcrawler.db")
+if !File.exists?(Database::DB_FILE)
   Database.sync
 end
 

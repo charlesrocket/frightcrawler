@@ -16,11 +16,6 @@ jobs:
         uses: crystal-lang/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal }}
-      - name: Cache DB
-        uses: actions/cache@v2
-        with:
-          path: ./bulk-data.json
-          key: ${{ runner.os }}-${{ hashFiles('**/frightcrawler.db') }}
       - name: Install shards
         run: shards install
       - name: Build

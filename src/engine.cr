@@ -30,7 +30,7 @@ module Engine
     @legality : String = ""
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
-      DB.open "sqlite3://./frightcrawler.db" do |db|
+      DB.open "sqlite3://#{Database::DB_FILE}" do |db|
         card = db.query_one "SELECT id, name, set_name, set_code, rarity, legality_#{@game_format} AS legality from cards where id = ?", @scry_id, as: Database::Cards
         @card_name = card.name
         @set_name = card.set_name
@@ -100,12 +100,12 @@ module Engine
       case @foil_status
       when "1", "foil"
         Counter.foil(@quantity.to_i)
-        :▲.colorize(:light_gray)
+        :"▲".colorize(:light_gray)
       when "etchedFoil"
         Counter.efoil(@quantity.to_i)
-        :◭.colorize(:light_gray)
+        :"◭".colorize(:light_gray)
       when "0", ""
-        :△.colorize(:dark_gray)
+        :"△".colorize(:dark_gray)
       else
         raise "ERROR: foils"
       end
@@ -155,6 +155,7 @@ module Engine
       delay(speed_str)
       card.summary
     end
+
     Log.info { "Processed: #{Counter.get_unique}/#{Counter.get_total}" }
     Counter.output
   end
