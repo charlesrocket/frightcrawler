@@ -12,7 +12,7 @@
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀
 ```
 
-### Deck legality checker
+### MtG deck validator
 
 #### Usage
 
