@@ -38,6 +38,7 @@ module Engine
         @rarity = card.rarity
         @legality = card.legality.upcase
       end
+
       Counter.total(@quantity.to_i)
       Counter.unique
     end
