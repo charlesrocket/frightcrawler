@@ -14,6 +14,13 @@
 
 ### MtG deck validator
 
+#### Compilation
+
+```shell
+shards install
+crystal build src/frightcrawler.cr --release
+```
+
 #### Usage
 
 ```shell
