@@ -14,8 +14,8 @@ require "./engine"
 # :nodoc:
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
 
-if !Dir.exists?(DB_HOME)
-  Dir.mkdir_p(DB_HOME)
+if !Dir.exists?(Database::DB_HOME)
+  Dir.mkdir_p(Database::DB_HOME)
 end
 
 backend = Log::IOBackend.new(File.new("#{Database::DB_HOME}/frightcrawler.log", "a+"))
