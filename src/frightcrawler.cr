@@ -13,7 +13,7 @@ require "./engine"
 
 # :nodoc:
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
-backend = Log::IOBackend.new(File.new("./frightcrawler.log", "a+"))
+backend = Log::IOBackend.new(File.new("#{Database::DB_HOME}/frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
 # Supported formats.
