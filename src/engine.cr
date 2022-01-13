@@ -134,7 +134,7 @@ module Engine
   end
 
   # Validates CSV file against provided format.
-  def self.validate_csv(file, game_format, speed_str) : Nil
+  def self.validate_csv(file, game_format) : Nil
     puts "\n  * Using #{game_format} format list"
     format_check(game_format)
     csv_layout(file)
@@ -153,7 +153,7 @@ module Engine
       else
         raise "ERROR: csv"
       end
-      delay(speed_str)
+      delay
       card.summary
     end
 
@@ -162,15 +162,15 @@ module Engine
   end
 
   # Sets output delay.
-  def self.delay(speed : String) : Nil
-    case speed
+  def self.delay : Nil
+    case CLI.speed
     when "slow"
       sleep 0.1
     when "normal"
       sleep 0.001
     when "fast"
     else
-      STDERR.puts "ERROR: Unsupported #{speed} value"
+      STDERR.puts "ERROR: Unsupported speed value #{CLI.speed}"
       exit(1)
     end
   end
