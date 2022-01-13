@@ -1,6 +1,6 @@
 # Handles CLI options.
 module CLI
-  @@speed : String = "normal"
+  @@speed : String = "fast"
 
   def self.speed : String
     @@speed
