@@ -12,10 +12,6 @@ module Database
 
   # Synchronizes DB.
   def self.sync : Nil
-    if !Dir.exists?(DB_HOME)
-      Dir.mkdir_p(DB_HOME)
-    end
-
     if !Database.synced
       Database.update
     end
