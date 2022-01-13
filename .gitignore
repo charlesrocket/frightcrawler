@@ -1,7 +1,6 @@
 frightcrawler
 *.db
 *.csv
-*.log
 .DS_Store
 
 /docs/
