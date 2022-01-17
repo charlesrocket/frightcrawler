@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Download source
         uses: actions/checkout@v2
+      - name: Cache DB
+        uses: actions/cache@v2
+        with:
+          path: ./bulk-data.json
+          key: ${{ runner.os }}-${{ hashFiles('~/frightcrawler/frightcrawler.db') }}
       - name: Install dependencies
         run: apt-get install -y libsqlite3-dev
       - name: Install shards
