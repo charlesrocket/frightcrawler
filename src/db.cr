@@ -25,6 +25,8 @@ module Database
         update
       end
     end
+
+    @@synced = true
   end
 
   # Returns latest timestamp.
@@ -137,7 +139,6 @@ module Database
       db.exec "COMMIT;"
     end
 
-    @@synced = true
     puts "\n  * Database synchronized"
   end
 end
