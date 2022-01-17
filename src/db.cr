@@ -19,7 +19,7 @@ module Database
     if !synced
       local_time = Time.utc.to_unix
       sync_time = "#{latest_timestamp}"
-      flag_time = 86000
+      flag_time = 2629743
 
       if (local_time - sync_time.to_i) >= flag_time
         update
