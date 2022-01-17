@@ -20,7 +20,7 @@ module Database
   # Returns latest timestamp.
   def self.latest_timestamp : DB::Any
     DB.open "sqlite3://#{DB_FILE}" do |db|
-      db.scalar "select timestamp from cards order by timestamp desc limit 1;"
+      db.scalar "select strftime('%s', timestamp) from cards order by timestamp desc limit 1;"
     end
   end
 
