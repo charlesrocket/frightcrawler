@@ -135,6 +135,7 @@ module Engine
 
   # Validates CSV file against provided format.
   def self.validate_csv(file, game_format) : Nil
+    Database.sync
     puts "\n  * Using #{game_format} format list"
     format_check(game_format)
     csv_layout(file)

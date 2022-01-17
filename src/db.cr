@@ -12,8 +12,18 @@ module Database
 
   # Synchronizes DB.
   def self.sync : Nil
-    if !Database.synced
-      Database.update
+    if !File.exists?(DB_FILE)
+      update
+    end
+
+    if !synced
+      local_time = Time.utc.to_unix
+      sync_time = "#{latest_timestamp}"
+      flag_time = 86000
+
+      if (local_time - sync_time.to_i) >= flag_time
+        update
+      end
     end
   end
 
