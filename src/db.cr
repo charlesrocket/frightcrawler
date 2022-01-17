@@ -84,7 +84,7 @@ module Database
                         legality_future text, legality_historic text, legality_gladiator text, legality_pioneer text, legality_modern text,
                         legality_legacy text, legality_pauper text, legality_vintage text, legality_penny text, legality_commander text,
                         legality_brawl text, legality_historicbrawl text, legality_paupercommander text, legality_duel text,
-                        legality_oldschool text, legality_premodern text, timestamp datetime default current_timestamp)"
+                        legality_oldschool text, legality_premodern text, timestamp datetime)"
       db.exec "BEGIN TRANSACTION;"
       HTTP::Client.get "#{bulk_link}" do |rsp|
         Array(Card).from_json(rsp.body_io) do |card|
@@ -116,6 +116,7 @@ module Database
         end
       end
 
+      db.exec "update cards set timestamp=current_timestamp;"
       db.exec "COMMIT;"
     end
 
