@@ -17,6 +17,12 @@ module Database
     end
   end
 
+  def self.latest_timestamp : DB::Any
+    DB.open "sqlite3://#{DB_FILE}" do |db|
+      db.scalar "select timestamp from cards order by timestamp desc limit 1;"
+    end
+  end
+
   struct Cards
     include DB::Serializable
 
