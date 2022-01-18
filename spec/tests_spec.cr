@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-Spec.before_suite { prepare }
+Spec.before_suite { Fixtures.prepare }
 
 Spec.before_each { reset }
 Spec.before_each { WebMock.reset }
