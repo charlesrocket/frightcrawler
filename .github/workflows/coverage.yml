@@ -23,7 +23,7 @@ jobs:
           path: ~/frightcrawler/frightcrawler.db
           key: ${{ runner.os }}-${{ hashFiles('~/frightcrawler/frightcrawler.db') }}
       - name: Install dependencies
-        run: apt-get install -y libsqlite3-dev
+        run: apt-get install -y libsqlite3-dev make
       - name: Install shards
         run: shards install
       - name: Run kcov
