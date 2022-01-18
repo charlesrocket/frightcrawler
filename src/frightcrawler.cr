@@ -35,10 +35,6 @@ INTRO = "
 
 puts INTRO, VERSION
 
-if !File.exists?(Database::DB_FILE)
-  Database.sync
-end
-
 # :nodoc:
 T1 = Time.monotonic
 
