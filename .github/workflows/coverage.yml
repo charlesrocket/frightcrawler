@@ -17,15 +17,10 @@ jobs:
     steps:
       - name: Download source
         uses: actions/checkout@v2
-      - name: Cache DB
-        uses: actions/cache@v2
-        with:
-          path: ~/frightcrawler/frightcrawler.db
-          key: ${{ runner.os }}-${{ hashFiles('~/frightcrawler/frightcrawler.db') }}
       - name: Install dependencies
-        run: apt-get install -y libsqlite3-dev
+        run: apt-get install -y libsqlite3-dev make
       - name: Install shards
-        run: shards install --without-development
+        run: shards install
       - name: Run kcov
         run: ./.github/workflows/coverage
       - name: Upload results

@@ -1,6 +1,7 @@
 require "./spec_helper"
 
-Spec.before_suite { Database.sync }
+Spec.before_suite { Fixtures.prepare }
+Spec.after_suite { clean }
 Spec.before_each { reset }
 
 describe CLI do
@@ -31,7 +32,15 @@ describe Counter do
   end
 end
 
-describe Database, tags: "api" do
+describe Database, tags: ["api", "db"] do
+  describe ".get_bulk_uri" do
+    it "returns bulk file uri" do
+      WebMock.stub(:get, "https://api.scryfall.com/bulk-data")
+        .to_return(body: Fixtures::Data::BULK)
+      Database.get_bulk_uri.should eq("https://c2.scryfall.com/file/scryfall-bulk/all-cards/all-cards-20220117101233.json")
+    end
+  end
+
   describe ".sync" do
     it "synchronizes db" do
       Database.sync
@@ -66,6 +75,8 @@ describe Engine do
 
   describe ".card_info", tags: "api" do
     it "prints card info for provided id" do
+      WebMock.stub(:get, "https://api.scryfall.com/cards/989a3960-0cfc-4eab-ae9e-503b934e9835")
+        .to_return(body: Fixtures::Data::CARD)
       Engine.card_info("989a3960-0cfc-4eab-ae9e-503b934e9835").should contain("Servo")
     end
   end
