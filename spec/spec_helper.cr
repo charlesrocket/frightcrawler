@@ -18,4 +18,5 @@ end
 
 def reset
   Counter.reset
+  WebMock.reset
 end
