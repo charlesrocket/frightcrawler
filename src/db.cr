@@ -83,6 +83,11 @@ module Database
     getter premodern : String
   end
 
+  def self.get_bulk_uri
+    bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
+    bulk_uri = bulk_data["data"][3]["download_uri"].to_s
+  end
+
   # Updates DB data.
   def self.update : Nil
     puts "\n  * Database synchronization ..."
@@ -95,9 +100,6 @@ module Database
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     SQL
 
-    bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
-    bulk_link = bulk_data["data"][3]["download_uri"]
-
     DB.open "sqlite3://#{DB_FILE}" do |db|
       db.exec "create table if not exists cards (id text primary key, name text, set_name text, set_code text, rarity text, legality_standard text,
                         legality_future text, legality_historic text, legality_gladiator text, legality_pioneer text, legality_modern text,
@@ -105,7 +107,7 @@ module Database
                         legality_brawl text, legality_historicbrawl text, legality_paupercommander text, legality_duel text,
                         legality_oldschool text, legality_premodern text, timestamp datetime)"
       db.exec "BEGIN TRANSACTION;"
-      HTTP::Client.get "#{bulk_link}" do |rsp|
+      HTTP::Client.get "#{get_bulk_uri}" do |rsp|
         Array(Card).from_json(rsp.body_io) do |card|
           db.exec(
             insert_sql,
