@@ -1,5 +1,6 @@
 require "spec"
 require "webmock"
+
 require "../src/frightcrawler"
 
 module Fixtures
