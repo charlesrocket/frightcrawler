@@ -33,7 +33,7 @@ describe Counter do
   end
 end
 
-describe Database, tags: "api" do
+describe Database, tags: ["api", "db"] do
   describe ".sync" do
     it "synchronizes db" do
       WebMock.stub(:get, "https://api.scryfall.com/bulk-data")
