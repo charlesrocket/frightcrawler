@@ -23,3 +23,7 @@ def reset
   Counter.reset
   WebMock.reset
 end
+
+def clean
+  File.delete(Database::DB_FILE)
+end

@@ -1,6 +1,7 @@
 require "./spec_helper"
 
 Spec.before_suite { Fixtures.prepare }
+Spec.after_suite { clean }
 Spec.before_each { reset }
 
 describe CLI do
