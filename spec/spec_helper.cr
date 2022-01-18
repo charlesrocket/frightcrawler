@@ -12,7 +12,6 @@ def reset
   Counter.reset
 end
 
-
 def prepare
   WebMock.stub(:get, "https://api.scryfall.com/bulk-data")
     .to_return(body: Fixtures::BULK)
