@@ -35,9 +35,9 @@ describe Database, tags: ["api", "db"] do
   describe ".sync" do
     it "synchronizes db" do
       WebMock.stub(:get, "https://api.scryfall.com/bulk-data")
-        .to_return(body: Fixtures::BULK)
+        .to_return(body: Fixtures::Data::BULK)
       WebMock.stub(:get, "https://c2.scryfall.com/file/scryfall-bulk/all-cards/all-cards-20220117101233.json")
-        .to_return(body_io: IO::Memory.new(Fixtures::CARDS))
+        .to_return(body_io: IO::Memory.new(Fixtures::Data::CARDS))
       Database.sync
       Database.synced.should be_true
     end
@@ -71,7 +71,7 @@ describe Engine do
   describe ".card_info", tags: "api" do
     it "prints card info for provided id" do
       WebMock.stub(:get, "https://api.scryfall.com/cards/989a3960-0cfc-4eab-ae9e-503b934e9835")
-        .to_return(body: Fixtures::CARD)
+        .to_return(body: Fixtures::Data::CARD)
       Engine.card_info("989a3960-0cfc-4eab-ae9e-503b934e9835").should contain("Servo")
     end
   end
