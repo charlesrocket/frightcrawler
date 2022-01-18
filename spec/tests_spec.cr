@@ -34,10 +34,6 @@ end
 describe Database, tags: ["api", "db"] do
   describe ".sync" do
     it "synchronizes db" do
-      WebMock.stub(:get, "https://api.scryfall.com/bulk-data")
-        .to_return(body: Fixtures::Data::BULK)
-      WebMock.stub(:get, "https://c2.scryfall.com/file/scryfall-bulk/all-cards/all-cards-20220117101233.json")
-        .to_return(body_io: IO::Memory.new(Fixtures::Data::CARDS))
       Database.sync
       Database.synced.should be_true
     end
