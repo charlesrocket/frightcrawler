@@ -25,5 +25,5 @@ def reset
 end
 
 def clean
-  File.delete(Database::DB_FILE)
+  Database.delete
 end

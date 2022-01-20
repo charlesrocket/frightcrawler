@@ -88,6 +88,10 @@ module Database
     bulk_data["data"][3]["download_uri"].to_s
   end
 
+  def self.delete : Nil
+    File.delete(Database::DB_FILE)
+  end
+
   # Updates DB data.
   def self.update : Nil
     puts "\n  * Database synchronization ..."
