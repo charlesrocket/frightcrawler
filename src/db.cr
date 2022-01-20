@@ -1,7 +1,7 @@
 # Manages DB data.
 module Database
   DB_HOME = Path.home / "frightcrawler"
-  DB_FILE = "#{DB_HOME}/frightcrawler.db"
+  DB_FILE = !Crystal.env.test? ? "#{DB_HOME}/frightcrawler.db" : "#{DB_HOME}/test.db"
 
   @@synced = false : Bool
 
