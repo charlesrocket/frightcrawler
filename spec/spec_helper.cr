@@ -4,8 +4,6 @@ require "webmock"
 
 require "../src/frightcrawler"
 
-Crystal::Env.default("test")
-
 module Fixtures
   struct Data
     BULK  = File.read("spec/fixtures/bulk.json")
