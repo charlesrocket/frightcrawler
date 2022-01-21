@@ -9,6 +9,8 @@ targets:
     main: src/frightcrawler.cr
 
 dependencies:
+  crystal-env:
+    github: crystal-lang/crystal-env
   sqlite3:
     github: crystal-lang/crystal-sqlite3
 

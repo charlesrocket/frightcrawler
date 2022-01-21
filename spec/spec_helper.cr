@@ -1,4 +1,5 @@
 require "spec"
+require "crystal-env/spec"
 require "webmock"
 
 require "../src/frightcrawler"

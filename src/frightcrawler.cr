@@ -1,6 +1,7 @@
 require "sqlite3"
 require "http/client"
 require "option_parser"
+require "crystal-env"
 require "colorize"
 require "json"
 require "csv"
