@@ -119,6 +119,7 @@ module Engine
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     csv_header = cardlist.headers.to_s
+
     if csv_header.includes? %("extras", "language", "name", "quantity", "scryfall_id")
       puts "\n  * Helvault CSV file loaded"
       @@helvault = true
@@ -142,6 +143,7 @@ module Engine
     csv_file = File.read(file)
     cardlist = CSV.new(csv_file, headers: true)
     puts "\n  * Reading CSV file ...", "\n"
+
     cardlist.each do |entry|
       row = entry.row.to_a
       case
@@ -154,6 +156,7 @@ module Engine
       else
         raise "ERROR: csv"
       end
+
       delay
       card.summary
     end
