@@ -95,6 +95,7 @@ module Database
   # Updates DB data.
   def self.update : Nil
     puts "\n  * Database synchronization ..."
+
     private insert_sql = <<-SQL
     INSERT OR IGNORE INTO "cards" ("id", "name", "set_name", "set_code", "rarity", "legality_standard", "legality_future",
                          "legality_historic", "legality_gladiator", "legality_pioneer", "legality_modern",
@@ -111,6 +112,7 @@ module Database
                         legality_brawl text, legality_historicbrawl text, legality_paupercommander text, legality_duel text,
                         legality_oldschool text, legality_premodern text, timestamp datetime)"
       db.exec "BEGIN TRANSACTION;"
+
       HTTP::Client.get "#{get_bulk_uri}" do |rsp|
         Array(Card).from_json(rsp.body_io) do |card|
           db.exec(

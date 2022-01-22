@@ -146,6 +146,7 @@ module Engine
 
     cardlist.each do |entry|
       row = entry.row.to_a
+
       case
       when @@helvault
         card = Crawler.new game_format, row[4], row[0], row[3]
