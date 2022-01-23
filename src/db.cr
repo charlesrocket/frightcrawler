@@ -84,7 +84,7 @@ module Database
   end
 
   # Retrieves bulk URI.
-  def self.get_bulk_uri
+  def self.bulk_uri
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     bulk_data["data"][3]["download_uri"].to_s
   end
@@ -115,7 +115,7 @@ module Database
                         legality_oldschool text, legality_premodern text, timestamp datetime)"
       db.exec "BEGIN TRANSACTION;"
 
-      HTTP::Client.get "#{get_bulk_uri}" do |rsp|
+      HTTP::Client.get "#{bulk_uri}" do |rsp|
         Array(Card).from_json(rsp.body_io) do |card|
           db.exec(
             insert_sql,
