@@ -1,4 +1,4 @@
-# Manages DB data.
+# Manages DB.
 module Database
   DB_HOME = Path.home / "frightcrawler"
   DB_FILE = !Crystal.env.test? ? "#{DB_HOME}/frightcrawler.db" : "#{DB_HOME}/test.db"
@@ -83,11 +83,13 @@ module Database
     getter premodern : String
   end
 
+  # Retrieves bulk URI.
   def self.get_bulk_uri
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     bulk_data["data"][3]["download_uri"].to_s
   end
 
+  # Deletes current DB.
   def self.delete : Nil
     File.delete(Database::DB_FILE)
   end
