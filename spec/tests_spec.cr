@@ -33,11 +33,11 @@ describe Counter do
 end
 
 describe Database, tags: ["api", "db"] do
-  describe ".get_bulk_uri" do
+  describe ".bulk_uri" do
     it "returns bulk file uri" do
       WebMock.stub(:get, "https://api.scryfall.com/bulk-data")
         .to_return(body: Fixtures::Data::BULK)
-      Database.get_bulk_uri.should eq("https://c2.scryfall.com/file/scryfall-bulk/all-cards/all-cards-20220117101233.json")
+      Database.bulk_uri.should eq("https://c2.scryfall.com/file/scryfall-bulk/all-cards/all-cards-20220117101233.json")
     end
   end
 
