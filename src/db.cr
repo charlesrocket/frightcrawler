@@ -5,7 +5,7 @@ module Database
 
   @@synced = false : Bool
 
-  # Returns synchronization status.
+  # Returns .sync status.
   def self.synced : Bool | Nil
     @@synced
   end
@@ -19,6 +19,7 @@ module Database
     if !synced
       local_time = Time.utc.to_unix
       sync_time = "#{latest_timestamp}"
+      # Sync DB monthly.
       flag_time = 2629743
 
       if (local_time - sync_time.to_i) >= flag_time
@@ -36,6 +37,7 @@ module Database
     end
   end
 
+  # Handles DB layout.
   struct Cards
     include DB::Serializable
 
@@ -47,6 +49,7 @@ module Database
     getter legality : String
   end
 
+  # Handles bulk data layout.
   struct Card
     include JSON::Serializable
 
@@ -61,6 +64,7 @@ module Database
     getter legalities : Legalities
   end
 
+  # Handles legality layout for `Card`.
   struct Legalities
     include JSON::Serializable
 
@@ -83,7 +87,7 @@ module Database
     getter premodern : String
   end
 
-  # Retrieves bulk URI.
+  # Retrieves bulk data URI.
   def self.bulk_uri
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     bulk_data["data"][3]["download_uri"].to_s
