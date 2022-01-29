@@ -4,14 +4,6 @@ Spec.before_suite { Fixtures.prepare }
 Spec.after_suite { clean }
 Spec.before_each { reset }
 
-describe CLI do
-  describe ".parse" do
-    it "loads cli options" do
-      CLI.parse.should be_nil
-    end
-  end
-end
-
 describe Counter do
   it "counts attributes" do
     Engine.validate_csv("spec/data/test_hv.csv", "vintage")
