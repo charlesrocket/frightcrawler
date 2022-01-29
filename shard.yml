@@ -18,9 +18,6 @@ development_dependencies:
   ameba:
     github: crystal-ameba/ameba
     version: ~> 0.14.3
-  testcli:
-    github: charlesrocket/testcli
-    branch: master
   webmock:
     github: manastech/webmock.cr
     branch: master
