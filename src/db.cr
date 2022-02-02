@@ -95,7 +95,11 @@ module Database
 
   # Deletes current DB.
   def self.delete : Nil
-    File.delete(Database::DB_FILE)
+    if File.exists?(DB_FILE)
+      File.delete(Database::DB_FILE)
+    else
+      raise "ERROR: No DB file"
+    end
   end
 
   # Updates DB data.
