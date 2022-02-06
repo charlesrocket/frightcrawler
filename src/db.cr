@@ -88,7 +88,7 @@ module Database
   end
 
   # Retrieves bulk data URI.
-  def self.bulk_uri
+  def self.bulk_uri : String
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
     bulk_data["data"][3]["download_uri"].to_s
   end
