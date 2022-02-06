@@ -23,8 +23,11 @@ end
 def reset
   Counter.reset
   WebMock.reset
+  Fixtures.prepare
 end
 
 def clean
-  Database.delete
+  if File.exists?(Database::DB_FILE)
+    Database.delete
+  end
 end
