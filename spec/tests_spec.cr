@@ -39,6 +39,15 @@ describe Database, tags: ["api", "db"] do
       Database.synced.should be_true
     end
   end
+
+  describe ".delete" do
+    it "erases db" do
+      File.touch(Database::DB_FILE)
+      File.exists?(Database::DB_FILE).should be_true
+      Database.delete
+      File.exists?(Database::DB_FILE).should be_false
+    end
+  end
 end
 
 describe Engine do
