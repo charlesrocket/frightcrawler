@@ -66,7 +66,7 @@ module Engine
         Counter.banned(@quantity.to_i)
         :"   BAN    ".colorize(:red)
       else
-        raise "ERROR: legalities"
+        raise "ERROR: #legalities."
       end
     end
 
@@ -92,7 +92,7 @@ module Engine
         Counter.bonus(@quantity.to_i)
         :B.colorize(:light_blue)
       else
-        raise "ERROR: rarities"
+        raise "ERROR: #rarities."
       end
     end
 
@@ -108,7 +108,7 @@ module Engine
       when "0", ""
         :"△".colorize(:dark_gray)
       else
-        raise "ERROR: foils"
+        raise "ERROR: #foils."
       end
     end
   end
@@ -130,7 +130,7 @@ module Engine
       puts "\n  * AetherHub CSV file loaded"
       @@aetherhub = true
     else
-      raise "ERROR: Unsupported CSV layout"
+      raise "ERROR: Unsupported CSV layout."
     end
   end
 
@@ -155,7 +155,7 @@ module Engine
       when @@aetherhub
         card = Crawler.new game_format, row[13], row[7], row[6]
       else
-        raise "ERROR: csv"
+        raise "ERROR: CSV file."
       end
 
       delay
@@ -175,7 +175,7 @@ module Engine
       sleep 0.001
     when "fast"
     else
-      STDERR.puts "ERROR: Unsupported speed value #{CLI.speed}"
+      STDERR.puts "ERROR: Unsupported speed value #{CLI.speed}."
       exit(1)
     end
   end
@@ -190,7 +190,7 @@ module Engine
   # Validates provided format.
   def self.format_check(input) : Nil
     if !FORMATS.includes? input
-      STDERR.puts "ERROR: Unknown game format #{input}"
+      STDERR.puts "ERROR: Unknown game format #{input}."
       exit(1)
     end
   end
