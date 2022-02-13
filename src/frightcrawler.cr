@@ -18,7 +18,23 @@ module Frightcrawler
   CLIENT  = "frightcrawler-#{VERSION}"
 
   # Supported formats.
-  FORMATS = ["standard", "future", "historic", "gladiator", "pioneer", "modern", "legacy", "pauper", "vintage", "penny", "commander", "brawl", "historicbrawl", "paupercommander", "duel", "oldschool", "premodern"]
+  FORMATS = ["standard",
+             "future",
+             "historic",
+             "gladiator",
+             "pioneer",
+             "modern",
+             "legacy",
+             "pauper",
+             "vintage",
+             "penny",
+             "commander",
+             "brawl",
+             "historicbrawl",
+             "paupercommander",
+             "duel",
+             "oldschool",
+             "premodern"]
 
   # :nodoc:
   INTRO = "

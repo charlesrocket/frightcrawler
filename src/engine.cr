@@ -31,7 +31,8 @@ module Engine
 
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
       DB.open "sqlite3://#{Database::DB_FILE}" do |db|
-        card = db.query_one "SELECT id, name, set_name, set_code, rarity, legality_#{@game_format} AS legality from cards where id = ?", @scry_id, as: Database::Cards
+        card = db.query_one "SELECT id, name, set_name, set_code, rarity, legality_#{@game_format} AS legality from cards where id = ?",
+          @scry_id, as: Database::Cards
         @card_name = card.name
         @set_name = card.set_name
         @set_code = "#{card.set_code.upcase.colorize.mode(:underline)}"
@@ -184,7 +185,10 @@ module Engine
   def self.card_info(id) : String
     Log.info { "Card info requested (#{id})" }
     puts "\n  * Printing card info ..."
-    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}", headers: HTTP::Headers{"User-Agent" => "#{Frightcrawler::CLIENT}"}).body).to_pretty_json
+    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}",
+      headers: HTTP::Headers{"User-Agent" => "#{Frightcrawler::CLIENT}"})
+      .body)
+      .to_pretty_json
   end
 
   # Validates provided format.
