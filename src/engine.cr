@@ -186,14 +186,14 @@ module Engine
     Log.info { "Card info requested (#{id})" }
     puts "\n  * Printing card info ..."
     JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}",
-      headers: HTTP::Headers{"User-Agent" => "#{Frightcrawler::CLIENT}"})
+      headers: HTTP::Headers{"User-Agent" => "#{Core::CLIENT}"})
       .body)
       .to_pretty_json
   end
 
   # Validates provided format.
   def self.format_check(input) : Nil
-    if !Frightcrawler::FORMATS.includes? input
+    if !Core::FORMATS.includes? input
       STDERR.puts "ERROR: Unknown game format #{input}."
       exit(1)
     end

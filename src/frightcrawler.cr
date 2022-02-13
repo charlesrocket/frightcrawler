@@ -12,7 +12,7 @@ require "./counter"
 require "./db"
 require "./engine"
 
-module Frightcrawler
+module Core
   # :nodoc:
   VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
   CLIENT  = "frightcrawler-#{VERSION}"
@@ -53,7 +53,7 @@ end
 backend = Log::IOBackend.new(File.new("#{Database::DB_HOME}/frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
-puts Frightcrawler::INTRO, Frightcrawler::VERSION
+puts Core::INTRO, Core::VERSION
 
 # :nodoc:
 T1 = Time.monotonic
