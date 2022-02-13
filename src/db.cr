@@ -89,7 +89,7 @@ module Database
 
   # Retrieves bulk data URI.
   def self.bulk_uri : String
-    bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data").body)
+    bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data", headers: HTTP::Headers{"User-Agent" => "frightcrawler"}).body)
     bulk_data["data"][3]["download_uri"].to_s
   end
 
@@ -123,7 +123,7 @@ module Database
                         legality_oldschool text, legality_premodern text, timestamp datetime)"
       db.exec "BEGIN TRANSACTION;"
 
-      HTTP::Client.get "#{bulk_uri}" do |rsp|
+      HTTP::Client.get("#{bulk_uri}", headers: HTTP::Headers{"User-Agent" => "frightcrawler"}) do |rsp| #
         Array(Card).from_json(rsp.body_io) do |card|
           db.exec(
             insert_sql,
