@@ -184,7 +184,7 @@ module Engine
   def self.card_info(id) : String
     Log.info { "Card info requested (#{id})" }
     puts "\n  * Printing card info ..."
-    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}", headers: HTTP::Headers{"User-Agent" => "frightcrawler"}).body).to_pretty_json
+    JSON.parse(HTTP::Client.get("https://api.scryfall.com/cards/#{id}", headers: HTTP::Headers{"User-Agent" => "#{CLIENT}"}).body).to_pretty_json
   end
 
   # Validates provided format.

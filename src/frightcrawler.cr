@@ -14,6 +14,7 @@ require "./engine"
 
 # :nodoc:
 VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
+CLIENT = "frightcrawler-#{VERSION}"
 
 if !Dir.exists?(Database::DB_HOME)
   Dir.mkdir_p(Database::DB_HOME)
