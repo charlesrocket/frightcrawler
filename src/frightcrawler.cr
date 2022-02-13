@@ -12,8 +12,39 @@ require "./counter"
 require "./db"
 require "./engine"
 
-# :nodoc:
-VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
+module Core
+  # :nodoc:
+  VERSION = {{ `shards version "#{__DIR__}"`.chomp.stringify }}
+  CLIENT  = "frightcrawler-#{VERSION}"
+
+  # Supported formats.
+  FORMATS = ["standard",
+             "future",
+             "historic",
+             "gladiator",
+             "pioneer",
+             "modern",
+             "legacy",
+             "pauper",
+             "vintage",
+             "penny",
+             "commander",
+             "brawl",
+             "historicbrawl",
+             "paupercommander",
+             "duel",
+             "oldschool",
+             "premodern"]
+
+  # :nodoc:
+  INTRO = "
+▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
+▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
+▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
+▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
+▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
+▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
+end
 
 if !Dir.exists?(Database::DB_HOME)
   Dir.mkdir_p(Database::DB_HOME)
@@ -22,19 +53,7 @@ end
 backend = Log::IOBackend.new(File.new("#{Database::DB_HOME}/frightcrawler.log", "a+"))
 Log.setup(:info, backend)
 
-# Supported formats.
-FORMATS = ["standard", "future", "historic", "gladiator", "pioneer", "modern", "legacy", "pauper", "vintage", "penny", "commander", "brawl", "historicbrawl", "paupercommander", "duel", "oldschool", "premodern"]
-
-# :nodoc:
-INTRO = "
-▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
-▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
-▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
-▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
-▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
-▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀"
-
-puts INTRO, VERSION
+puts Core::INTRO, Core::VERSION
 
 # :nodoc:
 T1 = Time.monotonic

@@ -20,7 +20,7 @@ module CLI
       parser.on("-h", "--help", "Print documentation") do
         parser.banner = "Usage: frightcrawler -g modern -f PATH/TO/FILE"
         parser.separator("Supported CSV layouts: Helvault, Helvault Pro, AetherHub.")
-        parser.separator(%(Supported formats: #{FORMATS.to_s.strip("[]")}))
+        parser.separator(%(Supported formats: #{Core::FORMATS.to_s.strip("[]")}))
         puts parser
         exit
       end
