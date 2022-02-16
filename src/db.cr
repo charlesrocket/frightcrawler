@@ -99,7 +99,7 @@ module Database
     if File.exists?(DB_FILE)
       File.delete(Database::DB_FILE)
     else
-      raise "ERROR: No DB file."
+      raise "ERROR: No DB file"
     end
   end
 
