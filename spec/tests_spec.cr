@@ -46,7 +46,7 @@ describe Database, tags: ["api", "db"] do
       File.exists?(Database::DB_FILE).should be_true
       Database.delete
       File.exists?(Database::DB_FILE).should be_false
-      expect_raises(Exception, "ERROR: No DB file.") do
+      expect_raises(Exception, "ERROR: No DB file") do
         Database.delete
       end
     end
