@@ -113,15 +113,24 @@ describe Engine do
   describe ".validate_csv", tags: "csv" do
     it "validates csv helvault file against provided game format" do
       Engine.validate_csv("spec/data/test_hv.csv", "vintage").should be_nil
+      expect_raises(Exception, "ERROR: Unsupported CSV layout") do
+        Engine.validate_csv("spec/data/test_hv_invalid.csv", "vintage")
+      end
     end
 
     it "validates csv helvault pro file against provided game format" do
       Engine.validate_csv("spec/data/test_hvp.csv", "legacy").should be_nil
+      expect_raises(Exception, "ERROR: Unsupported CSV layout") do
+        Engine.validate_csv("spec/data/test_hv_invalid.csv", "vintage")
+      end
     end
 
     {% if flag? :extended %}
       it "validates csv aetherhub file against provided game format" do
         Engine.validate_csv("spec/data/test_ah.csv", "legacy").should be_nil
+        expect_raises(Exception, "ERROR: Unknown game format foo") do
+          Engine.validate_csv("spec/data/test_ah.csv", "foo")
+        end
       end
     {% end %}
   end
