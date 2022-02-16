@@ -177,8 +177,7 @@ module Engine
       sleep 0.001
     when "fast"
     else
-      STDERR.puts "ERROR: Unsupported speed value #{CLI.speed}"
-      exit(1)
+      raise "ERROR: Unsupported speed value #{CLI.speed}"
     end
   end
 
@@ -195,8 +194,7 @@ module Engine
   # Validates provided format.
   def self.format_check(input) : Nil
     if !Core::FORMATS.includes? input
-      STDERR.puts "ERROR: Unknown game format #{input}"
-      exit(1)
+      raise "ERROR: Unknown game format #{input}"
     end
   end
 end
