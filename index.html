@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 1.2.2">
+<meta name="crystal_docs.project_version" content="0.3.2">
+<meta name="crystal_docs.project_name" content="frightcrawler">
+
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+  <meta name="repository-name" content="frightcrawler">
+  <title>frightcrawler 0.3.2</title>
+  <script type="text/javascript">
+  CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          frightcrawler
+        </a>
+      </h1>
+
+      <span class="project-version">
+        0.3.2
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class=" " data-id="frightcrawler/CLI" data-name="cli">
+      <a href="CLI.html">CLI</a>
+      
+    </li>
+  
+  <li class=" " data-id="frightcrawler/Core" data-name="core">
+      <a href="Core.html">Core</a>
+      
+    </li>
+  
+  <li class=" " data-id="frightcrawler/Counter" data-name="counter">
+      <a href="Counter.html">Counter</a>
+      
+    </li>
+  
+  <li class="parent " data-id="frightcrawler/Database" data-name="database">
+      <a href="Database.html">Database</a>
+      
+        <ul>
+  
+  <li class=" " data-id="frightcrawler/Database/Card" data-name="database::card">
+      <a href="Database/Card.html">Card</a>
+      
+    </li>
+  
+  <li class=" " data-id="frightcrawler/Database/Cards" data-name="database::cards">
+      <a href="Database/Cards.html">Cards</a>
+      
+    </li>
+  
+  <li class=" " data-id="frightcrawler/Database/Legalities" data-name="database::legalities">
+      <a href="Database/Legalities.html">Legalities</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class="parent " data-id="frightcrawler/Engine" data-name="engine">
+      <a href="Engine.html">Engine</a>
+      
+        <ul>
+  
+  <li class=" " data-id="frightcrawler/Engine/Crawler" data-name="engine::crawler">
+      <a href="Engine/Crawler.html">Crawler</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="frightcrawler" class="anchor" href="#frightcrawler">  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>frightcrawler</h1>
+<p><a href="https://github.com/charlesrocket/frightcrawler/actions/workflows/tests.yml"><img src="https://github.com/charlesrocket/frightcrawler/actions/workflows/tests.yml/badge.svg?branch=master" alt="Tests" /></a>
+<a href="https://codecov.io/gh/charlesrocket/frightcrawler"><img src="https://codecov.io/gh/charlesrocket/frightcrawler/branch/master/graph/badge.svg" alt="codecov" /></a>
+<a href="https://charlesrocket.github.io/frightcrawler"><img src="https://img.shields.io/badge/docs-available-9cf.svg?logo=crystal" alt="Docs" /></a></p>
+<h3><a id="mt-g-deck-validator" class="anchor" href="#mt-g-deck-validator">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>MtG deck validator</h3>
+<h4><a id="compilation" class="anchor" href="#compilation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Compilation</h4>
+<pre><code class="language-shell">shards install
+crystal build src/frightcrawler.cr --release</code></pre>
+<h4><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h4>
+<pre><code class="language-crystal">frightcrawler -h
+▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
+▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
+▓░░░▀░░░▀░▀▀░▀▀▀░▀▀▀▀░▀░░▀░░▀░░
+▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
+▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
+▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀
+0.3.1
+Usage: frightcrawler -g modern -f PATH/TO/FILE
+    -f CSV_FILE                      Path to CSV file
+    -g GAME_FORMAT                   Set game format
+    -p SPEED                         Set speed [slow/normal/fast]
+    -i SCRYFALL_ID                   Get card info
+    -s, --sync                       Sync DB
+    -h, --help                       Print documentation
+Supported CSV layouts: Helvault, Helvault Pro, AetherHub.
+Supported formats: &quot;standard&quot;, &quot;future&quot;, &quot;historic&quot;, &quot;gladiator&quot;, &quot;pioneer&quot;, &quot;modern&quot;, &quot;legacy&quot;, &quot;pauper&quot;, &quot;vintage&quot;, &quot;penny&quot;, &quot;commander&quot;, &quot;brawl&quot;, &quot;historicbrawl&quot;, &quot;paupercommander&quot;, &quot;duel&quot;, &quot;oldschool&quot;, &quot;premodern&quot;</code></pre>
+</div>
+</body>
+</html>
