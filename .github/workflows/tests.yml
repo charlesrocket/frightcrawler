@@ -25,4 +25,4 @@ jobs:
       - name: Run Ameba
         run: bin/ameba
       - name: Run tests
-        run: crystal spec --define extended --order=random --error-on-warnings
+        run: crystal spec --define extended --order=random --error-on-warnings --verbose
