@@ -26,7 +26,7 @@ module CLI
       end
 
       parser.invalid_option do |flag|
-        STDERR.puts "ERROR: #{flag} is not a valid option."
+        STDERR.puts "ERROR: #{flag} is not a valid option"
         STDERR.puts parser
         exit(1)
       end
@@ -41,7 +41,7 @@ module CLI
     end
 
     if csv_file == nil && sf_id.empty? && game_format_in.empty?
-      puts "\nNo data provided. Exiting."
+      puts "\nNo data provided"
     end
   end
 end
