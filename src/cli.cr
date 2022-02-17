@@ -14,7 +14,7 @@ module CLI
     OptionParser.parse do |parser|
       parser.on("-f CSV_FILE", "Path to CSV file") { |_csv_file| csv_file = _csv_file }
       parser.on("-g GAME_FORMAT", "Set game format") { |_game_format_in| game_format_in = _game_format_in }
-      parser.on("-p SPEED", "Set speed [slow/normal/fast]") { |_speed| @@speed = _speed }
+      parser.on("-p SPEED", "Set speed [slow/normal/#{"fast".colorize.mode(:underline)}]") { |_speed| @@speed = _speed }
       parser.on("-i SCRYFALL_ID", "Get card info") { |_sf_id| sf_id = _sf_id }
       parser.on("-s", "--sync", "Sync DB") { Database.sync }
       parser.on("-h", "--help", "Print documentation") do
