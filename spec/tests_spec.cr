@@ -4,6 +4,44 @@ Spec.before_suite { clean; Fixtures.prepare }
 Spec.after_suite { clean }
 Spec.before_each { reset }
 
+describe CLI do
+  describe ".speed" do
+    it "returns processing speed" do
+      CLI.speed.should eq("fast")
+    end
+  end
+
+  describe ".set_speed" do
+    it "sets processing speed to slow" do
+      CLI.set_speed("slow")
+      Engine.validate_csv("spec/data/test_hv.csv", "vintage")
+      CLI.speed.should eq("slow")
+    end
+
+    it "sets processing speed to normal" do
+      CLI.set_speed("normal")
+      Engine.validate_csv("spec/data/test_hv.csv", "vintage")
+      CLI.speed.should eq("normal")
+    end
+
+    it "sets processing speed to fast" do
+      CLI.set_speed("fast")
+      Engine.validate_csv("spec/data/test_hv.csv", "vintage")
+      CLI.speed.should eq("fast")
+    end
+
+    it "uses default processing speed with no input value" do
+      CLI.set_speed
+      Engine.validate_csv("spec/data/test_hv.csv", "vintage")
+      CLI.speed.should eq("fast")
+      expect_raises(Exception, "ERROR: Unsupported speed value foo") do
+        CLI.set_speed("foo")
+        Engine.validate_csv("spec/data/test_hv.csv", "vintage")
+      end
+    end
+  end
+end
+
 describe Counter do
   it "counts attributes" do
     Engine.validate_csv("spec/data/test_hv.csv", "vintage")
