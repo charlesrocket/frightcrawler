@@ -6,6 +6,10 @@ module CLI
     @@speed
   end
 
+  def self.set_speed(speed : String) : Nil
+    @@speed = speed
+  end
+
   def self.parse : Nil
     csv_file : String? = nil
     game_format_in : String = ""
