@@ -21,6 +21,7 @@ module Fixtures
 end
 
 def reset
+  CLI.set_speed
   Counter.reset
   WebMock.reset
   Fixtures.prepare
