@@ -5,6 +5,7 @@ FRIGHTCRAWLER_SYSTEM=$(INSTALL_DIR)/frightcrawler
 OUT_DIR=$(CURDIR)/bin
 FRIGHTCRAWLER=$(OUT_DIR)/frightcrawler
 FRIGHTCRAWLER_SOURCES=$(shell find src/ -type f -name '*.cr')
+WEBMOCK=$(CURDIR)/lib/webmock
 
 all: build
 
@@ -19,6 +20,12 @@ $(FRIGHTCRAWLER): $(FRIGHTCRAWLER_SOURCES) | $(OUT_DIR)
 $(OUT_DIR) $(INSTALL_DIR):
 				@mkdir -p $@
 
+$(WEBMOCK):
+				@shards install
+
+spec: $(WEBMOCK)
+				@crystal spec -s -p -v -D extended --order=random --error-on-warnings
+
 run:
 				$(FRIGHTCRAWLER)
 
@@ -31,3 +38,5 @@ clean:
 
 distclean:
 				rm -rf bin lib
+
+.PHONY: spec
