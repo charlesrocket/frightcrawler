@@ -1,12 +1,10 @@
 # Handles CLI options.
 module CLI
-  @@speed : String = "fast"
-
-  def self.speed : String
+  def self.speed : String | Nil
     @@speed
   end
 
-  def self.set_speed(speed : String) : Nil
+  def self.set_speed(speed : String = "fast") : Nil
     @@speed = speed
   end
 

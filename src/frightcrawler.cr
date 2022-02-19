@@ -59,6 +59,7 @@ puts Core::INTRO, Core::VERSION
 # :nodoc:
 T1 = Time.monotonic
 
+CLI.set_speed
 CLI.parse
 
 # :nodoc:
