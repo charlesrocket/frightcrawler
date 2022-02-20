@@ -4,14 +4,17 @@ module Engine
   @@helvault : Bool = false
   @@helvaultpro : Bool = false
 
+  # Returns layout status.
   def self.aetherhub : Bool
     @@aetherhub
   end
 
+  # :ditto:
   def self.helvault : Bool
     @@helvault
   end
 
+  # :ditto:
   def self.helvaultpro : Bool
     @@helvaultpro
   end
