@@ -17,7 +17,7 @@ class Counter
   @@foil : UInt16 = 0
   @@efoil : UInt16 = 0
 
-  # Prints out validation summary.
+  # Prints validation summary.
   def self.output : Nil
     puts "\n  Legal: #{get_legal.colorize(:green)}"
     puts "  Not legal: #{get_not_legal.colorize(:red)}"
