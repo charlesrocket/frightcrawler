@@ -15,7 +15,7 @@ lib:
 				@shards install --production
 
 $(FRIGHTCRAWLER): $(FRIGHTCRAWLER_SOURCES) | $(OUT_DIR)
-				@crystal build src/frightcrawler.cr -p -o $@ --release --no-debug
+				@crystal build src/frightcrawler.cr -p -o $@ --release --no-debug --verbose
 
 $(OUT_DIR) $(INSTALL_DIR):
 				@mkdir -p $@
