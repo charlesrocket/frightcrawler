@@ -34,7 +34,7 @@ install: build | $(INSTALL_DIR)
 				cp $(FRIGHTCRAWLER) $(FRIGHTCRAWLER_SYSTEM)
 
 clean:
-				rm -rf $(FRIGHTCRAWLER)
+				rm -f $(FRIGHTCRAWLER)
 
 distclean:
 				rm -rf bin lib
