@@ -23,7 +23,7 @@ $(OUT_DIR) $(INSTALL_DIR):
 $(WEBMOCK):
 				@shards install
 
-spec: $(WEBMOCK)
+test: $(WEBMOCK)
 				@crystal spec -s -p -v -D extended --order=random --error-on-warnings
 
 run:
@@ -39,4 +39,4 @@ clean:
 distclean:
 				rm -rf bin lib
 
-.PHONY: spec
+.PHONY: test
