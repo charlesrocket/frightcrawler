@@ -8,8 +8,8 @@
 #### Compilation
 
 ```shell
-shards install
-crystal build src/frightcrawler.cr --release
+make
+sudo make install
 ```
 
 #### Usage
