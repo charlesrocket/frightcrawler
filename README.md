@@ -5,14 +5,18 @@
 
 [MtG](https://magic.wizards.com) deck legality validator for [Helvault](https://apps.apple.com/us/app/helvault-mtg-card-scanner/id1466963201)/[AetherHub](https://aetherhub.com) CSVs
 
-#### Compilation
+### Dependencies
+* `crystal`
+* `sqlite3`
+
+### Compilation
 
 ```shell
 make
 sudo make install
 ```
 
-#### Usage
+### Usage
 
 ```
 frightcrawler -h
