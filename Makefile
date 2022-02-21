@@ -25,6 +25,9 @@ install:
 				@rm -f $(FRIGHTCRAWLER_SYSTEM)
 				cp $(FRIGHTCRAWLER) $(FRIGHTCRAWLER_SYSTEM)
 
+uninstall:
+				rm -f $(FRIGHTCRAWLER_SYSTEM)
+
 clean:
 				rm -f $(FRIGHTCRAWLER)
 
