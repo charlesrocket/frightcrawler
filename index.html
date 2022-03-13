@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Crystal Docs 1.2.2">
-<meta name="crystal_docs.project_version" content="0.3.3">
+<meta name="crystal_docs.project_version" content="0.3.4">
 <meta name="crystal_docs.project_name" content="frightcrawler">
 
 
@@ -13,7 +13,7 @@
 <script type="text/javascript" src="js/doc.js"></script>
 
   <meta name="repository-name" content="frightcrawler">
-  <title>frightcrawler 0.3.3</title>
+  <title>frightcrawler 0.3.4</title>
   <script type="text/javascript">
   CrystalDocs.base_path = "";
   </script>
@@ -39,7 +39,7 @@
       </h1>
 
       <span class="project-version">
-        0.3.3
+        0.3.4
       </span>
     </div>
   </div>
@@ -121,18 +121,27 @@
 <a href="https://codecov.io/gh/charlesrocket/frightcrawler"><img src="https://codecov.io/gh/charlesrocket/frightcrawler/branch/master/graph/badge.svg" alt="codecov" /></a>
 <a href="https://charlesrocket.github.io/frightcrawler"><img src="https://img.shields.io/badge/docs-available-9cf.svg?logo=crystal" alt="Docs" /></a></p>
 <p><a href="https://magic.wizards.com">MtG</a> deck legality validator for <a href="https://apps.apple.com/us/app/helvault-mtg-card-scanner/id1466963201">Helvault</a>/<a href="https://aetherhub.com">AetherHub</a> CSVs</p>
-<h4><a id="compilation" class="anchor" href="#compilation">
+<h3><a id="dependencies" class="anchor" href="#dependencies">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Compilation</h4>
-<pre><code class="language-shell">shards install
-crystal build src/frightcrawler.cr --release</code></pre>
-<h4><a id="usage" class="anchor" href="#usage">
+</a>Dependencies</h3>
+<ul>
+<li><code>crystal</code></li>
+<li><code>sqlite3</code></li>
+</ul>
+<h3><a id="compilation" class="anchor" href="#compilation">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Usage</h4>
+</a>Compilation</h3>
+<pre><code class="language-shell">make
+sudo make install</code></pre>
+<h3><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h3>
 <pre><code class="language-crystal">frightcrawler -h
 ▓░░░█▀▀░█▀▀▄░░▀░░█▀▀▀░█░░░░▀█▀░
 ▓░░░█▀░░█▄▄▀░░█▀░█░▀▄░█▀▀█░░█░░
