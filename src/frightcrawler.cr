@@ -31,6 +31,7 @@ module Core
              "commander",
              "brawl",
              "historicbrawl",
+             "alchemy",
              "paupercommander",
              "duel",
              "oldschool",

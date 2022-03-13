@@ -6,8 +6,6 @@ jobs:
   build:
     strategy:
       fail-fast: false
-      matrix:
-        crystal: [latest, nightly]
     runs-on: ubuntu-latest
     steps:
       - name: Download source
@@ -15,7 +13,7 @@ jobs:
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
         with:
-          crystal: ${{ matrix.crystal }}
+          crystal: latest
       - name: Install shards
         run: shards install
       - name: Build
