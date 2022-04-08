@@ -30,6 +30,7 @@ module Database
     @@synced = true
   end
 
+  # Force DB synchronization.
   def self.force_sync : Bool | Nil
     delete
     sync
