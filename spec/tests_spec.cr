@@ -87,7 +87,9 @@ describe Database, tags: ["api", "db"] do
 
   describe ".delete" do
     it "erases db" do
-      File.touch(Database::DB_FILE)
+      if !File.exists?(Database::DB_FILE)
+        File.touch(Database::DB_FILE)
+      end
       File.exists?(Database::DB_FILE).should be_true
       Database.delete
       File.exists?(Database::DB_FILE).should be_false
