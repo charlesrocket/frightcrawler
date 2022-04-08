@@ -30,9 +30,11 @@ module Database
     @@synced = true
   end
 
-  # Force DB synchronization.
+  # Forces DB synchronization.
   def self.force_sync : Bool | Nil
-    delete
+    if File.exists?(DB_FILE)
+      File.delete(Database::DB_FILE)
+    end
     sync
   end
 
