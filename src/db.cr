@@ -30,6 +30,11 @@ module Database
     @@synced = true
   end
 
+  def self.force_sync : Bool | Nil
+    delete
+    sync
+  end
+
   # Returns latest timestamp.
   def self.latest_timestamp : DB::Any
     DB.open "sqlite3://#{DB_FILE}" do |db|
