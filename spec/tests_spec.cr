@@ -78,6 +78,13 @@ describe Database, tags: ["api", "db"] do
     end
   end
 
+  describe ".force_sync" do
+    it "synchronizes db" do
+      Database.force_sync
+      Database.synced.should be_true
+    end
+  end
+
   describe ".delete" do
     it "erases db" do
       File.touch(Database::DB_FILE)
