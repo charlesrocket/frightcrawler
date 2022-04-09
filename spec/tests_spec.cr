@@ -2,7 +2,7 @@ require "./spec_helper"
 
 Spec.before_suite { clean; Fixtures.prepare }
 Spec.after_suite { clean }
-Spec.before_each { reset }
+Spec.before_each { clean; reset }
 
 describe CLI do
   describe ".speed" do
