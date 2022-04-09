@@ -80,6 +80,7 @@ describe Database, tags: ["api", "db"] do
 
   describe ".force_sync" do
     it "forces db synchronization" do
+      reset
       Database.force_sync
       Database.synced.should be_true
     end
