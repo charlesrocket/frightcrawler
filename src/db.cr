@@ -31,10 +31,11 @@ module Database
   end
 
   # Forces DB synchronization.
-  def self.force_sync : Bool | Nil
+  def self.force_sync : Nil
     if File.exists?(DB_FILE)
-      File.delete(Database::DB_FILE)
+      delete
     end
+
     sync
   end
 
