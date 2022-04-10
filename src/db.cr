@@ -5,47 +5,6 @@ module Database
 
   @@synced = false : Bool
 
-  # Returns .sync status.
-  def self.synced : Bool | Nil
-    @@synced
-  end
-
-  # Synchronizes DB.
-  def self.sync : Nil
-    if !File.exists?(DB_FILE)
-      update
-    end
-
-    if !synced
-      local_time = Time.utc.to_unix
-      sync_time = "#{latest_timestamp}"
-      # Sync DB monthly.
-      flag_time = 2629743
-
-      if (local_time - sync_time.to_i) >= flag_time
-        update
-      end
-    end
-
-    @@synced = true
-  end
-
-  # Forces DB synchronization.
-  def self.force_sync : Nil
-    if File.exists?(DB_FILE)
-      delete
-    end
-
-    sync
-  end
-
-  # Returns latest timestamp.
-  def self.latest_timestamp : DB::Any
-    DB.open "sqlite3://#{DB_FILE}" do |db|
-      db.scalar "select strftime('%s', timestamp) from cards order by timestamp desc limit 1;"
-    end
-  end
-
   # Handles DB layout.
   struct Cards
     include DB::Serializable
@@ -102,6 +61,47 @@ module Database
     bulk_data = JSON.parse(HTTP::Client.get("https://api.scryfall.com/bulk-data",
       headers: HTTP::Headers{"User-Agent" => "#{Core::CLIENT}"}).body)
     bulk_data["data"][3]["download_uri"].to_s
+  end
+
+  # Returns latest timestamp.
+  def self.latest_timestamp : DB::Any
+    DB.open "sqlite3://#{DB_FILE}" do |db|
+      db.scalar "select strftime('%s', timestamp) from cards order by timestamp desc limit 1;"
+    end
+  end
+
+  # Returns .sync status.
+  def self.synced : Bool | Nil
+    @@synced
+  end
+
+  # Synchronizes DB.
+  def self.sync : Nil
+    if !File.exists?(DB_FILE)
+      update
+    end
+
+    if !synced
+      local_time = Time.utc.to_unix
+      sync_time = "#{latest_timestamp}"
+      # Sync DB monthly.
+      flag_time = 2629743
+
+      if (local_time - sync_time.to_i) >= flag_time
+        update
+      end
+    end
+
+    @@synced = true
+  end
+
+  # Forces DB synchronization.
+  def self.force_sync : Nil
+    if File.exists?(DB_FILE)
+      delete
+    end
+
+    sync
   end
 
   # Deletes current DB.
