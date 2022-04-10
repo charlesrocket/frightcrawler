@@ -6,3 +6,4 @@ frightcrawler
 /bin/
 /.shards/
 *.dwarf
+*.db
