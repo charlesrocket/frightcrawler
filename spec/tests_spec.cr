@@ -78,6 +78,14 @@ describe Database, tags: ["api", "db"] do
     end
   end
 
+  describe ".resync" do
+    it "re-synchronizes db" do
+      reset
+      Database.resync
+      Database.synced.should be_true
+    end
+  end
+
   describe ".force_sync" do
     it "forces db synchronization" do
       reset

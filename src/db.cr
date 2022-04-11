@@ -95,6 +95,12 @@ module Database
     @@synced = true
   end
 
+  # :ditto:
+  def self.resync : Nil
+    update
+    @@synced = true
+  end
+
   # Forces DB synchronization.
   def self.force_sync : Nil
     if File.exists?(DB_FILE)
