@@ -26,14 +26,15 @@ frightcrawler -h
 ▓░█▀▄░█▀▀▄░█▀▀▄░█░░░█░█░░█▀▀░█▀▀▄
 ▓░█░░░█▄▄▀░█▄▄█░▀▄█▄▀░█░░█▀▀░█▄▄▀
 ▓░▀▀▀░▀░▀▀░▀░░▀░░▀░▀░░▀▀░▀▀▀░▀░▀▀
-0.3.1
+0.3.5
 Usage: frightcrawler -g modern -f PATH/TO/FILE
     -f CSV_FILE                      Path to CSV file
     -g GAME_FORMAT                   Set game format
     -p SPEED                         Set speed [slow/normal/fast]
     -i SCRYFALL_ID                   Get card info
     -s, --sync                       Sync DB
+    -d, --force-sync                 Force sync DB
     -h, --help                       Print documentation
 Supported CSV layouts: Helvault, Helvault Pro, AetherHub.
-Supported formats: "standard", "future", "historic", "gladiator", "pioneer", "modern", "legacy", "pauper", "vintage", "penny", "commander", "brawl", "historicbrawl", "paupercommander", "duel", "oldschool", "premodern"
+Supported formats: "standard", "future", "historic", "gladiator", "pioneer", "modern", "legacy", "pauper", "vintage", "penny", "commander", "brawl", "historicbrawl", "alchemy", "paupercommander", "duel", "oldschool", "premodern"
 ```
