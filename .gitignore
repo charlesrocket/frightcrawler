@@ -1,4 +1,5 @@
 frightcrawler
+
 .DS_Store
 
 /docs/
@@ -6,4 +7,3 @@ frightcrawler
 /bin/
 /.shards/
 *.dwarf
-*.db
