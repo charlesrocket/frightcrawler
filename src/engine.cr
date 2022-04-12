@@ -35,7 +35,8 @@ module Engine
     def initialize(@game_format, @scry_id, @foil_status, @quantity)
       DB.open "sqlite3://#{Database::DB_FILE}" do |db|
         card = db
-          .query_one "SELECT id, name, set_name, set_code, rarity, legality_#{@game_format} AS legality from cards where id = ?",
+          .query_one "SELECT id, name, set_name, set_code, rarity,
+              legality_#{@game_format} AS legality from cards where id = ?",
             @scry_id,
             as: Database::Cards
         @card_name = card.name
