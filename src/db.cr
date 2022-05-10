@@ -135,7 +135,7 @@ module Database
                          "legality_historicbrawl", "legality_alchemy",
                          "legality_paupercommander", "legality_duel",
                          "legality_oldschool", "legality_premodern")
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     SQL
 
     DB.open "sqlite3://#{DB_FILE}" do |db|
