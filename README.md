@@ -36,5 +36,5 @@ Usage: frightcrawler -g modern -f PATH/TO/FILE
     -d, --force-sync                 Force sync DB
     -h, --help                       Print documentation
 Supported CSV layouts: Helvault, Helvault Pro, AetherHub.
-Supported formats: "standard", "future", "historic", "gladiator", "pioneer", "modern", "legacy", "pauper", "vintage", "penny", "commander", "brawl", "historicbrawl", "alchemy", "paupercommander", "duel", "oldschool", "premodern"
+Supported formats: "standard", "future", "historic", "gladiator", "pioneer", "explorer", "modern", "legacy", "pauper", "vintage", "penny", "commander", "brawl", "historicbrawl", "alchemy", "paupercommander", "duel", "oldschool", "premodern"
 ```
