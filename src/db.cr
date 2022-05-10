@@ -186,5 +186,8 @@ module Database
     end
 
     puts "\n  * Database synchronized"
+  rescue SQLite3::Exception
+    puts "\n  * Database outdated"
+    Database.force_sync
   end
 end
