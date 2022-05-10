@@ -23,6 +23,7 @@ module Core
              "historic",
              "gladiator",
              "pioneer",
+             "explorer",
              "modern",
              "legacy",
              "pauper",
