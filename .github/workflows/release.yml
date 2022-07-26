@@ -77,7 +77,7 @@ jobs:
       - name: Build
         run: crystal docs src/frightcrawler.cr
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: docs
