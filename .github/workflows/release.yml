@@ -44,7 +44,7 @@ jobs:
           gzip ./bin/frightcrawler
           mv ./bin/frightcrawler.gz ./bin/frightcrawler-linux-x86_64.gz
       - name: Upload
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: frightcrawler-linux-x86_64
           path: ./bin/frightcrawler-linux-x86_64.gz
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           path: ./artifacts
       - name: Release
