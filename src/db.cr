@@ -86,7 +86,7 @@ module Database
       local_time = Time.utc.to_unix
       sync_time = "#{latest_timestamp}"
       # Sync DB monthly.
-      flag_time = 2629743
+      flag_time = 2_629_743
 
       if (local_time - sync_time.to_i) >= flag_time
         update
