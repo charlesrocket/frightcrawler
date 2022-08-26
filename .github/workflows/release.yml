@@ -81,4 +81,4 @@ jobs:
         with:
           branch: gh-pages
           folder: docs
-          single-commit: false
+          single-commit: true
