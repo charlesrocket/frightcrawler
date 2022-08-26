@@ -43,9 +43,8 @@ module CLI
       Engine.validate_csv("#{csv_file}", game_format_in)
     end
 
-    if csv_file == nil && sf_id.empty? && game_format_in.empty?
+    return unless csv_file == nil && sf_id.empty? && game_format_in.empty?
       puts "\nNo data provided"
       puts "Exiting now"
-    end
   end
 end

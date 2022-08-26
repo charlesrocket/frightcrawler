@@ -28,7 +28,6 @@ def reset
 end
 
 def clean
-  if File.exists?(Database::DB_FILE)
+  return unless File.exists?(Database::DB_FILE)
     Database.delete
-  end
 end
