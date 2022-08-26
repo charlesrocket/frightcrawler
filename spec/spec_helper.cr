@@ -29,5 +29,5 @@ end
 
 def clean
   return unless File.exists?(Database::DB_FILE)
-    Database.delete
+  Database.delete
 end

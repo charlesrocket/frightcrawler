@@ -199,6 +199,6 @@ module Engine
   # Validates provided format.
   def self.format_check(input) : Nil
     return unless !Core::FORMATS.includes? input
-      raise "ERROR: Unknown game format #{input}"
+    raise "ERROR: Unknown game format #{input}"
   end
 end

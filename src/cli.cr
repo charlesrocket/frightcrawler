@@ -44,7 +44,7 @@ module CLI
     end
 
     return unless csv_file == nil && sf_id.empty? && game_format_in.empty?
-      puts "\nNo data provided"
-      puts "Exiting now"
+    puts "\nNo data provided"
+    puts "Exiting now"
   end
 end
