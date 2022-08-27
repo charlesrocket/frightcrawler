@@ -21,6 +21,6 @@ jobs:
       - name: Check formatting
         run: crystal tool format --check
       - name: Run Ameba
-        run: bin/ameba
+        run: bin/ameba --all
       - name: Run tests
         run: crystal spec --define extended --order=random --error-on-warnings --verbose
