@@ -1,6 +1,11 @@
 # Manages DB.
 module Database
-  DB_HOME = Path.home / "frightcrawler"
+  {% if flag?(:darwin) %}
+    DB_HOME = Path.home / "Library/frightcrawler"
+  {% else %}
+    DB_HOME = Path.home / ".local/share/frightcrawler"
+  {% end %}
+
   DB_FILE = !Crystal.env.test? ? "#{DB_HOME}/frightcrawler.db" : "#{DB_HOME}/test.db"
 
   @@synced = false : Bool
