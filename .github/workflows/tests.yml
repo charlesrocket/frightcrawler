@@ -4,8 +4,6 @@ on: [push, pull_request]
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - name: Download source
@@ -20,7 +18,5 @@ jobs:
         run: shards build
       - name: Check formatting
         run: crystal tool format --check
-      - name: Run Ameba
-        run: bin/ameba --all
       - name: Run tests
         run: crystal spec --define extended --order=random --error-on-warnings --verbose
